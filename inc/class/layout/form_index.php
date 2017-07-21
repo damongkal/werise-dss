@@ -40,7 +40,7 @@
             To run the prototype, please click on the weather advisory or grain
             yield advisory image below or button above. Feedbacks to improve
             the prototype and/or establish collaboration are welcome.
-            ')?>
+            ')?> archietest
         </p>
     </div>
 
