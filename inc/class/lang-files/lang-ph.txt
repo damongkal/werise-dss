@@ -1,0 +1,117 @@
+Get Started
+--lang--
+Ang mga nakaraang ani ay mababa at hindi matatag dahil walang katiyakan sa dami at pagkalat ng pag-ulan, pagkakaroon ng nutrient stress, at sa paglitaw ng mga peste. Ang pagbabago ng klima poses ay nagbabadya ng matinding mga kaganapan ng panahon na maaring lalong magpababa ng inaasahan ani para sa mga umaasa lamang sa ulan.
+--lang--
+Ang IRRI-Japan Project para sa Climate Change Adaptation in Rainfed Rice Areas (CCARA) ay kasalukuyang gumagawa ng isang sistemang tulong sa pagdesisyon na tinawag na WeRise upang mapabuti ang kabuhayan ng mga magsasakang umaasa lamang sa ulan sa ilalim ng kasalukuyan at sa hinaharap na sitwasyon sa klima. Ang sistemang ito ay gumagamit ng ulat panahon na nagbibigay ng mahalagang impormasyon sa mga magsasaka ukol sa panahon tulad ng simula at katapusan ng tag-ulan at pagkalat ng ulan. Nagpapayo din ito sa mga magsasaka kung kailan dapat maghasik at magtanim, kung ano ang angkop na binhi, at kung kailan pinakamainam maglagay ng pataba.
+--lang--
+Kasalukuyang may mga paunang ulat na ang WeRise para sa Indonesia at Lao PDR. Maari ring tingnan ang paunang ulat para sa ibang mga bansa kabilang ang Pilipinas at Thailand. Upang patakbuhin ang mga paunang ulat, mangyaring mag-click sa imahe ng ulat panahon o ulat ani na nakalagay sa ibaba ibaba o ang mga button sa itaas. Aming ipagpapasalamat kung mayroon kang mga ideya kung paano mapapabuti ang mga paunang ulat o kung nais makipagtulungan sa amin.
+--lang--
+Home
+--lang--
+Tungkol sa
+--lang--
+Ulat Panahon
+--lang--
+Ulat sa Pag-ani
+--lang--
+Tuntunin At Kundisyon
+--lang--
+IRRI-Japan Collaborative Research Project
+--lang--
+Ang IRRI-Japan Collaborative Research Project ay pinondohan ng pamahalaan ng Japan sa pamamagitan ng Ministry of Agriculture, Forestry, at Fisheries (MAFF) mula noong 1984. Ang CCARA na ang pinakabagong proyekto nito ay inilunsad noong Agosto 2010 at magtatapos sa Septiyembre 2015.
+--lang--
+Pumili ng datos
+--lang--
+Istasyon
+--lang--
+Taon
+--lang--
+Measured Variable
+--lang--
+Ulan
+--lang--
+Temperatura
+--lang--
+Solar Radiation
+--lang--
+Early morning vapor pressure
+--lang--
+Lakas Hangin
+--lang--
+Show Graph
+--lang--
+Ulat
+--lang--
+Ang dami ng ulan ay
+--lang--
+karaniwan
+--lang--
+mataas sa karaniwan
+--lang--
+mababa sa karaniwan
+--lang--
+tala
+--lang--
+taya
+--lang--
+Acknowledgement
+--lang--
+Show data source/s
+--lang--
+Data Source
+--lang--
+Paglagay ng pataba
+--lang--
+walang pataba
+--lang--
+karaniwang pataba
+--lang--
+mungkahing pataba
+--lang--
+ikumpara sa ibang datos
+--lang--
+datos
+--lang--
+Ipakita ang ulat
+--lang--
+Pinakamahusay na araw ng paghahasik ng binhi
+--lang--
+Kategorya
+--lang--
+Paghasik
+--lang--
+Pag-ani
+--lang--
+Ani
+--lang--
+Araw ng paglagay ng pataba
+--lang--
+Kalendaryo
+--lang--
+Basal
+--lang--
+Top Dress 1
+--lang--
+Top Dress 2
+--lang--
+Fertilizer may be applied on these dates if sowing date is
+--lang--
+Ipakita
+--lang--
+Umpisa ng bulaklak
+--lang--
+Pagbulaklak
+--lang--
+mungkahing pataba
+--lang--
+walang pataba
+--lang--
+Ipakita ang ulat
+--lang--
+Simula ng ulan ay sa
+--lang--
+Inaasahang araw ng baha:
+--lang--
+Inaasahang araw ng tagtuyot:
+--lang--
+Kabuuang dami ng ulan ay

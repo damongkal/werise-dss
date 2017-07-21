@@ -1,0 +1,53 @@
+Pilih Dataset
+--lang--
+Stasiun
+--lang--
+Tahun
+--lang--
+Diukur Variabel
+--lang--
+Curah Hujan
+--lang--
+Suhu
+--lang--
+Radiasi Matahari
+--lang--
+Tekanan uap pagi
+--lang--
+Kecepatan angin
+--lang--
+Mohon pilih Negara.
+--lang--
+Silakan pilih Stasiun.
+--lang--
+Silahkan pilih Tahun.
+--lang--
+Silakan pilih Diukur Variabel.
+--lang--
+Sebenarnya Data Cuaca
+--lang--
+Prakiraan Cuaca data
+--lang--
+Musim Hujan
+--lang--
+Probabilitas di
+--lang--
+Membangkitkan grafik. Silakan menunggu...
+--lang--
+Ada risiko tinggi banjir.
+--lang--
+Ada risiko tinggi kekeringan.
+--lang--
+aktual
+--lang--
+ramalan
+--lang--
+Jenis
+--lang--
+Pupuk Aplikasi
+--lang--
+Tidak Ada Pupuk
+--lang--
+Rekomendasi Umum
+--lang--
+Rekomendasi Khusus

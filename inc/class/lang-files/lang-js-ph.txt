@@ -1,0 +1,71 @@
+Select Dataset
+--lang--
+Istasyon
+--lang--
+Taon
+--lang--
+Measured Variable
+--lang--
+Ulan
+--lang--
+Temperatura
+--lang--
+Solar Radiation
+--lang--
+Early morning vapor pressure
+--lang--
+Lakas ng hangin
+--lang--
+Pumili ng bansa
+--lang--
+Pumili ng istasyon.
+--lang--
+Pumili ng taon.
+--lang--
+Please select Measured Variable.
+--lang--
+ng Panahon
+--lang--
+Forecast Weather Data
+--lang--
+Tag-Ulan
+--lang--
+Probabilidad sa
+--lang--
+Maghintay...
+--lang--
+Malaki ang pag-asang may baha.
+--lang--
+Malaki ang pag-asang may tagtuyot.
+--lang--
+Tala
+--lang--
+Taya
+--lang--
+Binhi
+--lang--
+Paglagay ng pataba
+--lang--
+walang pataba
+--lang--
+karaniwang pataba
+--lang--
+mungkahing pataba
+--lang--
+para sa
+--lang--
+Pumili ng binhi
+--lang--
+Pumili ng paglagay ng pataba
+--lang--
+Inaasahang Maaabot na Ani
+--lang--
+Ani
+--lang--
+Paghasik
+--lang--
+Ipakita
+--lang--
+Tagtuyot
+--lang--
+Baha

@@ -1,0 +1,135 @@
+Get Started
+--lang--
+index0001
+--lang--
+index0002
+--lang--
+index0003
+--lang--
+Home
+--lang--
+About
+--lang--
+Weather Advisory
+--lang--
+Grain Yield Advisory
+--lang--
+Terms And Conditions
+--lang--
+IRRI-Japan Collaborative Research Project
+--lang--
+The IRRI-Japan Collaborative Research Projects have been funded by the government of Japan through the Ministry of Agriculture, Forestry, and Fisheries (MAFF) since 1984. CCARA, which is the latest project, was launched in August 2010 and will end in September 2015.
+--lang--
+Select Dataset
+--lang--
+Station
+--lang--
+Year
+--lang--
+Measured Variable
+--lang--
+Rainfall
+--lang--
+Temperature
+--lang--
+Solar Radiation
+--lang--
+Early morning vapor pressure
+--lang--
+Wind Speed
+--lang--
+Show Graph
+--lang--
+Advisory
+--lang--
+wet-season rainfall is
+--lang--
+normal
+--lang--
+above normal
+--lang--
+below normal
+--lang--
+real-time
+--lang--
+forecast
+--lang--
+Acknowledgement
+--lang--
+Show data source/s
+--lang--
+Data Source
+--lang--
+Fertilizer Application
+--lang--
+No Fertilizer
+--lang--
+General Recommendation
+--lang--
+Site-specific Recommendation
+--lang--
+Compare to another set
+--lang--
+Set
+--lang--
+Show Weather Graph
+--lang--
+Optimum sowing dates for rainfed rice crop
+--lang--
+Category
+--lang--
+Sowing Date
+--lang--
+Harvest Date
+--lang--
+Yield
+--lang--
+Fertilizer Schedule
+--lang--
+Calendar
+--lang--
+Basal
+--lang--
+Top Dress 1
+--lang--
+Top Dress 2
+--lang--
+Fertilizer may be applied on these dates if sowing date is
+--lang--
+Show
+--lang--
+Panicle Init.
+--lang--
+Flowering
+--lang--
+Fertilizer recommendation
+--lang--
+No Fertilizer
+--lang--
+Show Advisory
+--lang--
+Onset of rain is on
+--lang--
+Expected flooding dates:
+--lang--
+Expected drought dates:
+--lang--
+Total rainfall is
+--lang--
+about0001
+--lang--
+about0002
+--lang--
+about0003
+--lang--
+terms0001
+--lang--
+terms0002
+--lang--
+terms0003
+--lang--
+terms0004
+--lang--
+terms0005
+--lang--
+terms0006

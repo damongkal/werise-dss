@@ -1,0 +1,111 @@
+Translate
+เริ่มต้น
+--lang--
+น้ำฝนผลผลิตข้าวส่วนใหญ่จะเป็นในระดับต่ำและไม่แน่นอนเนื่องจากความไม่แน่นอนในจำนวนปริมาณน้ำฝนและการกระจายการดำรงอยู่ของความเครียดสารอาหารและการเกิดขึ้นศัตรูพืช การเปลี่ยนแปลงภูมิอากาศ poses ภัยคุกคามที่หลุมฝังศพของเหตุการณ์สภาพอากาศรุนแรงที่ต่อไปอาจลดการผลิตข้าวในพื้นที่นาน้ำฝน
+--lang--
+โครงการ IRRI ญี่ปุ่นเปลี่ยนแปลงสภาพภูมิอากาศการปรับตัวในน้ำฝนพื้นที่ข้าว (CCARA) คือการพัฒนาระบบสนับสนุนการตัดสินใจ (WeRise) เพื่อปรับปรุงการดำรงชีวิตของเกษตรกรผู้ปลูกข้าวน้ำฝนภายใต้สถานการณ์สภาพภูมิอากาศในปัจจุบันและอนาคต ระบบนี้ใช้การคาดการณ์สภาพอากาศตามฤดูกาลที่ให้ข้อมูลสภาพอากาศที่สำคัญดังกล่าวเป็นจุดเริ่มต้นและจุดสิ้นสุดของฤดูฝนและการกระจายปริมาณน้ำฝนในช่วงฤดูการเพาะปลูกพืชให้กับเกษตรกร นอกจากนี้ยังให้คำแนะนำแก่เกษตรกรเมื่อไปหว่านและปลูกพืชที่หลากหลายสิ่งที่มีความเหมาะสมและวิธีการใส่ปุ๋ยและปัจจัยการผลิตอื่น ๆ อาจจะนำมาใช้อย่างมีประสิทธิภาพ
+--lang--
+for translate
+--lang--
+บ้าน
+--lang--
+About
+--lang--
+ที่ปรึกษาสภาพอากาศ
+--lang--
+ผลผลิตข้าวที่ปรึกษา
+--lang--
+เงื่อนไขและข้อตกลง
+--lang--
+IRRI ญี่ปุ่นความร่วมมือโครงการวิจัย
+--lang--
+IRRI ญี่ปุ่นร่วมมือวิจัยโครงการที่ได้รับเงินทุนจากรัฐบาลญี่ปุ่นผ่านกระทรวงเกษตรป่าไม้และประมง (MAFF) ตั้งแต่ปี 1984 CCARA ซึ่งเป็นโครงการใหม่ล่าสุดที่เปิดตัวในเดือนสิงหาคมปี 2010 และจะสิ้นสุดในกันยายน 2015 .
+--lang--
+เลือกชุดข้อมูล
+--lang--
+สถานี
+--lang--
+ปี
+--lang--
+วัดตัวแปร
+--lang--
+ปริมาณน้ำฝน
+--lang--
+อุณหภูมิ
+--lang--
+รังสีดวงอาทิตย์
+--lang--
+ในช่วงเช้าความดันไอ
+--lang--
+ความเร็วลม
+--lang--
+แสดงกราฟ
+--lang--
+ที่ปรึกษา
+--lang--
+ปริมาณน้ำฝนช่วงฤดูฝนคือ
+--lang--
+ปกติ
+--lang--
+สูงกว่าปกติ
+--lang--
+ต่ำกว่าปกติ
+--lang--
+เรียลไทม์
+--lang--
+พยากรณ์
+--lang--
+รับทราบ
+Reìm t̂n
+--lang--
+n̂ả f̄n p̄hlp̄hlit k̄ĥāw s̄̀wn h̄ıỵ̀ ca pĕn nı radạb t̀ả læa mị̀ næ̀nxn neụ̄̀xngcāk khwām mị̀ næ̀nxn nı cảnwn primāṇ n̂ả f̄n læa kārk ra cāy kār dảrng xyū̀ k̄hxng khwāmkherīyd s̄ār xāh̄ār læa kār keid k̄hụ̂n ṣ̄ạtrū phụ̄ch kār pelī̀ynpælng p̣hūmi xākāṣ̄ poses p̣hạy khukkhām thī̀ h̄lum f̄ạng ṣ̄ph k̄hxng h̄etukārṇ̒ s̄p̣hāph xākāṣ̄ runræng thī̀ t̀x pị xāc ld kār p̄hlit k̄ĥāw nı phụ̄̂nthī̀ nā n̂ả f̄n
+--lang--
+khorngkār IRRI ỵī̀pùn pelī̀ynpælng s̄p̣hāph p̣hūmi xākāṣ̄ kār prạb tạw nı n̂ả f̄n phụ̄̂nthī̀ k̄ĥāw (CCARA) khụ̄x kār phạtʹhnā rabb s̄nạbs̄nun kār tạds̄incı (WeRise) pheụ̄̀x prạbprung kār dảrng chīwit k̄hxng kes̄ʹtrkr p̄hū̂ plūk k̄ĥāw n̂ả f̄n p̣hāy tı̂ s̄t̄hānkārṇ̒ s̄p̣hāph p̣hūmi xākāṣ̄ nı pạccubạn læa xnākht rabb nī̂ chı̂ kār khād kārṇ̒ s̄p̣hāph xākāṣ̄ tām vdūkāl thī̀ h̄ı̂ k̄ĥxmūl s̄p̣hāph xākāṣ̄ thī̀ s̄ảkhạỵ dạng kl̀āw pĕn cud reìm t̂n læa cud s̄îns̄ud k̄hxng vdū f̄n læa kārk ra cāy primāṇ n̂ả f̄n nı ch̀wng vdū kār pheāa plūk phụ̄ch h̄ı̂ kạb kes̄ʹtrkr nxkcāk nī̂ yạng h̄ı̂ khả næanả kæ̀ kes̄ʹtrkr meụ̄̀x pị h̄ẁān læa plūk phụ̄ch thī̀ h̄lākh̄lāy s̄ìng thī̀ mī khwām h̄emāas̄m læa wiṭhī kār s̄ı̀ pǔy læa pạccạy kār p̄hlit xụ̄̀n «xāc ca nả mā chı̂ xỳāng mī pras̄ithṭhip̣hāph
+--lang--
+b̂ān
+--lang--
+thī̀ prụks̄ʹā s̄p̣hāph xākāṣ̄
+--lang--
+p̄hlp̄hlit k̄ĥāw thī̀ prụks̄ʹā
+--lang--
+ngeụ̄̀xnk̄hị læa k̄ĥx tklng
+--lang--
+IRRI ỵī̀pùn khwām r̀wmmụ̄x khorngkār wicạy
+--lang--
+IRRI ỵī̀pùn r̀wmmụ̄x wicạy khorngkār thī̀ dị̂ rạb ngein thun cāk rạṭ̄hbāl ỵī̀pùn p̄h̀ān krathrwng kes̄ʹtr p̀ā mị̂ læa pramng (MAFF) tậngtæ̀ pī 1984 CCARA sụ̀ng pĕn khorngkār h̄ım̀ l̀ās̄ud thī̀ peid tạw nı deụ̄xn s̄ingh̄ākhm pī 2010 læa ca s̄îns̄ud nı kạnyāyn 2015.
+--Lang--
+leụ̄xk chud k̄ĥxmūl
+--lang--
+s̄t̄hānī
+--lang--
+pī
+--lang--
+wạd tạwpær
+--lang--
+primāṇ n̂ả f̄n
+--lang--
+xuṇh̄p̣hūmi
+--lang--
+rạngs̄ī dwng xāthity̒
+--lang--
+nı ch̀wng chêā khwām dạn xị
+--lang--
+khwāmrĕw lm
+--lang--
+s̄ædng krāf
+--lang--
+thī̀ prụks̄ʹā
+--lang--
+primāṇ n̂ả f̄n ch̀wng vdū f̄n khụ̄x
+--lang--
+pkti
+--lang--
+s̄ūng kẁā pkti
+--lang--
+t̀ả kẁā pkti
+--lang--
+reī yl thịm̒
+--lang--
+phyākrṇ̒
+--lang--
+rạb thrāb

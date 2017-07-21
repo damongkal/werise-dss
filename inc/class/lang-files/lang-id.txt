@@ -1,0 +1,135 @@
+Memulai
+--lang--
+Hasil gabah pada lahan sawah tadah hujan yang rendah dan tidak stabil terutama disebabkan ketidapastian jumlah dan distribusi hujan, lebih jauh akan menyebabkan terjadinya permasalahan organisme pengganggu tanaman dan kekurangan pangan. Perubahan iklim merupakan ancaman serius terhadap kejadian cuaca ekstrim yang selanjutnya dapat menurunkan produktivitas padi di lahan sawah tadah hujan.
+--lang--
+Proyek IRRI-Jepang pada Climate Change Adaptation in Rainfed Rice Areas (CCARA) sedang mengembangkan sebuah sistem pendukung pembuat keputusan (WeRise) untuk meningkatkan taraf hidup petani padi sawah tadah hujan pada kondisi iklim saat ini maupun yang akan datang. Sistem ini menggunakan perkiraan cuaca musiman yang menyediakan informasi cuaca penting kepada petani seperti awal dan akhir musim hujan serta distribusi curah hujan selama musim tanam. Sistem ini juga memberikan informasi kepada petani kapan harus sebar benih dan tanam bibit, varietas yang tepat, dan bagaimana pupuk dan input lainnya dapat diaplikasikan secara efisien.
+--lang--
+Pengujian lapangan untuk prototipe WeRise sedang dilaksanakan di Indonesia dan Laos. Prototipe untuk negara lain seperti Philipina dan Thailand juga memungkinkan untuk dieksplorasi lebih jauh. Untuk menjalankan prototipe, dapat di-klik pada menu Rekomendasi Cuaca dan Rekomendasi Hasil Gabah pada gambar di bagian atas atau bawah. Saran sebagai timbal balik sangat kami harapkan dalam rangka memperbaiki prototipe dan/atau meningkatkan kerjasama.
+--lang--
+Rumah
+--lang--
+Tentang
+--lang--
+Penasehat Cuaca
+--lang--
+Hasil Gabah Penasehat
+--lang--
+Syarat dan Ketentuan
+--lang--
+Proyek penelitian kerjasama IRRI-Jepang
+--lang--
+Proyek penelitian kerjasama IRRI-Jepang telah didanai oleh Pemerintah Jepang melalui Kementrian Pertanian, Kehutanan, dan Perikanan (MAFF = Ministry of Agriculture, Forestry, and Fisheries) sejak tahun 1984. CCARA merupakan proyek terakhir yang dimulai pada Agustus 2010 dan akan berakhir pada September 2015.
+--lang--
+Pilih Dataset
+--lang--
+Stasiun
+--lang--
+Tahun
+--lang--
+Diukur Variabel
+--lang--
+Curah Hujan
+--lang--
+Suhu
+--lang--
+Radiasi Matahari
+--lang--
+Tekanan uap pagi
+--lang--
+Kecepatan angin
+--lang--
+Lihat Grafik
+--lang--
+Laporan
+--lang--
+curah hujan musim hujan
+--lang--
+normal
+--lang--
+atas normal
+--lang--
+bawah normal
+--lang--
+aktual
+--lang--
+ramalan
+--lang--
+Pengakuan
+--lang--
+Show data source/s
+--lang--
+Data Source
+--lang--
+Fertilizer Application
+--lang--
+No Fertilizer
+--lang--
+General Recommendation
+--lang--
+Site-specific Recommendation
+--lang--
+Compare to another set
+--lang--
+Set
+--lang--
+Show Weather Graph
+--lang--
+Optimum sowing dates for rainfed rice crop
+--lang--
+Category
+--lang--
+Sowing Date
+--lang--
+Harvest Date
+--lang--
+Yield
+--lang--
+Fertilizer Schedule
+--lang--
+Calendar
+--lang--
+Basal
+--lang--
+Top Dress 1
+--lang--
+Top Dress 2
+--lang--
+Fertilizer may be applied on these dates if sowing date is
+--lang--
+Show
+--lang--
+Panicle Init.
+--lang--
+Flowering
+--lang--
+Fertilizer recommendation
+--lang--
+No Fertilizer
+--lang--
+Show Advisory
+--lang--
+Onset of rain is on
+--lang--
+Expected flooding dates:
+--lang--
+Expected drought dates:
+--lang--
+Total rainfall is
+--lang--
+Sistem pendukung keputusan Cuaca-Padi-hara terintegrasi (WeRise) merupakan suatu alat pendukung keputusan berbasis komputer yang menyediakan nasehat cepat kepada petani, peneliti, dan penyuluh dalam mengoptimalkan waktu tanam, varietas yang digunakan, dan waktu aplikasi pupuk pada area sawah tadah hujan pada kondisi sekarang maupun yang akan datang.
+--lang--
+WeRise mengintegrasikan prediksi iklim lokal musiman (output SINTEX-F* melalui prosedur pengurangan bias) dan data cuaca real-time dengan ORYZA yang dideskripsikan dalam publikasi berikut:
+--lang--
+for translate
+--lang--
+Prototipe WeRise (Weather-Rice-Nutrient integrated decision support system) menyediakan nasehat cepat kepada petani, peneliti, dan penyuluh untuk mengoptimalkan waktu tanam, varietas yang digunakan, dan jumlah serta waktu aplikasi pupuk pada area sawah tadah hujan pada kondisi iklim saat ini maupun yang akan datang. Penggunaan software ini harus tunduk pada syarat dan ketentuan sebagai berikut:
+--lang--
+Pengguna secara tegas mengakui bahwa WeRise, algoritma dan output databasenya merupakan kekayaan intelektual dari International Rice Research Institute (IRRI) dan hak cipta di bawah ketentuan Kode Properti Intelektual Philippina, relevan dengan hak cipta internasional dan perjanjian kekayaan intelektual serta prinsip-prinsip umum dan hukum internasional. Pengguna juga secara tegas mengakui bahwa input database penelitian berasal dari penelitian kolaboratif secara bersama-sama dimiliki oleh IRRI dan lembaga kolaborasinya. Selanjutnya pengguna secara tegas mengakui bahwa IRRI dan lembaga kolaborasinya adalah pemilik eksklusif kekayaan intelektual ini dan telah memesan dan akan melindungi semua hak yang terkait dengannya. Lebih jauh, pengguna secara tegas mengakui bahwa input database penelitian yang disediakan dan dimiliki oleh lembaga yang berkolaborasi digunakan secara eksklusif untuk WeRise sesuai dengan kebijakan lembaga IP institusional.
+--lang--
+IRRI adalah organisasi internasional otonom non-profit. Semua pengguna disarankan untuk tidak menjual, tidak memungut pembayaran dalam mendistribusikan atau meng-link-kan WeRise. Hal ini termasuk pada semua perilaku atau cara eksploitasi komersial. Penggunaan WeRise tunduk pada Kebijakan Kekayaan Intelektual IRRI.
+--lang--
+International Rice Research Institute (IRRI) tidak menjamin keandalan prakiraan cuaca musiman dan tidak mendukung atau mempromosikan pupuk dan varietas padi tertentu. Selain iklim, tanaman dan pengelolaan hara, banyak faktor seperti tanah, serangga, patogen, dan gulma yang mempengaruhi hasil padi. IRRI tidak menjamin hasil padi yang akan dicapai yang ditargetkan oleh kultivar dan galur harapan yang berbeda dengan penyediaan prakiraan cuaca musiman, pengelolaan tanaman dan pedoman pemupukan hara. Isi dari software ini dapat berubah tanpa pemberitahuan.
+--lang--
+Jika terdapat perkara pemberitahuan, hukum atau sebaliknya, atau informasi yang berkaitan dengan pelanggaran dan / atau klaim hak kekayaan intelektual, silakan kirim ke:
+--lang--
+for translate

@@ -1,0 +1,53 @@
+Select Dataset
+--lang--
+Station
+--lang--
+Year
+--lang--
+Measured Variable
+--lang--
+Rainfall
+--lang--
+Temperature
+--lang--
+Solar Radiation
+--lang--
+Early morning vapor pressure
+--lang--
+Wind Speed
+--lang--
+Please select Country.
+--lang--
+Please select Station.
+--lang--
+Please select Year.
+--lang--
+Please select Measured Variable.
+--lang--
+Real-Time Weather Data
+--lang--
+Forecast Weather Data
+--lang--
+Wet Season
+--lang--
+Probability at
+--lang--
+Generating chart. Please wait...
+--lang--
+There is high risk of flooding.
+--lang--
+There is high risk of drought.
+--lang--
+real-time
+--lang--
+forecast
+--lang--
+Variety
+--lang--
+Fertilizer Application
+--lang--
+No Fertilizer
+--lang--
+General Recommendation
+--lang--
+Specific Recommendation
