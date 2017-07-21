@@ -1,0 +1,248 @@
+/* CSS Document */
+#pageheader{
+	background-image: url("../images/pageheader-bg.jpg");
+	background-repeat: repeat-x;
+	background-position: top;
+	width: 100%;
+	height: 128px;
+	background-color: #567B11;
+}
+#pageheader #pagebanner{
+	width: 800px;
+	height: 128px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	background-image: url("../images/pagebanner-bg.jpg");
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+#pageheader #pagebanner #pagelogo{
+	float:left;
+	width:298px;
+	margin-top:23px;
+}
+#pageheader #pagebanner #bannernav{
+	float:right;
+	margin-top:89px;
+	width:490px;
+	height: 39px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #FFF;
+	font-size: 14px;
+	text-align:right;
+	overflow: hidden;
+}
+#pageheader #pagebanner #bannernav ul{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	float: right;
+}
+#pageheader #pagebanner #bannernav ul li{
+	float: left;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #8CB730;
+	
+}
+#pageheader #pagebanner #bannernav ul li a{
+	text-decoration: none;
+	color: #FFF;
+	margin: 0px;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	display: block;	
+}
+#pageheader #pagebanner #bannernav ul li a.selected{
+	background-color:#8CB730;
+}
+#pageheader #pagebanner #bannernav ul li a:link{
+	color: #FFF;
+}
+#pageheader #pagebanner #bannernav ul li a:visited{
+	color: #FFF;
+}
+#pageheader #pagebanner #bannernav ul li a:hover{
+	color: #FFF;
+	background-color:#8CB730;
+}
+#pageheader #pagebanner #bannernav ul li a:active{
+	color: #FFF;
+}
+#pageheader #pagebanner #bannernav ul li a:selected{
+	color: #FFF;
+}
+#pagebody{
+	background-color: #FFF;	
+    padding-bottom: 20px;
+}
+#pagebody #dataselection{
+	width: 790px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #8CB730;
+	background-image: url("../images/navigation-bg.jpg");
+	background-repeat: repeat-x;
+	background-position: left top;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #FFF;
+	font-size: 12px;
+	text-align:left;
+    padding: 0 5px 5px 5px;
+}
+#pagebody #dataselection form{
+	margin:0px;
+	padding-top:7px;
+	padding-left:9px;
+}
+#pagebody #dataselection form select{
+	font-size:12px;
+}
+.dss-btn{
+	color: #FFF;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:8px;
+	padding-right:8px;
+	background-color:#567B11;
+	border: 1px solid #94BC36;
+    height: 30px;
+    line-height: 1;
+}
+#pagebody #dataselection form #show:hover{
+	cursor: pointer;
+}
+
+#pagebody label {
+    float: left;
+    width: 50px;
+    line-height: 30px;
+    height: 30px;
+    font-size:12px;
+}
+
+#pagebody .chart{
+    height: 100px;
+    width: 950px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;	
+    display:none;
+}
+
+#pagebody .datagrid-dss {
+    width:700px;
+    margin:auto;
+    padding: 20px 0 20px 0;
+}
+
+.flag
+{
+    background-repeat: no-repeat;
+    padding: 0 0 3px 20px;
+}
+
+#loading-indicator {
+    display:none;
+    padding: 5px 20px 5px 20px;
+    margin: 0 0 0 10px;
+    float: left;
+    background-color: #ffffff;
+}
+
+body, input, select
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 12px;
+}
+
+#help-guide
+{
+    padding: 10px 40px 10px 40px;
+}
+#help-guide .question
+{
+    font-size: 14px;
+    font-weight: 700;
+}
+#help-guide .answer
+{
+    border: 1px #000 dotted;
+    padding: 5px;
+    background-color: #FFDB58;
+}
+
+.alert
+{
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+
+.hi_yld_tr
+{
+    background-color: #ffffff;
+}
+
+.hi_yld_fert_apply
+{
+    display:none;
+}
+
+table th
+{
+    color:#ffffff;
+}
+
+.table-admin th
+{
+    color:#333333;
+}
+
+.fert_th
+{
+    float:left;
+    width:80px;
+    border: #ffffff solid 1px;
+}
+
+.hi_yld_tr_all
+{
+    display: none;
+}
+
+.hi_yld_tr_allh
+{
+    background-color: #8CB730;
+    display: none;
+}
+
+.table-dss {
+    width: auto;
+}
+
+.table-dss td{
+    font-family: Courier;
+}
+
+.cropcalchart{
+    height: 100px;
+    width: 800px;
+    border: 1px dotted #000000;
+}
+
+#acknowledgement{
+    width: 800px;
+}

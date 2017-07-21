@@ -1,0 +1,241 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/menus.css);
+
+
+/* Mega Drop-Down Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Level 1 */
+.menu-dropdown li.level1 { margin-right: -1px; 	}
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 {
+	padding-bottom: 1px;
+	border-width: 0 1px 0 1px;
+	border-style: solid;
+	border-right-color: #E0E0E0;
+	border-left-color: transparent;
+	font-size: 15px;
+	color: #707070;
+	text-transform: uppercase;
+}
+
+.menu-dropdown:first-child .level1:first-child .level1 { border-left-color: #E0E0E0; }
+
+.menu-dropdown a.level1 > span,
+.menu-dropdown span.level1 > span { 
+	height: 72px;
+	padding: 0 20px;
+	line-height: 72px;
+}
+
+/* Set Active */
+.menu-dropdown li.active .level1 { 
+	border-left-color: #E0E0E0;
+	background-color:#FBFBFB;
+}
+
+.menu-dropdown li.active .level1:before {
+	content: "";
+	display: block;
+	position: absolute;	
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	z-index: 3;
+}
+
+/* Set Hover */
+#menu .menu-dropdown li.level1:hover .level1,
+#menu .menu-dropdown li.remain .level1 {
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+}
+
+/* Drop-Down */
+.menu-dropdown .dropdown { 
+	top: 71px;
+	left: 0;
+}
+
+.menu-dropdown .dropdown-bg > div {
+	padding: 5px 10px; 
+	color: #FFF;
+}
+
+/* Level 2 */
+.menu-dropdown li.level2 {
+	margin: 0 10px;
+	border-top: 1px solid rgba(255,255,255,0.15); 
+}
+
+.menu-dropdown li.level2:first-child { border: none; }
+
+.menu-dropdown a.level2,
+.menu-dropdown span.level2 { 
+	color: #FFF; 
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+}
+
+.menu-dropdown a.level2 > span, 
+.menu-dropdown span.level2 > span { 
+	padding: 8px 0;
+	line-height: 25px; 
+}
+
+.menu-dropdown a.level2:hover,
+.menu-dropdown a.current.level2 { text-shadow: 0 -1px 0 rgba(0,0,0,0.3); }
+
+/* Level 3 */
+.menu-dropdown li.level3 { line-height: 18px; }
+
+.menu-dropdown a.level3 { 
+	padding-left: 17px;
+	background-position: 5px 0;
+	background-repeat: no-repeat;
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(20,20,20,0.4);
+}
+
+/* Set Hover + Current */
+.menu-dropdown a.level3:hover { background-position: 5px -50px; }
+.menu-dropdown a.current.level3 { background-position: 5px -100px; } 
+
+/* Icons */
+.menu-dropdown .level1 .level1 span.icon {
+	height: 72px;
+	margin: 0 5px 0 -10px;
+}
+
+/* Subtitle */
+.menu-dropdown span.title { line-height: 20px; }
+.menu-dropdown .level1 .level1 span.title { margin-top: 20px; }
+
+.menu-dropdown li.level2 .level2 span.subtitle { line-height: 15px;}
+
+/* Menu + Module */
+.menu-dropdown .module a { 
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(20,20,20,0.3); 
+}
+
+.menu-dropdown .module a:hover {  
+	color: rgba(0,0,0,0.45); 
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+}
+
+
+/* Sidebar/Accordion Menu
+----------------------------------------------------------------------------------------------------*/
+
+/* Link */
+.menu-sidebar a,
+.menu-sidebar li > span { color: #9D9D9D; }
+
+/* Hover */
+.menu-sidebar a:hover,
+.menu-sidebar li > span:hover { color: #707070; }
+
+/* Current */
+.menu-sidebar a.current:hover { color: #707070; }
+
+/* Level 1 */
+.menu-sidebar li.level1 { border-top: 1px solid #DBDBDB; }
+.menu-sidebar li.level1:first-child { border-top: none; }
+
+.menu-sidebar a.level1,
+.menu-sidebar span.level1 { text-transform: uppercase; }
+
+.menu-sidebar a.level1 > span, 
+.menu-sidebar span.level1 > span { padding: 8px 0; }
+
+/* Parents Level 1 */
+.menu-sidebar li.parent.active .level1:hover { color: #707070; }
+
+.menu-sidebar li.parent .level1 > span { 
+	background-position: 100% 0;
+	background-repeat: no-repeat; 
+}
+
+.menu-sidebar li.parent .level1 > span:hover { background-position: 100% -70px; }
+
+.menu-sidebar li.parent.active .level1 > span { background-position: 100% -140px; }
+.menu-sidebar li.parent.active .level1 > span:hover { background-position: 100% -210px; }
+
+/* Level 2 */
+.menu-sidebar ul.level2 { padding-left: 5px; }
+
+.menu-sidebar a.level2 {
+	padding-left: 18px;
+	background-position: 0 1px;
+	background-repeat: no-repeat;
+}
+
+.menu-sidebar a.level2:hover { background-position: 0 -69px; }
+.menu-sidebar a.level2.current { background-position: 0 -139px; }
+.menu-sidebar a.level2.current:hover { background-position: 0 -69px; }
+
+/* Level 3-4 */
+.menu-sidebar ul.level3 { padding-left: 25px; }
+.menu-sidebar ul.level3 ul { padding-left: 10px; }
+
+
+/* Sidebar/Accordion Menu on modules default & grey
+----------------------------------------------------------------------------------------------------*/
+
+#page .mod-box-default .menu-sidebar a,
+#page .mod-box-grey .menu-sidebar a { color: #9D9D9D; }
+
+#page .mod-box-default .menu-sidebar :hover,
+#page .mod-box-grey .menu-sidebar :hover { color: #707070; }
+
+
+/* Sidebar/Accordion Menu on colored modules
+----------------------------------------------------------------------------------------------------*/
+
+/* Link */
+.mod-box-colored .menu-sidebar a,
+.mod-box-colored .menu-sidebar li > span, 
+.mod-box-transparent a,
+.mod-box-transparent li > span { 
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25); 
+}
+
+/* Level 1 */
+.mod-box-color1 .menu-sidebar li.level1 { border-top-color: rgba(255,255,255,0.15); }
+.mod-box-color2 .menu-sidebar li.level1,
+.mod-box-transparent .menu-sidebar li.level1 { border-top-color: rgba(255,255,255,0.25); }
+
+/* Sidebar/Accordion Menu on line module
+----------------------------------------------------------------------------------------------------*/
+
+/* Link */
+.bg-colored .mod-line .menu-sidebar a,	
+.bg-colored .mod-line .menu-sidebar li > span { 
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.3); 
+}
+
+/* Level 1 */
+.bg-colored .mod-line .menu-sidebar li.level1 { border-top-color: rgba(255,255,255,0.5); }
+
+
+/* Line Menu
+----------------------------------------------------------------------------------------------------*/
+
+.menu-line li {
+	margin-left: 10px;
+	padding-left: 11px;
+	background-image: url(../images/menu_line_item.png);
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+}
+
+.menu-line li:first-child {
+	margin-left: 0;
+	padding-left: 0;
+	background: none;
+}

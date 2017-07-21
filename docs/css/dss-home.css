@@ -1,0 +1,185 @@
+/* CSS Document */
+#header{
+	background-image: url(../images/header-bg.jpg);
+	background-repeat: repeat-x;
+	background-position: top;
+	width: 100%;
+	height: 338px;
+	background-color: #567B11;
+}
+#header #banner{
+	width: 800px;
+	height: 338px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	background-image: url(../images/banner-bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+#header #banner #banner-image{
+	width: 466px;
+	height: 338px;
+	float:left;
+}
+#header #banner #banner-text{
+	width: 334px;
+	float:right;
+}
+#header #banner #banner-text #logo{
+	margin-top: 62px;
+	margin-left: 19px;
+}
+#header #banner #banner-text #bannerbox{
+	width: 309px;
+	padding-bottom: 10px;
+	background-color: #618718;
+}
+#header #banner #banner-text #bannerbox #description{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 11px;
+	color: #FFF;
+	line-height: 12px;
+	padding: 12px;
+}
+#header #banner #banner-text #bannerbox #getstarted{
+	text-align:right;
+	padding-top:10px;
+	padding-right:12px;
+}
+#header #banner #banner-text #bannerbox #getstarted a{
+	display:block;
+	padding:6px;
+	background-color: #7DA627;
+	float:right;
+	color: #FFF;
+	text-decoration: none;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 14px;
+	border: 1px solid #94BC36;
+}
+#header #banner #banner-text #bannerbox #getstarted a:link{
+	color: #FFF;
+}
+#header #banner #banner-text #bannerbox #getstarted a:hover{
+	color: #FFF;
+	background-color: #94BC36;
+}
+#header #banner #banner-text #bannerbox #getstarted a:active{
+	color: #FFF;
+}
+#header #banner #banner-text #bannerbox #getstarted a:visited{
+	color: #FFF;
+}
+#header #banner #banner-text #bannerbox #getstarted a:selected{
+	color: #FFF;
+}
+#homebody{
+	background-color: #FFF;	
+}
+#homebody #navigation{
+	height: 39px;
+	width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #8CB730;
+	background-image: url(../images/navigation-bg.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #FFF;
+	font-size: 14px;
+	text-align:right;
+	overflow: hidden;
+}
+#homebody #navigation ul{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	float: right;
+}
+#homebody #navigation ul li{
+	float: left;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #8CB730;
+	
+}
+#homebody #navigation ul li a{
+	text-decoration: none;
+	color: #FFF;
+	margin: 0px;
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-top: 11px;
+	padding-bottom: 11px;
+	display: block;	
+}
+#homebody #navigation ul li a:link{
+	color: #FFF;
+}
+#homebody #navigation ul li a:visited{
+	color: #FFF;
+}
+#homebody #navigation ul li a:hover{
+	color: #FFF;
+	background-color:#8CB730;
+}
+#homebody #navigation ul li a:active{
+	color: #FFF;
+}
+#homebody #navigation ul li a:selected{
+	color: #FFF;
+}
+#homebody #introduction{
+	width:760px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top:20px;
+	padding-bottom:20px;
+	text-align:left;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+#homebody #introduction h1{
+	font-size: 20px;
+	color: #567B11;
+	margin-top: 0px;
+	margin-bottom: 25px;
+}
+#homebody #introduction h2{
+	font-size: 16px;
+	color: #8CB730;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+#homebody #introduction p{
+	font-size: 12px;
+	color: #000;
+	margin-top: 0px;
+	margin-bottom: 14px;
+	line-height: 16px;
+}
+#homebody #graph{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-top:30px;
+	padding-bottom:20px;
+	text-align:center;
+}
+#homebody #homeimages{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0px;
+	margin-bottom:0px;
+	text-align:center;
+}

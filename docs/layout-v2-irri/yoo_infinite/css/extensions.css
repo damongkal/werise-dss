@@ -1,0 +1,58 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+
+/* Widgetkit: Twitter
+----------------------------------------------------------------------------------------------------*/
+
+.wk-twitter.wk-twitter-single {
+	padding: 40px;
+	text-align: center;
+	background: url(../images/line_bg.png) top repeat-x,
+				url(../images/widgetkit/twitter/twitter.png) bottom center no-repeat;
+}
+
+.wk-twitter .content {
+	font-size: 19px;
+	line-height: 22px;
+	margin-bottom: 35px;
+}
+
+.wk-twitter .meta { margin-bottom: 15px;}
+
+.wk-twitter .content a,
+.wk-twitter .meta a {
+	color: #B0B6BB;
+	color: rgba(255,255,255,0.65);
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.8); 
+}
+
+.wk-twitter .content a:hover,
+.wk-twitter .meta a:hover {
+	color: #FFF;
+	text-shadow: 0 0 1px 0 rgba(0,0,0,0.4);
+	text-decoration: underline;
+}
+
+
+/* Widgetkit: Spotlight
+----------------------------------------------------------------------------------------------------*/
+
+.image-circle.spotlight .overlay { 
+	padding: 0;
+	text-transform: uppercase; 
+	border-radius: 50%;
+	background: url(../images/widgetkit/spotlight/spotlight_bg.png) 0 0 repeat; 
+}
+
+.image-circle.spotlight .overlay > div{ 
+	padding: 10px;
+}
+
+.image-circle.spotlight .overlay h1 { 
+	font-size: 18px;
+	line-height: 25px;
+}
+.image-circle.spotlight .overlay p { 
+	font-size: 13px;
+	line-height: 16px;
+}

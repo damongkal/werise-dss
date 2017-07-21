@@ -1,0 +1,73 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Menu
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+.button-primary:hover,
+.button-default:hover,
+#system .item > .links a:hover,
+form.style button:hover,
+form.style input[type='button']:hover,
+form.style input[type='submit']:hover  {
+    -o-transition: 
+    	border-color 200ms ease-in-out, 
+    	background 200ms ease-in-out;
+	-webkit-transition: 
+		border-color 200ms ease-in-out, 
+		background 200ms ease-in-out;
+	-moz-transition: 
+		border-color 200ms ease-in-out, 
+		background 200ms ease-in-out;
+	transition: 
+		border-color 200ms ease-in-out, 
+		background 200ms ease-in-out;  	
+}
+
+#totop-scroller:hover, 
+.social-icons a:hover {
+	-o-transition: opacity 200ms ease-in-out;
+	-webkit-transition: opacity 200ms ease-in-out;
+	-moz-transition: opacity 200ms ease-in-out;
+	transition: opacity 200ms ease-in-out;
+}
+
+
+/* Widgetkit: Slideset + Slideshow
+----------------------------------------------------------------------------------------------------*/
+
+.wk-slideshow-infinite > div .next:hover,
+.wk-slideshow-infinite > div .prev:hover,
+.wk-slideset-infinite > div .next:hover,
+.wk-slideset-infinite > div .prev:hover {
+	-o-transition: opacity 200ms ease-in-out; 
+	-webkit-transition: opacity 200ms ease-in-out; 
+	-moz-transition: opacity 200ms ease-in-out; 
+	transition: opacity 200ms ease-in-out;	
+}
+
+.wk-slideshow-infinite .nav span:hover,
+.wk-slideset-infinite .nav span:hover {
+	-o-transition: opacity 200ms ease-in-out; 
+	-webkit-transition: opacity 200ms ease-in-out; 
+	-moz-transition: opacity 200ms ease-in-out; 
+	transition: opacity 200ms ease-in-out;	
+}
+
+/* Custom
+----------------------------------------------------------------------------------------------------*/
+
+.frontpage-clients a:hover {
+	-o-transition: opacity 200ms ease-in-out;
+	-webkit-transition: opacity 200ms ease-in-out;
+	-moz-transition: opacity 200ms ease-in-out;
+	transition: opacity 200ms ease-in-out;
+}
+

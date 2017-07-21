@@ -1,0 +1,237 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/*
+ * Style Style Sheet - Defines the main look like colors and backgrounds
+ * Not all style related CSS is included, only colors and backgrounds which may change for different theme styles
+ */
+
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+a,
+code { color: #0081C1; }
+
+mark { background-color: #32A1D9; }
+ins { background-color: #47BC58; }
+
+.bg-color1 strong { color: #B2DFFF; }
+.bg-color2 strong { color: #A7E2A5; }
+
+::-moz-selection { background: #008AD0; }
+::selection { background: #008AD0; }
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* 
+ * BG Block 
+ */
+
+.bg-color1 { 
+	background: #007BB7;
+	background: -moz-radial-gradient(center, ellipse farthest-corner, #008FD5 0%, #00689B 100%);
+	background: -o-radial-gradient(center, ellipse farthest-corner, #008FD5 0%, #00689B 100%);
+	background: -webkit-radial-gradient(center, ellipse farthest-corner, #008FD5 0%, #00689B 100%);
+	background: radial-gradient(center, ellipse farthest-corner, #008FD5 0%, #00689B 100%);
+}
+
+.bg-color2 { 
+	background: #36B04A;
+	background: -moz-radial-gradient(center, ellipse farthest-corner, #4DC35C 0%, #2FAA43 100%);
+	background: -o-radial-gradient(center, ellipse farthest-corner, #4DC35C 0%, #2FAA43 100%);
+	background: -webkit-radial-gradient(center, ellipse farthest-corner, #4DC35C 0%, #2FAA43 100%);
+	background: radial-gradient(ellipse farthest-corner at center, #68DB73 0%, #2FAA43 100%);
+}
+
+.body-dark,
+.bg-dark { background: #404D59; }
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+.menu-dropdown li.active .level1:before,
+#menu .menu-dropdown li.level1:hover .level1,
+#menu .menu-dropdown li.remain .level1,
+.menu-dropdown .dropdown-bg > div { background-color: #0081C1; }
+
+#menu .menu-dropdown li.level1:hover .level1,
+#menu .menu-dropdown li.remain .level1  { border-color: #0081C1; }
+
+.menu-dropdown a.level3 { background-image: url(../images/menu_dropdown_level3.png); }
+
+.menu-dropdown li.active .level1 { color: #0081C1; }
+
+/* 
+ * Menu Sidebar
+ */
+
+.menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent.png); }
+.menu-sidebar a.level2 { background-image: url(../images/menu_sidebar_level2.png); }
+
+/* 
+ * Sidebar on color1 modules 
+ */
+
+.bg-color1 .menu-sidebar li.parent .level1 > span,
+.mod-box-color1 .menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent_color1.png); }
+
+.bg-color1 .menu-sidebar a.level2,
+.mod-box-color1 .menu-sidebar a.level2 { background-image: url(../images/menu_sidebar_level2_color1.png); }
+
+/* 
+ *Sidebar on color2 modules 
+ */
+
+.bg-color2 .menu-sidebar li.parent .level1 > span,
+.mod-box-color2 .menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent_color2.png); }
+
+.bg-color2 .menu-sidebar a.level2,
+.mod-box-color2 .menu-sidebar a.level2 { background-image: url(../images/menu_sidebar_level2_color2.png); }
+
+/* 
+ * Menu Sidebar on grey + default modules 
+ */
+ 
+#page .mod-box-default .menu-sidebar li.parent .level1 > span,
+#page .mod-box-grey .menu-sidebar li.parent .level1 > span { background-image: url(../images/menu_sidebar_parent.png); }
+#page .mod-box-default  .menu-sidebar a.level2,
+#page .mod-box-grey  .menu-sidebar a.level2 { background-image: url(../images/menu_sidebar_level2.png); }
+
+.mod-line .menu-sidebar li .active,
+#page .mod-box-default .menu-sidebar li .active,
+#page .mod-box-grey .menu-sidebar li .active { color: #0081C1; }
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+.mod-box .module-title,
+.mod-line .module-title { color: #0081C1; }
+
+.module .badge { background-image: url(../images/module_badges.png); }
+.module .module-title .icon { background-image: url(../images/module_icons.png); }
+
+.mod-box-color1 { 
+	border-color: #006DA4;
+	background: #0081C1;
+}
+
+.mod-box-color2 { 
+	border-color: #32893F;
+	background: #47BC58;
+}
+
+.bg-colored .mod-box-default a,
+.bg-colored .mod-box-grey a {
+	color: #0081C1;
+	text-shadow: none;
+} 
+
+.bg-colored .mod-box-default code,
+.bg-colored .mod-box-grey code { color: #0081C1; } 
+
+
+/* Tools + System Links
+----------------------------------------------------------------------------------------------------*/
+
+.button-primary,
+#page .mod-box-default .button-primary,
+#page .mod-box-grey .button-primary,
+#system .item > .links a {
+	border-color: #006DA4;
+	background: #008CD1;
+}
+
+.button-primary:hover,
+#page .mod-box-default .button-primary:hover,
+#page .mod-box-grey .button-primary:hover,
+#system .item > .links a:hover {
+	border-color: #005C8B;
+	background: #0082C2;
+}
+
+.button-primary:active,
+#page .mod-box-default .button-primary:active,
+#page .mod-box-grey .button-primary:active,
+#system .item > .links a:active {
+	border-color: #00517A;
+	background: #0079B4;
+}	
+
+dl.separator dt:after { background-color: #008CD1; }
+
+em.box { color: #0081C1; }
+
+.social-icons li a,
+.module.mod-box-default .social-icons li a,
+.module.mod-box-grey .social-icons li a { background-image: url(../images/tools/icons_social.png); }
+
+
+/* Links
+----------------------------------------------------------------------------------------------------*/
+
+.menu-dropdown .level2 a:hover,
+.menu-dropdown .level2 a.current,
+.bg-color1 a:hover,
+.mod-box-color1 a:hover,
+.mod-box-color1 .menu-sidebar :hover,
+.mod-box-color1 .menu-sidebar li .active,
+.bg-color1 .menu-sidebar :hover,
+.bg-color1 .menu-sidebar li .active,
+.bg-color1 .mod-line .menu-sidebar li .active { color: #B2DFFF; }
+
+.bg-color2 a:hover,
+.mod-box-color2 a:hover,
+.mod-box-color2 .menu-sidebar :hover,
+.mod-box-color2 .menu-sidebar li .active,
+.bg-color2 .menu-sidebar :hover,
+.bg-color2 .menu-sidebar li .active,
+.bg-color2 .mod-line .menu-sidebar li .active { color: #A7E2A5; }
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+#system .pagination a:hover, 
+#system .pagination strong,
+.searchbox .results li.results-header,
+.searchbox .results li.result.selected h3,
+#system #respond h3 { color: #0081C1; }
+
+#system .pagination a:hover { border-color: #006599; }
+
+#system .pagination a.previous,
+#system .pagination a.next { background-image: url(../images/pagination.png); }
+
+.searchbox .results li.more-results:hover { background-color: #0081C1; }
+
+#system #comments .comment-byadmin .comment-head {
+	border-color: #D3D9DB;
+	background: #E9EFF2;
+}
+
+#system span.highlight { background-color: #0081C1; }
+
+
+/* Extensions
+----------------------------------------------------------------------------------------------------*/
+
+
+
+
+/* Widgetkit Slideshow
+----------------------------------------------------------------------------------------------------*/
+
+.wk-slideshow-infinite .caption h1 {
+	background-color: #007BB7;
+	background-color: rgba(0,143,213,0.8);
+}
+
+.wk-slideshow-infinite .caption h1 + span {
+	background-color: #36B04A;
+	background-color: rgba(71,170,80,0.85);
+}
+

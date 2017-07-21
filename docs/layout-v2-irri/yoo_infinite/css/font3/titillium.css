@@ -1,0 +1,20 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+.menu-dropdown a.level1,
+.menu-dropdown span.level1 { 
+	font-family: "TitilliumText25L250wt";
+	font-size: 16px;
+}
+
+.menu-dropdown .level1 .level1 span.title { font-size: 15px; }
+.menu-dropdown .level1 .level1 span.subtitle {
+	margin-top: 1px;
+	font-size: 10px;
+}
+
+.searchbox input { font-family: "TitilliumText25L250wt"; }
+
+.menu-sidebar a.level2 { background-position: 0 -1px; }
+.menu-sidebar a.level2:hover { background-position: 0 -71px; }
+.menu-sidebar a.level2.current { background-position: 0 -141px; }
+.menu-sidebar a.level2.current:hover { background-position: 0 -71px; }

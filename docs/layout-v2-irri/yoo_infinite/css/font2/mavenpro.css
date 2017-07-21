@@ -1,0 +1,12 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { font-family: "MavenProRegular"; }
+
+h1 { font-size: 38px; }
+
+.wk-slideshow-infinite .caption h1 + span { font-family: "MavenProRegular"; }

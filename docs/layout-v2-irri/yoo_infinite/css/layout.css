@@ -1,0 +1,105 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/layout.css);
+
+
+/* Spacing
+----------------------------------------------------------------------------------------------------*/
+
+.module { margin: 10px; }
+
+#breadcrumbs,
+#content { margin: 20px 10px; }
+
+#block-header + * #breadcrumbs { margin: 0 10px 20px 10px; }
+
+#footer .module { margin: 0; }
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+/* Blocks */
+#block-header + * { padding-top: 20px; }
+#block-header { 
+	border-bottom: 1px solid #E0E0E0; 
+	background: #FFF; 
+}
+
+.wrapper.max-width65 { max-width: 65%; }
+.wrapper.max-width80 { max-width: 80%; }
+.wrapper.max-width100 { max-width: 100%; }
+
+/* Backgrounds */
+.bg-white,
+.bg-colored { padding: 20px 0;} 
+
+.bg-colored {
+	border-top: 1px solid rgba(0,0,0,0.15);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.bg-colored h1,
+.bg-colored h2,
+.bg-colored h3,
+.bg-colored h4,
+.bg-colored h5,
+.bg-colored h6,
+.bg-colored { color: #FFF; }
+
+.bg-colored a {
+	color: #FFF;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+}
+
+.bg-colored code { color: #FFF; } 
+
+.bg-white + .bg-white { margin-top: -40px; }
+.bg-white { background: #FFF; }
+
+.bg-dark a:hover { 
+	color: #B0B6BB;
+	color: rgba(255,255,255,0.65);
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.25); 
+}
+
+/* Header */
+#header { padding: 0 10px; }
+
+#logo { height: 72px; }
+#logo > img {
+	width: auto;
+	max-height: 100%;
+}
+
+#menubar {
+	margin-bottom: -1px;
+	float: right;
+}
+
+/* Footer */
+#footer {
+	padding: 10px;
+	line-height: 18px;
+	text-align: left;
+	font-size: 12px;
+}
+
+/* ToTop Scroller */
+#totop-scroller {
+	display: block;
+	position: absolute;
+	top: 13px;
+	right: 10px;
+	z-index: 1;
+	width: 34px;
+	height: 34px;
+	background: url(../images/totop_scroller.png) 0 0 no-repeat;
+	text-decoration: none;
+	opacity: 0.7
+}
+
+#totop-scroller:hover { 
+	opacity: 1;
+	background-position: 0 -40px; 
+}
+

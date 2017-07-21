@@ -1,0 +1,113 @@
+/* CSS Document */
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.clr{
+	clear:both;
+}
+
+#footerv1{
+	background-color: #FFF;
+	background-image: url(../images/footer-bg.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+#footer #footer-content{
+	width: 800px;
+	height: 165px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#footer #footer-content #irrijcrp{
+	width: 146px;
+	height: 148px;
+	float: left;
+}
+#footer #footer-content #footer-text{
+	float: right;
+	width: 640px;
+	margin: 0px;
+	padding-top: 30px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 12px;
+	color: #567B11;
+}
+#footer #footer-content #footer-text p {
+	margin: 0px;
+}
+#footer #footer-content #footer-text #footer-nav a{
+	color: #567B11;
+	text-decoration:none;
+}
+#footer #footer-content #footer-text #footer-nav a:link{
+	color: #567B11;
+	text-decoration:none;
+}
+#footer #footer-content #footer-text #footer-nav a:hover{
+	color: #567B11;
+}
+#footer #footer-content #footer-text #footer-nav a:visited{
+	color: #567B11;
+}
+#footer #footer-content #footer-text #footer-nav a:active{
+	color: #567B11;
+}
+#footer #footer-content #footer-text #footer-nav a:selected{
+	color: #567B11;
+}
+#footer #footer-content #footer-text #footer-info{
+	padding-top: 20px;
+	line-height: 14px;
+}
+.select-extra{
+    font-weight: 700;
+    font-color: #cccccc;
+}
+
+#sql-log
+{
+    border:1px solid #000000;
+    margin: 5px;
+    padding: 5px;
+}
+
+#sql-log div
+{
+    border-bottom:1px dashed #000000;
+    padding: 3px;
+}
+
+/* unvisited link */
+.dssmenu a:link {
+    color: #707070;
+}
+
+/* visited link */
+.dssmenu a:visited {
+    color: #707070;
+}
+
+/* mouse over link */
+.dssmenu a:hover {
+    color: #ffffff;
+}
+
+/* selected link */
+.dssmenu a:active {
+    color: #707070;
+}
+
+.dssmenu a {
+    text-transform: none;
+}
+
+input[type="password"], select {
+    padding: auto;
+}
+
+.gmnoprint img {
+    max-width: none; 
+}

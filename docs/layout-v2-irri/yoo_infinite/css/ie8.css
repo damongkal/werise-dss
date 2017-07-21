@@ -1,0 +1,61 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+@import url(../warp/css/ie8.css);
+
+/* Base
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Layout
+----------------------------------------------------------------------------------------------------*/
+
+#menubar { margin-bottom: 0; }
+
+
+/* Menus
+----------------------------------------------------------------------------------------------------*/
+
+.menu-dropdown .dropdown { top: 73px; }
+
+.menu-dropdown li.level2 { border-top: none; }
+
+
+/* Modules
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Tools
+----------------------------------------------------------------------------------------------------*/
+
+.bg-colored .button-primary,
+.mod-box-colored .button-primary,
+.mod-box-transparent .button-primary { background: url(../images/tools/button_primary_bg.png) 0 0 repeat; }
+
+.bg-colored .button-primary:hover,
+.mod-box-colored .button-primary:hover,
+.mod-box-transparent .button-primary:hover { background: url(../images/tools/button_primary_bg_hover.png) 0 0 repeat; }
+
+.bg-colored .button-primary,
+.mod-box-colored .button-primary,
+.mod-box-transparent .button-primary { border: none; }
+
+
+/* System
+----------------------------------------------------------------------------------------------------*/
+
+/* Search Box */
+.searchbox { height: 73px; }
+
+.searchbox input { line-height: 70px; }
+
+.searchbox .results { top: 73px; }
+
+
+/* Style
+----------------------------------------------------------------------------------------------------*/
+
+
+/* Custom
+----------------------------------------------------------------------------------------------------*/
+
+.custom-logo { min-width: 138px; }

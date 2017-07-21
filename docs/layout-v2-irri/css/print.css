@@ -1,0 +1,5 @@
+@media print {
+    #block-header, #block-bottom-c, #block-footer, #footerv1 {
+        display:none;
+    }
+}
