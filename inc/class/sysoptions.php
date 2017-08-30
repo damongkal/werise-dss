@@ -64,8 +64,10 @@ class sysoptions
         $tmp = $db->getRowList('SELECT * FROM `system_options`');
         $this->sysopts = array();
         foreach ($tmp as $rec) {
-            $type = $this->default[$rec->id]['type'];
-            $this->sysopts[$rec->id] = $this->convertToType($type, $rec->ovalue);
+            if (isset($this->default[$rec->id])) {
+                $type = $this->default[$rec->id]['type'];
+                $this->sysopts[$rec->id] = $this->convertToType($type, $rec->ovalue);
+            }
         }
         $this->setConstants();
     }
@@ -109,12 +111,13 @@ class sysoptions
         $this->default[self::_ADM_SHOW_MENU] = array(
             'value' => false,
             'desc' => 'Show the Admin menu?');
+        /*
         $this->default[self::_ADM_SHOW_LOAD_WEATHER_DETAIL] =  array(
             'value' => false,
             'desc' => 'Show processing details of "Weather Data Files" section?');
         $this->default[self::_ADM_SHOW_LOAD_ORYZA_DETAIL] =  array(
             'value' => false,
-            'desc' => 'Show processing details of "Oryza2000 Interface" section?');
+            'desc' => 'Show processing details of "Oryza2000 Interface" section?');*/
         $this->default[self::_ADM_ORYZA_LOAD_TEST] =  array(
             'value' => false,
             'desc' => 'Load only 1 set for Oryza2000? Set to TRUE to quickly test the result of "Oryza2000 Interface" section.');

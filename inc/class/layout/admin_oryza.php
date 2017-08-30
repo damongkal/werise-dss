@@ -80,8 +80,8 @@
                                 <tr class="tr-gray">
                                     <th width="20">&nbsp;</th>
                                     <th width="120">File</th>
-                                    <th width="80">Year</th>
-                                    <th width="120">Is displayed to<br /> yield chart?</th>
+                                    <th width="50">Year</th>
+                                    <th width="140">Is displayed to<br /> yield chart?</th>
                                     <th width="180">Action</th>
                                     <th width="400">Notes</th>
                                 </tr>                                 
@@ -99,7 +99,7 @@
                                         <td><?php echo $file['year'] ?></td>
                                         <td>
                                             <?php if ($file['is_oryza_loaded']): ?>
-                                                <?php echo $file['is_oryza_loaded']->upload_date . ' <a href="admin.php?pageaction=oryza&action=detail&id=' . $file['is_oryza_loaded']->id . '">' . "[{$file['is_oryza_loaded']->id}]</a>" ?>
+                                                <?php echo $file['is_oryza_loaded']->upload_date . ' <a href="admin.php?pageaction=oryzaref&action=detail&id=' . $file['is_oryza_loaded']->id . '"><span class="badge">' . $file['is_oryza_loaded']->id . "</a>" ?>
                                             <?php else: ?>
                                                 <span style="color:#ff0000"><i class="icon-eye-close"></i> NO</span>
                                             <?php endif; ?>
@@ -121,75 +121,7 @@
 
         <?php endif; ?>        
 
-    <?php endif; ?>
-
-
-    <?php if ($cls->action === 'detail'): ?>                
-        <h3>Dataset</h3>
-
-        <table class="table table-bordered adm-table">
-            <tr>
-                <td class="tr-gray">ID</td>
-                <td><?php echo $cls->dataset_info->id ?></td>
-            </tr>    
-            <tr>
-                <td class="tr-gray">Date Processed</td>
-                <td><?php echo $cls->dataset_info->upload_date ?></td>
-            </tr>                
-            <tr>
-                <td class="tr-gray">Station</td>
-                <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> <?php echo $cls->dataset_station->station_name ?>, <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Year</td>
-                <td><?php echo $cls->dataset_info->year ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Type</td>
-                <td><?php echo werise_weather_properties::getTypeDesc($cls->dataset_info->wtype) ?></td>
-            </tr>            
-            <tr>
-                <td class="tr-gray">Variety</td>
-                <td><?php echo $cls->dataset_info->variety ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Fertilization</td>
-                <td><?php echo werise_oryza_fertilizer::getTypeDesc($cls->dataset_info->fert) ?></td>
-            </tr>            
-            <tr>
-                <td class="tr-gray">Oryza version</td>
-                <td><?php echo $cls->dataset_info->oryza_ver ?></td>
-            </tr>                        
-        </table>
-
-        <h3>Data</h3>
-
-        <table class="table table-bordered adm-table">
-            <tr class="tr-gray">
-                <th width="60">Runnum</th>
-                <th width="80">Decadal</th>
-                <th width="60">Yield</th>
-                <th width="200">Fertilizer Schedule</th>
-                <th width="60">Emergence</th>
-                <th width="60">Panicle Init.</th>
-                <th width="60">Flowering</th>
-                <th width="60">Harvest</th>
-            </tr>
-            <?php foreach ($cls->dataset_data as $data): ?>
-                <tr>
-                    <td><?php echo $data->runnum ?></td>
-                    <td><?php echo $data->observe_date ?></td>
-                    <td><?php echo $data->yield ?></td>
-                    <td><?php echo $data->fert ?></td>
-                    <td><?php echo $data->emergence ?></td>
-                    <td><?php echo $data->panicle_init ?></td>
-                    <td><?php echo $data->flowering ?></td>
-                    <td><?php echo $data->harvest ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>             
-
-    <?php endif; ?>        
+    <?php endif; ?>     
 
 </div>
 

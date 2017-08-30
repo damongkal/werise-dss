@@ -8,9 +8,14 @@ class admin_stations {
     public $regions;
 
     public function __construct() {
-
+        // physical PRN weather files
         $files_r = $this->getFileCounts(werise_weather_properties::_REALTIME);
         $files_f = $this->getFileCounts(werise_weather_properties::_FORECAST);
+        // weather data in DB
+        $weather_r = $this->getWeatherDatasetCounts(werise_weather_properties::_REALTIME);
+        $weather_f = $this->getWeatherDatasetCounts(werise_weather_properties::_FORECAST);        
+        
+        // oryza datasets in DB
         $oryza_dset = $this->getOryzaCounts();
 
         $this->stations = array();
@@ -26,16 +31,26 @@ class admin_stations {
                 $subregion_id = 0;
             }
             $station_id = $rec->station_id;
-            // merge historical data
+            // merge PRN historical data
             $rec->historical = false;
             if (isset($files_r[$country_code][$station_id])) {
                 $rec->historical = $files_r[$country_code][$station_id];
             }
-            // merge forecast data
+            // merge PRN forecast data
             $rec->forecast = false;
             if (isset($files_f[$country_code][$station_id])) {
                 $rec->forecast = $files_f[$country_code][$station_id];
             }
+            // merge DB historical data
+            $rec->historicaldb = false;
+            if (isset($weather_r[$country_code][$station_id])) {
+                $rec->historicaldb = $weather_r[$country_code][$station_id];
+            }
+            // merge DB forecast data
+            $rec->forecastdb = false;
+            if (isset($weather_f[$country_code][$station_id])) {
+                $rec->forecastdb = $weather_f[$country_code][$station_id];
+            }            
             // merge oryza data
             $rec->oryza = false;
             if (isset($oryza_dset[$country_code][$station_id])) {
@@ -46,8 +61,8 @@ class admin_stations {
             $this->regions[$region_id] = $rec->topregion_name;
             $this->regions[$subregion_id] = $rec->subregion_name;
         }
-        /*
-          echo '<pre>';
+
+          /*echo '<pre>';
           print_r($this->stations);
           echo '</pre>';
           die(); */
@@ -77,6 +92,29 @@ class admin_stations {
         }
         return $files2;
     }
+    
+    private function getWeatherDatasetCounts($wtype) {
+        $weather_dset = weather_data::getDatasets(null, $wtype);
+        $files2 = array();
+        if ($weather_dset) {
+            foreach ($weather_dset as $rec) {
+                $country = $rec->country_code;
+                $station = $rec->station_id;
+                $year = $rec->year;
+                if (!isset($files2[$country][$station])) {
+                    $files2[$country][$station] = array('min' => $year, 'max' => $year, 'cnt' => 0);
+                }
+                if ($year < $files2[$country][$station]['min']) {
+                    $files2[$country][$station]['min'] = $year;
+                }
+                if ($year > $files2[$country][$station]['max']) {
+                    $files2[$country][$station]['max'] = $year;
+                }
+                $files2[$country][$station]['cnt'] ++;
+            }
+        }
+        return $files2;
+    }    
 
     private function getOryzaCounts() {
         $oryza_dset = oryza_data::getAllDatasets(werise_weather_properties::_FORECAST);
@@ -142,12 +180,16 @@ class admin_stations {
             $location = implode(', ', $loc);
             $map_btn = '<button class="btn btn-mini mapbtn" type="button" data="' . $station->geo_lat . ';' . $station->geo_lon . ';' . $location . '"><i class="icon-map-marker icon-fix"></i></button>';
         }
-        return "$lat : $lon : $alt <span class=\"label label-{$gps_span}\"><i class=\"icon-{$gps_status} icon-white\"></i></span> $map_btn";
+        return "$lat $lon $alt &bull; <span class=\"label label-{$gps_span}\"><i class=\"icon-{$gps_status} icon-white\"></i></span> $map_btn";
     }
 
-    public function fmtDataFiles($data) {
+    public function fmtDataFiles($data,$data2 = false) {
         if ($data === false) {
-            echo '<span class="label label-important">no data</span>';
+            if ($data2 === false) {
+                echo '<span class="label label-important">no data</span>';
+            } else {
+                echo $data2['min'] . ' to ' . $data2['max'];
+            }
         } else {
             echo $data['min'] . ' to ' . $data['max'];
         }

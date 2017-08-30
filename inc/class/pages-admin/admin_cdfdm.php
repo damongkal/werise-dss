@@ -28,18 +28,20 @@ class admin_cdfdm {
             // execute action
             $this->doAction();
             $c = new werise_sintexf_data;
-            $this->raw = $c->getRawData($this->arg_region);            
-            // datafiles
-            foreach (werise_cdfdm_folder::getSources() as $source) {
-                list($dir, $files) = werise_cdfdm_folder::getFolderInfo($this->region_info->country_code, $this->arg_region, $source);
-                $this->datafiles[$source] = array($dir, $files);
+            $this->raw = $c->getRawData($this->arg_region);
+            if (_ADM_ENV!=='PROD') {
+                // datafiles
+                foreach (werise_cdfdm_folder::getSources() as $source) {
+                    list($dir, $files) = werise_cdfdm_folder::getFolderInfo($this->region_info->country_code, $this->arg_region, $source);
+                    $this->datafiles[$source] = array($dir, $files);
+                }
+                // get OUT datafile max year            
+                $this->outmaxyear = $this->getOutMaxYear();
+                // scriptfiles
+                $this->scriptfiles['list'] = werise_cdfdm_script::getListFile();
+                $this->scriptfiles['real'] = werise_cdfdm_script::getScriptFile(werise_cdfdm_script::_TYPE_REAL);
+                $this->scriptfiles['grasp'] = werise_cdfdm_script::getScriptFile(werise_cdfdm_script::_TYPE_GRASP);
             }
-            // get OUT datafile max year            
-            $this->outmaxyear = $this->getOutMaxYear();
-            // scriptfiles
-            $this->scriptfiles['list'] = werise_cdfdm_script::getListFile();
-            $this->scriptfiles['real'] = werise_cdfdm_script::getScriptFile(werise_cdfdm_script::_TYPE_REAL);
-            $this->scriptfiles['grasp'] = werise_cdfdm_script::getScriptFile(werise_cdfdm_script::_TYPE_GRASP);
         }
     }
 

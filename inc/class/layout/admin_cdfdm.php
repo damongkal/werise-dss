@@ -14,7 +14,7 @@
             <table class="table table-bordered adm-table">
                 <tr class="tr-gray">
                     <th width="300">Region</th>
-                    <th width="200">SINTEX-F</th>
+                    <th width="250">SINTEX-F</th>
                 </tr>                
 
                 <?php foreach ($regions as $region_id => $subregions) : ?>
@@ -37,7 +37,7 @@
 
         <div class="dselect" style="width:500px; margin-bottom:15px; padding: 5px 10px 15px 10px">
             <div class="pull-left" style="padding-top: 5px"><b>Region:</b> [<span id="region_id"><?php echo $cls->arg_region ?></span>] <?php echo $cls->fmtRegion() ?></div> 
-            <?php if ($cls->action !== 'chart') : ?>
+            <?php if ( (count($cls->raw) > 0) && $cls->action !== 'chart') : ?>
                 <div class="pull-right"><input type="button" class="btn btn-small" id="chart_btn" value="Weather Chart" /></div>
             <?php endif; ?>
             <div class="clear">&nbsp;</div>
@@ -87,6 +87,7 @@
                     <?php endforeach; ?>
 
                 <?php endif; ?>
+                <?php if (_ADM_ENV!=='PROD') : ?>        
                 <tr>
                     <td colspan="6">
                         <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
@@ -116,8 +117,11 @@
                             </form>
                         </div>
                     </td></tr>
+                <?php endif; ?>
             </table>                        
 
+            <?php if (_ADM_ENV!=='PROD') : ?>
+            
             <h3 style="margin-top: 0">General Circulation Model (GCM)</h3>
 
             <table class="table table-bordered adm-table" style="margin:3px">
@@ -329,6 +333,10 @@
 
                 </table>
             </div>
+            
+            <?php endif; ?>
+            
+            
         <?php endif; ?>
     <?php endif; ?>
 

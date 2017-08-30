@@ -2,7 +2,7 @@
     <div id="help-btn">
         <p>Displays the contents of the database.</p>
     </div>
-
+    
     <?php foreach ($cls->stations as $country_code => $regions) : ?>
 
         <h3><img class="icon-flag-<?php echo $country_code ?>" style="margin-top: 8px" /><?php echo werise_stations_country::getName($country_code) ?></h3>
@@ -44,11 +44,11 @@
                     <?php foreach ($stations as $station) : ?>
                         <tr>
                             <td><span class="label label-<?php echo ($station->is_enabled == 1) ? "success" : "important" ?>"><i class="icon-<?php echo ($station->is_enabled == 1) ? "ok-circle" : "remove-circle" ?>"></i></span></td>
-                            <td><?php echo $station->station_id ?></td>
+                            <td><a href="admin.php?pageaction=weatherref&action=detail&station_id=<?php echo $country_code.'-'.$station->station_id ?>"><span class="badge"><?php echo $station->station_id ?></span></a></td>
                             <td><?php echo $station->station_name ?></td>
                             <td><?php echo $cls->fmtLatLon($station) ?></td>
-                            <td><?php echo $cls->fmtDataFiles($station->historical) ?></td>
-                            <td><?php echo $cls->fmtDataFiles($station->forecast) ?></td>
+                            <td><?php echo $cls->fmtDataFiles($station->historical, $station->historicaldb) ?></td>
+                            <td><?php echo $cls->fmtDataFiles($station->forecast,$station->forecastdb) ?></td>
                             <td><?php echo $cls->fmtDataFiles($station->oryza) ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -56,8 +56,11 @@
                 <?php endforeach; ?>
             <?php endforeach; ?>
         </table>
-    <?php endforeach; ?>
+    <?php endforeach; ?>        
+         
 </div>
+
+
 
 
 <script type="text/javascript">

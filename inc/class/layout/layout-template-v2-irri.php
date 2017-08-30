@@ -131,7 +131,7 @@
                         <button class="btn btn-small" onclick="javascript:window.print()"><i class="icon-print"> </i> Print</button>
                     </div>
                     
-                    <?php if (_opt(sysoptions::_ADM_SHOW_MENU)) : ?>
+                    <?php if (_opt(sysoptions::_ADM_SHOW_MENU) || (dss_auth::getUsername()==='admin')) : ?>
                         <button class="btn btn-small" onclick="javascript:window.location.assign('admin.php')"><i class="icon-cog"> </i> Admin</button>
                     <?php endif;?>                    
                     

@@ -5,7 +5,7 @@
         <button class="btn btn-info btn-small" onclick="javascript:launch_help('q11')"><i class="icon-question-sign"> </i> Help</button>
     </div>
 
-    <?php if ($cls->action !== 'list'): ?>
+    <?php if ($cls->action !== 'list' && $cls->action !== 'detail'): ?>
         <p><a class="btn btn-small" href="admin.php?pageaction=weatherfile"><i class="icon-repeat"></i> Back to Directory List</a></p>
     <?php endif; ?>
 
@@ -132,35 +132,23 @@
             </tr>
             <tr>
                 <td class="tr-gray">Date Processed</td>
-                <td><?php echo $cls->dataset_info->upload_date ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Country</td>
-                <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Region</td>
-                <td><?php echo $cls->dataset_station->topregion_name ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Sub-Region</td>
-                <td><?php echo $cls->dataset_station->subregion_name ?></td>
+                <td><?php echo $cls->dataset_info->upload_date ?> <span class="badge">ver <?php echo $cls->dataset_info->oryza_ver ?></span></td>
             </tr>
             <tr>
                 <td class="tr-gray">Station</td>
                 <td><?php echo $cls->dataset_station->station_name ?></td>
             </tr>            
             <tr>
+                <td class="tr-gray">Region</td>
+                <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> 
+                    <?php echo $cls->dataset_station->subregion_name ?>, 
+                    <?php echo $cls->dataset_station->topregion_name ?>, 
+                    <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?>
+                </td>
+            </tr>            
+            <tr>
                 <td class="tr-gray">Year</td>
-                <td><?php echo $cls->dataset_info->year ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Type</td>
-                <td><?php echo werise_weather_properties::getTypeDesc($cls->dataset_info->wtype) ?></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Oryza version</td>
-                <td><?php echo $cls->dataset_info->oryza_ver ?></td>
+                <td><?php echo $cls->dataset_info->year ?> <?php echo werise_weather_properties::getTypeDesc($cls->dataset_info->wtype) ?></td>
             </tr>
         </table>
 
@@ -191,7 +179,7 @@
 
         <table class="table table-bordered adm-table">
             <tr class="tr-gray">
-                <th width="80">Date</th>
+                <th width="110">Date</th>
                 <th class="nbr" width="80">Rainfall</th>
                 <th class="nbr" width="80">Min Temp.</th>
                 <th class="nbr" width="80">Max Temp.</th>
@@ -226,7 +214,7 @@
 
         <table class="table table-bordered adm-table">
             <tr class="tr-gray">
-                <th width="80">From<br />Date</th>
+                <th width="110">From<br />Date</th>
                 <th width="80" style="display:none">To<br />Date</th>
                 <th class="nbr" width="80">Rainfall</th>
                 <th class="nbr" width="80">Min Temp.</th>
@@ -468,7 +456,7 @@
             <?php endif; ?>
         <?php endif; ?>    
 
-    <?php if ($cls->action !== 'list'): ?>
+    <?php if ($cls->action !== 'list' && $cls->action !== 'detail'): ?>
         <p><a class="btn btn-small" href="admin.php?pageaction=weatherfile"><i class="icon-repeat"></i> Back to Directory List</a></p>
     <?php endif; ?>
 </div>

@@ -7,10 +7,6 @@ class admin_oryza
     public $action_ret;
     public $files;
     public $fileprops;
-    
-    public $dataset_info;
-    public $dataset_station;
-    public $dataset_data;
 
     private $station_names;
     private $ver;
@@ -46,8 +42,6 @@ class admin_oryza
                     $this->action_ret = array(false,$e->getMessage());
                 }                    
                 break;
-            case 'detail':
-                list($this->dataset_info,$this->dataset_station,$this->dataset_data) = $action_loader->actionDetails();
                 break;                    
             case 'oryza_err':
                 $this->action_ret = $action_loader->actionOryzaError();
@@ -333,27 +327,7 @@ class oryza_action extends admin_weather_action
         {
             $cls->deleteDataSet($rec->id, false);
         }
-    }
-    
-    public function actionDetails()
-    {
-        $id = 0;
-        if (isset($_GET['id']))
-        {
-            $id = $_GET['id'];
-        }        
-        // dataset info
-        $filter = array('id'=>$id);
-        $dset = oryza_data::getDatasets($filter);
-        $dataset_info = $dset[0];
-        // station info
-        $filter2 = array('country'=>$dset[0]->country_code,'station'=>$dset[0]->station_id);
-        $station = weather_stations::getAll($filter2);
-        $dataset_station = $station[0];
-        // dataset records
-        $dataset_data = oryza_data::getDatasetRecords($filter);        
-        return array($dataset_info,$dataset_station,$dataset_data);
-    }    
+    } 
 
     private function getFert()
     {
