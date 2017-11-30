@@ -416,19 +416,15 @@ class oryza_data
     public function getVarieties($country,$station,$year,$wtype='r')
     {
         $sql = "
-            SELECT DISTINCT `variety`
-            FROM "._DB_DATA.".`oryza_dataset`
-            WHERE `country_code` = '{$country}'
-                AND `station_id` = {$station}
-                AND `year` = {$year}
-                AND `wtype` = '{$wtype}'";
+            SELECT DISTINCT ds.`variety`, v.*
+            FROM "._DB_DATA.".`oryza_dataset` AS ds
+            INNER JOIN `varieties` AS v ON ds.`variety` = v.`variety_code`
+            WHERE ds.`country_code` = '{$country}'
+                AND ds.`station_id` = {$station}
+                AND ds.`year` = {$year}
+                AND ds.`wtype` = '{$wtype}'";
         $rs = $this->db->getRowList($sql);
-        $rs2 = array();
-        foreach($rs as $rec)
-        {
-            $rs2[] = array($rec->variety,  werise_oryza_terms::getVarietyLabel($rec->variety));
-        }
-        return $rs2;
+        return $rs;
     }
     
     /**

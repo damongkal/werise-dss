@@ -219,11 +219,13 @@ $fertoptscount = count($fertopts);
                     <select class="form-control" name="cs2r_variety1" id="cs2r_variety1" style="width:150px">
                         <option value=""><?php __('Variety')?> &raquo;</option>
                     </select>
+                    <div id="variety-info-1" class="variety-info"></div>
 
                     <label class="control-label" for="cs2r_variety2"><?php echo __('Variety for second crop')?></label>
                     <select class="form-control" name="cs2r_variety2" id="cs2r_variety2" style="width:150px">
                         <option value=""><?php __('Variety')?> &raquo;</option>
                     </select>
+                    <div id="variety-info-2" class="variety-info"></div>
 
                     <div>
                         <button class="form-control btn btn-success showcombi" type="button"><i class="icon-thumbs-up icon-white"></i> <?php __('Show advisory') ?></button>
@@ -568,8 +570,10 @@ $fertoptscount = count($fertopts);
 
 </div>
 
-<div id="fert_sched_template3" class="hide"></div>
-<div id="fert_sched_template2" class="hide">
+<!-- TEMPLATE: Fertilizer Schedule -->
+<div id="fert_sched_template3" class="html-template"></div>
+<!-- TEMPLATE: Observed Rainfall -->
+<div id="fert_sched_template2" class="html-template">
     <p><b>Observed Rainfall</b></p>
     <table class="table table-bordered table-condensed" style="width:440px">
         <thead>
@@ -581,6 +585,15 @@ $fertoptscount = count($fertopts);
         <tbody>
         </tbody>
     </table>
+</div>
+<!-- TEMPLATE: Variety Info -->
+<div id="variety-info-template" class="html-template">
+    <h4>Info on {{variety_name}}:</h4>
+    <p>
+        &raquo; Maturity: {{maturity}}<br />
+        &raquo; Yield Average: {{yield_avg}}<br />
+        &raquo; Yield Potential: {{yield_potential}}
+    </p>
 </div>
 
 
