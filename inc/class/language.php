@@ -179,6 +179,22 @@ class language
             return array($str,'');
         }
     }
+    
+    public static function getLangs($country_code = null)
+    {
+        $langs = array(
+            'en'=>'English',
+            'la'=>'ພາສາລາວ',
+            'id'=>'Bahasa Indonesia',
+            'th'=>'ไทย',
+            'ph'=>'Filipino');
+        if (is_null($country_code)) {
+            return $langs;
+        } else {
+            $code = strtolower($country_code);
+            return $langs[$code];
+        }
+    }    
 }
 
 function _t($str,$debug=false)

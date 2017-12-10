@@ -1,3 +1,7 @@
+<?php
+$country_choice = dss_utils::getLastSelectValues('country');
+$all_country = werise_stations_country::getAll();
+?>
 <div class="width-center">
     <header>
         <h1 class="title"><?php echo _CURRENT_OPT ?></h1>
@@ -11,21 +15,16 @@
                 <legend><?php echo __('Dataset')?></legend>
 
                 <label class="control-label" for="station"><?php __('Station') ?></label>
-                <div class="bfh-selectbox bfh-countries" data-countryList="ID,LA,PH,TH" data-country="<?php echo dss_utils::getLastSelectValues('country')?>" data-flags="true" style="float:left">
-                    <input id="country" name="country" type="hidden" value="<?php echo dss_utils::getLastSelectValues('country')?>">
-                    <a class="bfh-selectbox-toggle" role="button" data-toggle="bfh-selectbox" href="#">
-                        <span class="bfh-selectbox-option input-small" data-option=""></span>
-                        <b class="caret"></b>
-                    </a>
-                    <div class="bfh-selectbox-options" style="min-width:130px">
-                        <input type="text" class="bfh-selectbox-filter" style="display:none">
-                        <div role="listbox">
-                            <ul role="option" style="width:130px">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                
+                <input id="country" name="country" type="hidden" value="<?php echo $country_choice ?>">
+                <div class="btn-group">
+                    <button class="btn btn-small dropdown-toggle country-dropdown" data-toggle="dropdown"><i class="icon-flag-<?php echo strtoupper($country_choice) ?>"> </i> <?php echo $all_country[$country_choice]['country'] ?> &nbsp;&nbsp;<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <?php foreach ($all_country as $country_code => $country_attr): ?>
+                            <li><a href="index.php?pageaction=weather&country=<?php echo $country_code ?>"><i class="icon-flag-<?php echo $country_code ?>"> </i> <?php echo $country_attr['country'] ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>                
                 &nbsp;
                 <div class="input-append" id="location_div">
                   <input class="form-control span2" id="location_name" type="text" disabled="disabled" style="width:400px;padding:4px 10px">

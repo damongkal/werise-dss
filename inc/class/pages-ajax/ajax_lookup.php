@@ -42,6 +42,7 @@ class ajax_lookup extends ajax_base
         } else {
             foreach ($rs as $rec) {
                 $rec_tmp = new werise_varieties_record;
+                $rec->variety_name = strtoupper($rec->variety_name);
                 $rec_tmp->loadRecord($rec);
                 $rec->dds_depth = $rec_tmp->getDdsDepth();
                 $rec->dds_volume = $rec_tmp->getDdsVolume();

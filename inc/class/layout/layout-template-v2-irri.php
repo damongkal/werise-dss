@@ -7,7 +7,7 @@
 
         <title>IRRI &raquo; Tools and Database &raquo; WeRise - Weather-rice-nutrient integrated decision support system</title>
 
-        <script type="text/javascript" src="js/jquery/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript">
             jQuery.noConflict();
         </script>
@@ -21,9 +21,6 @@
         <link type="text/css" rel="stylesheet" href="css/bootstrap/bootstrap-formhelpers.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap/bootstrap-formhelpers-countries.flags.css" />
         <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap/bootstrap-formhelpers-selectbox.js"></script>
-        <script type="text/javascript" src="js/bootstrap/bootstrap-formhelpers-countries.en_US.js"></script>
-        <script type="text/javascript" src="js/bootstrap/bootstrap-formhelpers-countries.js"></script>
 
         <script type="text/javascript" src="gzip.php?group=common"></script>
         <script type="text/javascript">
@@ -118,13 +115,12 @@
                     <?php endif; ?>                    
                     
                     <div class="btn-group">
-                        <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-globe"> </i> Select Language <span class="caret"></span></button>
+                        <?php $lang_choice = language::getInstance()->getLang(); ?>
+                        <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-flag-<?php echo strtoupper($lang_choice) ?>"> </i> <?php echo language::getLangs($lang_choice) ?> &nbsp;&nbsp;<span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="index.php?lang=en"><i class="icon-flag-US"> </i> English</a></li>
-                            <li><a href="index.php?lang=la"><i class="icon-flag-LA"> </i> ພາສາລາວ</a></li>
-                            <li><a href="index.php?lang=id"><i class="icon-flag-ID"> </i> Bahasa Indonesia</a></li>
-                            <li><a href="index.php?lang=th"><i class="icon-flag-TH"> </i> ไทย</a></li>
-                            <li><a href="index.php?lang=ph"><i class="icon-flag-PH"> </i> Filipino</a></li>
+                            <?php foreach (language::getLangs() as $lang_id => $lang_name): ?>
+                                <li><a href="index.php?lang=<?php echo $lang_id ?>"><i class="icon-flag-<?php echo strtoupper($lang_id) ?>"> </i> <?php echo $lang_name ?></a></li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <div class="btn-group">

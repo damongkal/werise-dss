@@ -2,22 +2,19 @@
  * page behaviours
  */
 jQuery(function () {
-    // trigger one crop calendar
+    // trigger two crop calendar
+    CombiListForm.bindEvents();
+    CombiListForm.initForm();
+    jQuery('#cstwo').click(function () {
+        CombiListForm.initForm();
+    });
+    
+    // OLD VERSION: trigger one crop calendar
     jQuery('#csone').click(function () {
-        OryzaFormV1.initForm();        
+        OryzaFormV1.initForm();
         jQuery('#cropseason').hide();
         jQuery('#dataselection').show();
         jQuery('#dataselection2').hide();
-    });
-
-    // trigger two crop calendar
-    jQuery('#cstwo').click(function () {
-        CombiListForm.initForm();        
-        jQuery('#cropseason').hide();
-        jQuery('#dataselection2').show();
-        jQuery('#dataselection').hide();
-        jQuery('.cs2_custom').hide();
-        jQuery('#grainyield_chart').hide();
     });
 });
 

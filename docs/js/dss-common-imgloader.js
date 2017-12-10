@@ -15,6 +15,9 @@ var weriseApp = {
         jQuery("#werise-error-div").show();                    
     },    
     recentSelect : [],
+    varietyInfo : false,
+    ajaxCache : [],
+    ajaxCacheIdx : [],
     dropDownData : { station : [] },
     ajax: function (urlparams) {
         return jQuery.ajax({
@@ -36,6 +39,20 @@ var weriseApp = {
     },    
     getStoredVariety : function() {
         return this.recentSelect.variety;
+    },
+    setVarietyInfo : function(data) {
+        this.varietyInfo = data;
+    },    
+    getVarietyInfo : function() {
+        return this.varietyInfo;
+    },      
+    setAjaxCache : function(url,data) {
+        var idx = 0;
+        this.ajaxCache[idx] = data;
+    },    
+    getAjaxCache : function(url) {
+        var idx = 0;
+        return this.ajaxCache[idx];
     },
     dbg : function(callerobj,marker,obj) {
         var oktypes = ["string","number"];

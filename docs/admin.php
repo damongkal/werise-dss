@@ -5,7 +5,7 @@ $valid_admin = array(
     'import', 'oryza', 'phpinfo',
     'rcm', 'stations', 'weatherfile',
     'cdfdm_convert','help','users',
-    'weatherref','oryzaref','cdfdm'
+    'weatherref','oryzaref','cdfdm','varieties'
 );
 $pageaction = 'admin_index';
 if (isset($_REQUEST['pageaction'])) {

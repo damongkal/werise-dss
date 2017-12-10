@@ -52,7 +52,7 @@ var OryzaAdvisory = {
         var type_year = OryzaFormV1.getYear('');
         var wtype = type_year.substr(0, 1);
         weather_chart.setCalendar1('Crop Calendar', CropCalendarChart.getProps(calendar_data));
-        weather_chart.makeChart(OryzaFormV1.getCountry(), OryzaFormV1.getStation(), 0, wtype, false);        
+        weather_chart.makeChart(OryzaFormV1.getCountry(), OryzaFormV1.getStation(), 0, wtype, false);
     }
 }
 
@@ -147,9 +147,10 @@ var AllCalendars = {
         var newcal = new CropCalendar;
         newcal.setCalendar(cropdata);
         var fert = new FertilizerSchedule;
+        variety_info = CombiListStorage.getVarietyInfo(cropdata.variety,'varcode');
 
         var tmp = '<tr id="calendar_' + newcal.dataset_id + '_' + newcal.runnum + '" class="allcalendar">';
-        tmp = tmp + '<td style="font-weight:700">' + croptitle + '</td>';
+        tmp = tmp + '<td style="font-weight:700">' + croptitle + ': ' + variety_info.variety_name + '</td>';
         tmp = tmp + '<td>' + formatDate2(newcal.sow_date, '', 'abbr') + '</td>';
         tmp = tmp + '<td class="alldates">' + formatDate2(newcal.panicle_init_date, '', 'abbr') + '</td>';
         tmp = tmp + '<td class="alldates">' + formatDate2(newcal.flower_date, '', 'abbr') + '</td>';
@@ -172,22 +173,117 @@ var AllCalendars = {
         {
             jQuery('#calendar_' + second_idx).show();
         }
-    },
-    showTotalYield: function (first_data, second_data) {
-        // first crop
-        jQuery('#grain_yield1').html(first_data.yield.toFixed(2));
-        var image_width = Math.floor(46 * first_data.yield);
-        jQuery('#rice-sack1').css('width', image_width);
-        // second crop        
-        jQuery('#grain_yield2').html(second_data.yield.toFixed(2));
-        var image_width2 = Math.floor(46 * second_data.yield);
-        jQuery('#rice-sack2').css('width', image_width2);
-        // total grain yield
-        var total_yield = first_data.yield + second_data.yield;
-        jQuery('#total_grain_yield').html(total_yield.toFixed(2));
-        jQuery('#total_grain_yield_p').show();
     }
 
+};
+
+
+/**
+ * water requirements advisory
+ * @type type
+ */
+var WaterRequirement = {
+    showAdvisory: function()
+    {
+        this.populateValues(1);
+        this.populateValues(2);
+    },
+    populateValues: function(cropidx) {
+        // get data from previous stored ajax call
+        var crop_data = CombiListStorage.getRunDataByIndex(cropidx);
+
+        // jQuery('#f-rain').html(WeatherAdvisory.getRainCategory(first_data.rain_code,first_data.rain_amt));
+        var variety_info, deficit, reqt, pump_hours, fuel_consumed, fuel_cost;
+        var pump_rate = parseInt(jQuery("#pump-rate").val());
+        var fuel_rate = parseFloat(jQuery("#fuel-rate").val());
+        var fuel_price = parseFloat(jQuery("#fuel-price").val());
+        var farm_size = parseFloat(jQuery("#farm-size").val());
+
+        // first crop
+        variety_info = CombiListStorage.getVarietyInfo(crop_data.variety,'varcode');
+        jQuery('#suppl-'+cropidx+'-var').html(variety_info.name);
+        jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
+        jQuery('#suppl-'+cropidx+'-2').html(variety_info.tp_depth);
+        deficit = parseInt(crop_data.rain_amt - variety_info.tp_depth);
+        jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));
+        if (deficit<0) {
+            deficit = Math.abs(deficit);
+            reqt = deficit * 10000 * 1000 / 1000;
+            pump_hours = reqt / pump_rate / 3600;
+            jQuery('#suppl-'+cropidx+'-4').html(parseInt(pump_hours));
+            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);            
+            jQuery('#suppl-'+cropidx+'-7').html(parseInt(pump_hours * farm_size));            
+            fuel_consumed = pump_hours * fuel_rate * farm_size;
+            jQuery('#suppl-'+cropidx+'-5').html(parseInt(fuel_consumed));
+            fuel_cost = parseInt(fuel_consumed * fuel_price);
+            jQuery('#suppl-'+cropidx+'-6').html(fuel_cost.toLocaleString('en'));
+        } else {
+            jQuery('#suppl-'+cropidx+'-4').html('0');
+            jQuery('#suppl-'+cropidx+'-5').html('0');
+            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);
+            jQuery('#suppl-'+cropidx+'-7').html('0');
+            jQuery('#suppl-'+cropidx+'-6').html('0');            
+        }
+    }
+};
+
+/**
+ * total production advisory
+ * @type type
+ */
+var TotalProduction = {
+    showAdvisory: function()
+    {
+        // get data from previous stored ajax call
+        var first_data = CombiListStorage.getRunDataByIndex(1);
+        var second_data = CombiListStorage.getRunDataByIndex(2);
+        // initialize variables
+        var farm_size = parseFloat(jQuery("#farm-size").val());
+        var family_count = parseFloat(jQuery("#family-num").val());
+        var person_consume = 57 / 1000; // rice (t) consumed by 1 person for 6 months
+        var unit_yield, actual_yield, family_consume, surplus;
+        var unit_yield_total, actual_yield_total, family_consume_total, surplus_total;
+
+        // first crop
+        unit_yield = first_data.yield; // unit yield
+        unit_yield_total = unit_yield;
+        jQuery('#grain_yield1').html(unit_yield.toFixed(2));
+        var image_width = Math.floor(46 * unit_yield);
+        jQuery('#rice-sack1').css('width', image_width);
+        actual_yield = unit_yield * farm_size;// actual production
+        actual_yield_total = actual_yield;
+        jQuery('#actual-yield-1').html(actual_yield.toFixed(2));
+        family_consume = person_consume * family_count; // family consumed
+        family_consume_total = family_consume;
+        jQuery('#yield-consume-1').html(family_consume.toFixed(2));
+        surplus = actual_yield - family_consume; // surplus
+        surplus_total = surplus;
+        jQuery('#yield-surplus-1').html(surplus.toFixed(2));
+
+        // second crop
+        unit_yield = second_data.yield; // unit yield
+        unit_yield_total += unit_yield;
+        jQuery('#grain_yield2').html(unit_yield.toFixed(2));
+        var image_width = Math.floor(46 * unit_yield);
+        jQuery('#rice-sack2').css('width', image_width);
+        actual_yield = unit_yield * farm_size;// actual production
+        actual_yield_total += actual_yield;
+        jQuery('#actual-yield-2').html(actual_yield.toFixed(2));
+        family_consume = person_consume * family_count; // family consumed
+        family_consume_total += family_consume;
+        jQuery('#yield-consume-2').html(family_consume.toFixed(2));
+        surplus = actual_yield - family_consume; // surplus
+        surplus_total += surplus;
+        jQuery('#yield-surplus-2').html(surplus.toFixed(2));
+
+        // total grain yield
+        jQuery('#total_grain_yield').html(unit_yield_total.toFixed(2));
+        jQuery('#actual-yield-3').html(actual_yield_total.toFixed(2));
+        jQuery('#yield-consume-3').html(family_consume_total.toFixed(2));
+        jQuery('#yield-surplus-3').html(surplus_total.toFixed(2));
+
+        jQuery('#total_grain_yield_p').show();
+    }
 };
 
 function showAdvisory_Compare(ajaxdata)
