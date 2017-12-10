@@ -201,12 +201,24 @@ var WaterRequirement = {
 
         // first crop
         variety_info = CombiListStorage.getVarietyInfo(crop_data.variety,'varcode');
+        // transplant or dry seeding
+        var tmp_date = new Date(crop_data.sow_date);
+        var tmp_month = tmp_date.getMonth();
+        var reqt_method = 'direct dry seeding';
+        var reqt_depth = variety_info.tp_depth;
+        if (tmp_month>=2 && tmp_month<=5) {
+            reqt_method = 'transplanting';
+            var reqt_depth = variety_info.dds_depth;
+        }
+        console.log('month:'+tmp_month);
         jQuery('#suppl-'+cropidx+'-var').html(variety_info.name);
         jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
-        jQuery('#suppl-'+cropidx+'-2').html(variety_info.tp_depth);
-        deficit = parseInt(crop_data.rain_amt - variety_info.tp_depth);
-        jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));
-        if (deficit<0) {
+        jQuery('#suppl-'+cropidx+'-2').html(reqt_depth);
+        jQuery('#suppl-'+cropidx+'-method').html(reqt_method);
+        deficit = parseInt(crop_data.rain_amt - reqt_depth);
+        jQuery('#suppl-'+cropidx+'-3').html('0');
+        if (deficit<0) {            
+            jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));
             deficit = Math.abs(deficit);
             reqt = deficit * 10000 * 1000 / 1000;
             pump_hours = reqt / pump_rate / 3600;

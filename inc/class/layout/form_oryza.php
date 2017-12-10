@@ -488,8 +488,8 @@ $all_country = werise_stations_country::getAll();
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Water requirement') ?></td>
-                <td><span id="suppl-1-2">0</span> mm</td>
-                <td><span id="suppl-2-2">0</span> mm</td>
+                <td><span id="suppl-1-2">0</span> mm (<span id="suppl-1-method">0</span>)</td>
+                <td><span id="suppl-2-2">0</span> mm (<span id="suppl-2-method">0</span>)</td>
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Water deficit') ?></td>
