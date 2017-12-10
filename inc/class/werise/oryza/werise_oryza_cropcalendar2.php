@@ -11,11 +11,11 @@ class werise_oryza_cropcalendar2
     private $raindates;
     private $runnums = array();
     
-    public function getRecommended(werise_core_dataset $dataset, $raindates, $season_start,$season_end )
+    public function getRecommended(werise_core_dataset $dataset, $raindates, $season_start, $season_end, $crop1, $crop2 )
     {
         $this->rain_advisory = new advisory_rainfall($dataset->getStation(),$dataset->getWType());
         $this->raindates = $raindates;
-        return $this->getList($dataset,$season_start,$season_end);
+        return $this->getList($dataset,$season_start,$season_end, $crop1, $crop2);
     }
     
     public function getCustom(werise_core_dataset $dataset, $raindates, $crop1, $crop2)
@@ -25,7 +25,7 @@ class werise_oryza_cropcalendar2
         return $this->getList2($dataset,$crop1, $crop2);
     }         
     
-    private function getList(werise_core_dataset $dataset, $season_start, $season_end)
+    private function getList(werise_core_dataset $dataset, $season_start, $season_end, $crop1, $crop2)
     {        
         $db = Database_MySQL::getInstance();
         
@@ -58,21 +58,24 @@ class werise_oryza_cropcalendar2
         // 1st crop
         $sql6 = sprintf("{$sql5}
             AND b.`observe_date` >= '%s'
-            AND b.observe_date < '%s'",
+            AND b.observe_date < '%s'
+            AND a.variety = '%s'",
             $db->escape($season_start),
-            $cutoff1);
+            $cutoff1,
+            $db->escape($crop1['variety']));
         $rs3 = $db->getRowList($sql6);
         foreach($rs3 as $rec3) // 1st crop
         {
             // second crop
             $sql7 = sprintf("{$sql5}
                 AND b.`observe_date` >= DATE_ADD('%s', INTERVAL %u DAY)
-                AND b.observe_date < DATE_ADD('%s', INTERVAL %u DAY)",
+                AND b.observe_date < DATE_ADD('%s', INTERVAL %u DAY)
+                AND a.variety = '%s'",
                 $rec3->observe_date, 
                 intval($rec3->harvest+$rest),
                 $rec3->observe_date,     
-                $cutoff2    
-                );
+                $cutoff2,
+                $db->escape($crop2['variety']));
             $rs4 = $db->getRowList($sql7);
             $second = $this->getSecondCropList($rs4);
             $scount = count($second);

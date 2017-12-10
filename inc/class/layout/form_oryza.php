@@ -429,18 +429,18 @@ $all_country = werise_stations_country::getAll();
             <thead>
                 <tr style="background-color: #567B11">
                     <th rowspan="2" style="width:120px"><?php __('Crop') ?></th>
-                    <th rowspan="2" style="width:100px"><?php __('Sowing Date') ?></th>
+                    <th rowspan="2" style="width:105px"><?php __('Sowing Date') ?></th>
                     <th rowspan="2" class="alldates" style="width:90px"><?php __('Panicle Init.') ?></th>
                     <th rowspan="2" class="alldates" style="width:90px"><?php __('Flowering') ?></th>
-                    <th rowspan="2" style="width:90px"><?php __('Harvest Date') ?></th>
+                    <th rowspan="2" style="width:105px"><?php __('Harvest Date') ?></th>
                     <th rowspan="2" style="width:50px;text-align:right"><?php __('Yield') ?><br />(t/ha)</th>
-                    <th colspan="3" style="width:400px;text-align:center"><?php __('Fertilizer Schedule') ?></th>
+                    <th colspan="3" style="text-align:center"><?php __('Fertilizer Schedule') ?></th>
                     <th colspan="3" class="npkamt" style="width:250px;text-align:center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
                 </tr>
                 <tr style="background-color: #567B11">
-                    <th style="width:130px"><?php __('Basal') ?></th>
-                    <th style="width:130px"><?php __('Top Dress 1') ?></th>
-                    <th style="width:130px"><?php __('Top Dress 2') ?></th>
+                    <th style="width:145px"><?php __('Basal') ?></th>
+                    <th style="width:145px"><?php __('Top Dress 1') ?></th>
+                    <th style="width:145px"><?php __('Top Dress 2') ?></th>
                     <th class="npkamt" style="width:80px"><?php __('Basal') ?></th>
                     <th class="npkamt" style="width:80px"><?php __('Top Dress 1') ?></th>
                     <th class="npkamt" style="width:80px"><?php __('Top Dress 2') ?></th>

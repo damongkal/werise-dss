@@ -22,6 +22,15 @@ class ajax_oryza2 extends ajax_base {
         
         // get high yields
         $cal = new werise_oryza_cropcalendar2();
+        // crop 1
+        $crop1 = array(
+            'variety'=>$this->getArg('c1variety',''),
+            'fert'=>$this->getArg('c1fert',''));
+        // crop 2
+        $crop2 = array(
+            'date'=>$this->getArg('c2date',''),
+            'variety'=>$this->getArg('c2variety',''),
+            'fert'=>$this->getArg('c2fert',''));        
         if ($adv_type === werise_oryza_cropcalendar2::_TYPE_RECO)
         {
             // get crop season
@@ -29,26 +38,17 @@ class ajax_oryza2 extends ajax_base {
             list($season_tmp2,$season_end) = dss_utils::getCropSeason(12,$dataset->getYear());                           
             // get rain dates
             $raindates = $this->getRainDates($dataset,$season_start,$season_end);
-            $high_yield = $cal->getRecommended($dataset,$raindates, $season_start,$season_end);
+            $high_yield = $cal->getRecommended($dataset,$raindates,$season_start,$season_end,$crop1,$crop2);
         } else
         {
             // get crop season
             $cs1date = $this->getArg('c1date',$dataset->getYear().'-01-01');
+            $crop1['date'] = $cs1date;
             $cs1datetmp = explode('-',$cs1date);
             $month_start = intval($cs1datetmp[1]);
             list($season_start,$season_end) = dss_utils::getCropSeason($month_start,$dataset->getYear());
             // get rain dates
             $raindates = $this->getRainDates($dataset,$season_start,$season_end);
-            // crop 1
-            $crop1 = array(
-                'date'=>$cs1date,
-                'variety'=>$this->getArg('c1variety',''),
-                'fert'=>$this->getArg('c1fert',''));
-            // crop 2
-            $crop2 = array(
-                'date'=>$this->getArg('c2date',''),
-                'variety'=>$this->getArg('c2variety',''),
-                'fert'=>$this->getArg('c2fert',''));
             $high_yield = $cal->getCustom($dataset,$raindates,$crop1,$crop2);
         }
         // get yield chart period
