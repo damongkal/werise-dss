@@ -193,7 +193,7 @@ var WaterRequirement = {
         var crop_data = CombiListStorage.getRunDataByIndex(cropidx);
 
         // jQuery('#f-rain').html(WeatherAdvisory.getRainCategory(first_data.rain_code,first_data.rain_amt));
-        var variety_info, deficit, reqt, pump_hours, fuel_consumed, fuel_cost;
+        var variety_info, deficit, reqt, pump_hours, pump_hours_total, fuel_consumed, fuel_cost;
         var pump_rate = parseInt(jQuery("#pump-rate").val());
         var fuel_rate = parseFloat(jQuery("#fuel-rate").val());
         var fuel_price = parseFloat(jQuery("#fuel-price").val());
@@ -210,31 +210,30 @@ var WaterRequirement = {
             reqt_method = 'transplanting';
             var reqt_depth = variety_info.dds_depth;
         }
-        console.log('month:'+tmp_month);
+        var currency_name = CombiListStorage.getCountryInfo('currency');
         jQuery('#suppl-'+cropidx+'-var').html(variety_info.variety_name);
         jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
         jQuery('#suppl-'+cropidx+'-2').html(reqt_depth);
         jQuery('#suppl-'+cropidx+'-method').html(reqt_method);
         deficit = parseInt(crop_data.rain_amt - reqt_depth);
-        jQuery('#suppl-'+cropidx+'-3').html('0');
         if (deficit<0) {
             jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));
+            jQuery('#suppl-'+cropidx+'-sched').html('Drought period (5-6 day interval)');            
             deficit = Math.abs(deficit);
             reqt = deficit * 10000 * 1000 / 1000;
             pump_hours = reqt / pump_rate / 3600;
-            jQuery('#suppl-'+cropidx+'-4').html(parseInt(pump_hours));
-            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);
-            jQuery('#suppl-'+cropidx+'-7').html(parseInt(pump_hours * farm_size));
+            pump_hours_total = '('+parseInt(pump_hours)+' hr/ha) X ('+farm_size+' ha) = '+parseInt(pump_hours * farm_size)+' hr';
+            jQuery('#suppl-'+cropidx+'-4').html(pump_hours_total);
             fuel_consumed = pump_hours * fuel_rate * farm_size;
-            jQuery('#suppl-'+cropidx+'-5').html(parseInt(fuel_consumed));
+            jQuery('#suppl-'+cropidx+'-5').html(parseInt(fuel_consumed) + ' L');
             fuel_cost = parseInt(fuel_consumed * fuel_price);
-            jQuery('#suppl-'+cropidx+'-6').html(fuel_cost.toLocaleString('en'));
+            jQuery('#suppl-'+cropidx+'-6').html(fuel_cost.toLocaleString('en') + ' ' + currency_name);
         } else {
-            jQuery('#suppl-'+cropidx+'-4').html('0');
-            jQuery('#suppl-'+cropidx+'-5').html('0');
-            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);
-            jQuery('#suppl-'+cropidx+'-7').html('0');
-            jQuery('#suppl-'+cropidx+'-6').html('0');
+            jQuery('#suppl-'+cropidx+'-3').html('0');
+            jQuery('#suppl-'+cropidx+'-sched').html('Irrigation not needed');
+            jQuery('#suppl-'+cropidx+'-4').html('');
+            jQuery('#suppl-'+cropidx+'-5').html('');
+            jQuery('#suppl-'+cropidx+'-6').html('');
         }
     }
 };

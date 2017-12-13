@@ -547,23 +547,23 @@ $all_country = werise_stations_country::getAll();
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Schedule') ?></td>
-                <td><span id="suppl-1-sched">Drought period (5-6 day interval)</span></td>
-                <td><span id="suppl-2-sched">Drought period (5-6 day interval)</span></td>
+                <td id="suppl-1-sched">Drought period (5-6 day interval)</td>
+                <td id="suppl-2-sched">Drought period (5-6 day interval)</td>
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Amount of time needed<br />to irrigate deficit') ?></td>
-                <td>(<span id="suppl-1-4">55</span> hr/ha) X (<span id="suppl-1-fz">0</span> ha) = <span id="suppl-1-7">0</span> hr</td>
-                <td>(<span id="suppl-2-4">55</span> hr/ha) X (<span id="suppl-2-fz">0</span> ha) = <span id="suppl-2-7">0</span> hr</td>
+                <td id="suppl-1-4">(55 hr/ha) X (1 ha) = 55 hr</td>
+                <td id="suppl-2-4">(55 hr/ha) X (1 ha) = 55 hr</td>
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel consumption') ?></td>
-                <td><span id="suppl-1-5">0</span> L</td>
-                <td><span id="suppl-2-5">0</span> L</td>
+                <td id="suppl-1-5">0 L</td>
+                <td id="suppl-2-5">0 L</td>
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel cost') ?></td>
-                <td><span id="suppl-1-6">0</span> <span class="currency-name"></span></td>
-                <td><span id="suppl-2-6">0</span> <span class="currency-name"></span></td>
+                <td id="suppl-1-6">0 Pesos</td>
+                <td id="suppl-2-6">0 Pesos</td>
             </tr>
         </table>
 
