@@ -176,7 +176,7 @@ $all_country = werise_stations_country::getAll();
             <fieldset style="margin-top:0">
                 <legend><?php echo __('Dataset') ?></legend>
 
-                <label class="control-label" for="cs2_station"><?php __('Station') ?></label>
+                <label class="control-label" for="cs2_station"><?php __('Location') ?></label>
 
                 <input id="cs2_country" name="cs2_country" type="hidden" value="<?php echo $country_choice ?>">
                 <div class="btn-group">
@@ -299,6 +299,19 @@ $all_country = werise_stations_country::getAll();
         <!-- START: two calendar -->
         <div id="twocropcal" class="hide">
 
+        <h2 class="title" style="font-weight: 700; color:#547e1a">Dataset</h2>
+        <table class="table table-bordered table-condensed table-dss">
+            <tr>
+                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Location') ?></td>
+                <td><span id="adv-location"></span></td>
+            </tr>
+            <tr>
+                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Year') ?></td>
+                <td><span id="adv-year"></span></td>
+            </tr>
+        </table>            
+            
+            
             <h2 class="title" style="font-weight: 700; color:#547e1a">Optimum sowing dates for two cropping seasons</h2>
 
             <table id="twocropcalbest" class="table table-bordered table-condensed table-dss">
@@ -464,7 +477,10 @@ $all_country = werise_stations_country::getAll();
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Number of family members') ?></td>
                 <td>
-                    <input class="form-control" id="family-num" type="text" style="width:35px" value="4" />
+                    <div class="form-group">
+                    <span class="help-inline">0-14 yrs. old</span> <input class="form-control" id="family-num-young" type="text" style="width:35px" value="2" />
+                    <span class="help-inline">15+ yrs. old</span> <input class="form-control" id="family-num-old" type="text" style="width:35px" value="2" />
+                    </div>
                 </td>
             </tr>
         </table>

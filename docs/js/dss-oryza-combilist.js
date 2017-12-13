@@ -187,6 +187,7 @@ var CombiListForm = {
         jQuery(CombiListForm.tyear).change(function() {
             CombiListForm.populateSowDate1(jQuery(this).val(), CombiListForm.c1date);
             CombiListForm.makeVarietyData();
+            jQuery('#adv-year').html(jQuery(this).val());
         });
 
         // show variety data
@@ -227,10 +228,14 @@ var CombiListForm = {
             WaterRequirement.showAdvisory();
             TotalProduction.showAdvisory();
         });
-        // change farm size
-        jQuery("#family-num").change(function() {
+        // change family count
+        jQuery("#family-num-young").change(function() {
             TotalProduction.showAdvisory();
         });
+        // change family count
+        jQuery("#family-num-old").change(function() {
+            TotalProduction.showAdvisory();
+        });        
         // change pump rate
         jQuery("#pump-rate").change(function() {
             WaterRequirement.showAdvisory();
@@ -299,7 +304,9 @@ var CombiListForm = {
         weriseApp.dbg('change', 'station', station_id);
 
         // populate location name
-        jQuery("#location2_name").val(DropDown.getStationName(station_id));
+        var location_name = DropDown.getStationName(station_id);
+        jQuery("#location2_name").val(location_name);
+        jQuery("#adv-location").html(location_name+', '+BFHCountriesList[this.getCountry()]);
 
         // show location placeholder
         jQuery('#location2_div').show();

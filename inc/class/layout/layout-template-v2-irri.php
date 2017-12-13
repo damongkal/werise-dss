@@ -21,6 +21,7 @@
         <link type="text/css" rel="stylesheet" href="css/bootstrap/bootstrap-formhelpers.css" />
         <link type="text/css" rel="stylesheet" href="css/bootstrap/bootstrap-formhelpers-countries.flags.css" />
         <script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap/bootstrap-formhelpers-countries.en_US.js"></script>
 
         <script type="text/javascript" src="gzip.php?group=common"></script>
         <script type="text/javascript">

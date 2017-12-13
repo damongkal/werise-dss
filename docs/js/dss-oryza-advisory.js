@@ -211,20 +211,20 @@ var WaterRequirement = {
             var reqt_depth = variety_info.dds_depth;
         }
         console.log('month:'+tmp_month);
-        jQuery('#suppl-'+cropidx+'-var').html(variety_info.name);
+        jQuery('#suppl-'+cropidx+'-var').html(variety_info.variety_name);
         jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
         jQuery('#suppl-'+cropidx+'-2').html(reqt_depth);
         jQuery('#suppl-'+cropidx+'-method').html(reqt_method);
         deficit = parseInt(crop_data.rain_amt - reqt_depth);
         jQuery('#suppl-'+cropidx+'-3').html('0');
-        if (deficit<0) {            
+        if (deficit<0) {
             jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));
             deficit = Math.abs(deficit);
             reqt = deficit * 10000 * 1000 / 1000;
             pump_hours = reqt / pump_rate / 3600;
             jQuery('#suppl-'+cropidx+'-4').html(parseInt(pump_hours));
-            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);            
-            jQuery('#suppl-'+cropidx+'-7').html(parseInt(pump_hours * farm_size));            
+            jQuery('#suppl-'+cropidx+'-fz').html(farm_size);
+            jQuery('#suppl-'+cropidx+'-7').html(parseInt(pump_hours * farm_size));
             fuel_consumed = pump_hours * fuel_rate * farm_size;
             jQuery('#suppl-'+cropidx+'-5').html(parseInt(fuel_consumed));
             fuel_cost = parseInt(fuel_consumed * fuel_price);
@@ -234,7 +234,7 @@ var WaterRequirement = {
             jQuery('#suppl-'+cropidx+'-5').html('0');
             jQuery('#suppl-'+cropidx+'-fz').html(farm_size);
             jQuery('#suppl-'+cropidx+'-7').html('0');
-            jQuery('#suppl-'+cropidx+'-6').html('0');            
+            jQuery('#suppl-'+cropidx+'-6').html('0');
         }
     }
 };
@@ -251,10 +251,15 @@ var TotalProduction = {
         var second_data = CombiListStorage.getRunDataByIndex(2);
         // initialize variables
         var farm_size = parseFloat(jQuery("#farm-size").val());
-        var family_count = parseFloat(jQuery("#family-num").val());
-        var person_consume = 57 / 1000; // rice (t) consumed by 1 person for 6 months
-        var unit_yield, actual_yield, family_consume, surplus;
-        var unit_yield_total, actual_yield_total, family_consume_total, surplus_total;
+        var unit_yield, actual_yield, surplus;
+        var unit_yield_total, actual_yield_total, surplus_total;
+
+        // family consume
+        var family_count_young = parseInt(jQuery("#family-num-young").val());
+        var family_count_old = parseInt(jQuery("#family-num-old").val());
+        var person_consume = 59.75 / 1000; // rice (t) consumed by 1 person for 6 months
+        var family_consume = (person_consume * family_count_young / 2) + (person_consume * family_count_old); // family consumed
+        var family_consume_total = family_consume * 2;
 
         // first crop
         unit_yield = first_data.yield; // unit yield
@@ -265,8 +270,6 @@ var TotalProduction = {
         actual_yield = unit_yield * farm_size;// actual production
         actual_yield_total = actual_yield;
         jQuery('#actual-yield-1').html(actual_yield.toFixed(2));
-        family_consume = person_consume * family_count; // family consumed
-        family_consume_total = family_consume;
         jQuery('#yield-consume-1').html(family_consume.toFixed(2));
         surplus = actual_yield - family_consume; // surplus
         surplus_total = surplus;
@@ -281,8 +284,6 @@ var TotalProduction = {
         actual_yield = unit_yield * farm_size;// actual production
         actual_yield_total += actual_yield;
         jQuery('#actual-yield-2').html(actual_yield.toFixed(2));
-        family_consume = person_consume * family_count; // family consumed
-        family_consume_total += family_consume;
         jQuery('#yield-consume-2').html(family_consume.toFixed(2));
         surplus = actual_yield - family_consume; // surplus
         surplus_total += surplus;
