@@ -429,7 +429,7 @@
             <?php else: ?>
             <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
 
-                <form id="upload_form" role="form" class="form" enctype="multipart/form-data" action="/admin.php?pageaction=weatherfile" method="post">
+                <form id="upload_form" role="form" class="form" enctype="multipart/form-data" action="admin.php?pageaction=weatherfile" method="post">
                     <input name="action" type="hidden" value="grasp" />
                     <input name="prnfile" type="hidden" value="<?php echo $cls->dataset_station->country_code.'-'.$cls->dataset_station->station_id ?>" />
 

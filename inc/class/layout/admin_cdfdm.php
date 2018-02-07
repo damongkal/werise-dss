@@ -92,7 +92,7 @@
                     <td colspan="6">
                         <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
 
-                            <form id="upload_form" role="form" class="form" enctype="multipart/form-data" action="/admin.php?pageaction=cdfdm" method="post">
+                            <form id="upload_form" role="form" class="form" enctype="multipart/form-data" action="admin.php?pageaction=cdfdm" method="post">
                                 <input id="action" name="action" type="hidden" value="uploadraw" />
                                 <input id="raw_region" name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
 
@@ -148,7 +148,7 @@
                 <?php if (count($cls->raw) > 0): ?>
                     <tr style="display:none">
                         <td colspan="2">
-                            <form id="gcm_form" role="form" class="form" action="/admin.php?pageaction=cdfdm" method="post">
+                            <form id="gcm_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
                                 <input id="action" name="action" type="hidden" value="rawtogcm" />
                                 <input id="gcm_region" name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
 
@@ -193,7 +193,7 @@
 
                 <tr>
                     <td colspan="2">
-                        <form id="obsreal_form" role="form" class="form" action="/admin.php?pageaction=cdfdm" method="post">
+                        <form id="obsreal_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
                             <input id="action" name="action" type="hidden" value="obsreal" />
                             <input name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
 
@@ -215,7 +215,7 @@
 
                 <tr>
                     <td colspan="2">
-                        <form id="script_form" role="form" class="form" action="/admin.php?pageaction=cdfdm" method="post">
+                        <form id="script_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
                             <input id="action" name="action" type="hidden" value="downscale" />
                             <input id="ftype" name="ftype" type="hidden" value="real-time" />
                             <input id="gcm_region" name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
@@ -248,7 +248,7 @@
 
                     <tr>
                         <td colspan="2">
-                            <form id="out_form" role="form" class="form" action="/admin.php?pageaction=cdfdm_convert" method="post">
+                            <form id="out_form" role="form" class="form" action="admin.php?pageaction=cdfdm_convert" method="post">
                                 <input id="action" name="action" type="hidden" value="export" />
                                 <input id="ftype" name="ftype" type="hidden" value="real-time" />
                                 <input name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
@@ -321,7 +321,7 @@
 
                         <tr>
                             <td colspan="2">
-                                <form id="script_form" role="form" class="form" action="/admin.php?pageaction=cdfdm" method="post">
+                                <form id="script_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
                                     <input id="gcm_region" name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
                                     <fieldset style="margin: 0">
                                         <input type="submit" class="btn btn-small" name="convert-prn" value="Convert to PRN format" />
@@ -343,7 +343,7 @@
     <?php if ($cls->action === 'chart') : ?>    
         <div class="dselect" style="width:500px; margin-bottom:15px; padding: 5px 10px 15px 10px">            
 
-            <form id="chart_form" role="form" class="form" action="/admin.php?pageaction=cdfdm" method="post">    
+            <form id="chart_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">    
                 <input type="hidden" name="action" value="chart" />
                 <input type="hidden" name="region_id" value="<?php echo $cls->arg_region ?>" />
                 <fieldset style="margin-top:0">
