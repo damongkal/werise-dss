@@ -65,10 +65,10 @@ class admin_oryzaref {
         // get all datasets
         $filter_all = array('country' => $dset[0]->country_code, 'station' => $dset[0]->station_id, 'year' => $dset[0]->year);
         $dset_all = oryza_data::getDatasets($filter_all);
-        foreach ($dset_all as $idx => $dset_rec) {
-            $dataset_data = oryza_data::getDatasetRecords(array('id' => $idx));
+        foreach ($dset_all as $dset_rec) {
+            $dataset_data = oryza_data::getDatasetRecords(array('id' => $dset_rec->id));
             $chart_data = $this->getSeriesData($dataset_data);
-            $datasets[$idx] = array('dataset_info' => $dset_rec, 'dataset_data' => $dataset_data, 'chart_data' => $chart_data);
+            $datasets[$dset_rec->id] = array('dataset_info' => $dset_rec, 'dataset_data' => $dataset_data, 'chart_data' => $chart_data);
         }
         return array($station_data, $datasets);
     }
