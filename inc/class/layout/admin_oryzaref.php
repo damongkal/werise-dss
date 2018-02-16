@@ -86,40 +86,41 @@
 
     <?php endif; ?>
 
-    <?php if ($cls->action === 'detail'): ?>
+    <?php if ($cls->action === 'detail'): ?>        
+        
+        <h3>Station</h3>
+        <p>
+            <img class="icon-flag-<?php echo $cls->station->country_code ?>"> <?php echo $cls->station->station_name ?>, <?php echo $cls->station->subregion_name ?>, <?php echo $cls->station->topregion_name ?>, <?php echo werise_stations_country::getName($cls->station->country_code) ?>
+        </p>            
+        
+        <?php foreach ($cls->datasets as $idx => $dataset) : ?>                    
+        
         <h3>Dataset</h3>
 
         <table class="table table-bordered adm-table">
             <tr>
                 <td class="tr-gray">ID</td>
-                <td><?php echo $cls->dataset_info->id ?></td>
+                <td><?php echo $dataset['dataset_info']->id ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Date Processed</td>
-                <td><?php echo $cls->dataset_info->upload_date ?> <span class="badge">ver <?php echo $cls->dataset_info->oryza_ver ?></span></td>
-            </tr>
-            <tr>
-                <td class="tr-gray">Station</td>
-                <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> <?php echo $cls->dataset_station->station_name ?>, <?php echo $cls->dataset_station->subregion_name ?>, <?php echo $cls->dataset_station->topregion_name ?>, <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?></td>
+                <td><?php echo $dataset['dataset_info']->upload_date ?> <span class="badge">ver <?php echo $dataset['dataset_info']->oryza_ver ?></span></td>
             </tr>
             <tr>
                 <td class="tr-gray">Year</td>
-                <td><?php echo $cls->dataset_info->year ?> <?php echo werise_weather_properties::getTypeDesc($cls->dataset_info->wtype) ?></td>
+                <td><?php echo $dataset['dataset_info']->year ?> <?php echo werise_weather_properties::getTypeDesc($dataset['dataset_info']->wtype) ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Variety</td>
-                <td><?php echo $cls->dataset_info->variety ?></td>
+                <td><?php echo $dataset['dataset_info']->variety ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Fertilization</td>
-                <td><?php echo werise_oryza_fertilizer::getTypeDesc($cls->dataset_info->fert) ?></td>
+                <td><?php echo werise_oryza_fertilizer::getTypeDesc($dataset['dataset_info']->fert) ?></td>
             </tr>
         </table>
-
-        <h3>Grain Yield Chart</h3>
-        <div id="yieldchart"></div>
         
-        <h3>Data</h3>
+        <h4>Data</h4>
 
         <table class="table table-bordered adm-table">
             <tr class="tr-gray">
@@ -132,7 +133,7 @@
                 <th width="50" style="text-align: right">Flower<br />ing</th>
                 <th width="50" style="text-align: right">Harvest</th>
             </tr>
-            <?php foreach ($cls->dataset_data as $data): ?>
+            <?php foreach ($dataset['dataset_data'] as $data): ?>
                 <tr>
                     <td><?php echo $data->runnum ?></td>
                     <td><?php echo $data->observe_date ?></td>
@@ -145,7 +146,29 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+        
+        <h4>Grain Yield Chart</h4>
+        <div id="yieldchart-<?php echo $dataset['dataset_info']->id ?>"></div>        
 
+        <?php endforeach; ?>
     <?php endif; ?>
 
 </div>
+
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/highcharts-more.js"></script>
+<script type="text/javascript" src="gzip.php?group=oryzaadmin"></script>
+<script type="text/javascript">
+    /**
+     * page behaviours
+     */
+    jQuery(function() {
+        var station_name = 'location';
+        var chart = new OryzaChart();
+        var chart_data;
+        <?php foreach ($cls->datasets as $idx => $dataset) : ?>                    
+        chart_data = [{data:<?php echo json_encode($dataset['chart_data']) ?>}];        
+        chart.callHighCharts('#yieldchart-<?php echo $dataset['dataset_info']->id ?>', chart_data, station_name);
+        <?php endforeach; ?>
+    });
+</script>

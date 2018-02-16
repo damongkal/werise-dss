@@ -7,9 +7,8 @@ class admin_oryzaref {
     public $action;
     private $stations;
     
-    public $dataset_info;
-    public $dataset_station;
-    public $dataset_data;    
+    public $station;
+    public $datasets;   
 
     public function __construct() {
 
@@ -23,10 +22,23 @@ class admin_oryzaref {
         switch($this->action)
         {
             case 'detail':
-                list($this->dataset_info, $this->dataset_station, $this->dataset_data) = $this->actionDetails();
+                list($this->station, $this->datasets) = $this->actionDetails();
         }
     }
+    
+    private function getStation($country_code, $station_id)
+    {
+        $filter = array('country' => $country_code, 'station' => $station_id);
+        $station = weather_stations::getAll($filter);
+        return $station[0];
+    }
 
+    /**
+     * to be replaced!!!
+     * @param type $country_code
+     * @param type $station_id
+     * @return type
+     */
     public function getStationName($country_code, $station_id) {
         $idx = $country_code . $station_id;
         if (!isset($this->stations[$idx])) {
@@ -37,25 +49,38 @@ class admin_oryzaref {
         return $this->stations[$idx];
     }
     
-    public function actionDetails()
+    private function actionDetails()
     {
         $id = 0;
-        if (isset($_GET['id']))
-        {
+        if (isset($_GET['id'])) {
             $id = $_GET['id'];
-        }        
-        // dataset info
-        $filter = array('id'=>$id);
-        $dset = oryza_data::getDatasets($filter);
-        $dataset_info = $dset[0];
-        // station info
-        $filter2 = array('country'=>$dset[0]->country_code,'station'=>$dset[0]->station_id);
-        $station = weather_stations::getAll($filter2);
-        $dataset_station = $station[0];
-        // dataset records
-        $dataset_data = oryza_data::getDatasetRecords($filter);        
-        return array($dataset_info,$dataset_station,$dataset_data);
-    }    
+        }
+        // get first dataset info
+        $filter = array('id' => $id);
+        $dset = oryza_data::getDatasets(array('id' => $id));
+        // get station
+        $filterw = array('country' => $dset[0]->country_code, 'station' => $dset[0]->station_id);
+        $station = weather_stations::getAll($filterw);
+        $station_data = $station[0];
+        // get all datasets
+        $filter_all = array('country' => $dset[0]->country_code, 'station' => $dset[0]->station_id, 'year' => $dset[0]->year);
+        $dset_all = oryza_data::getDatasets($filter_all);
+        foreach ($dset_all as $idx => $dset_rec) {
+            $dataset_data = oryza_data::getDatasetRecords(array('id' => $idx));
+            $chart_data = $this->getSeriesData($dataset_data);
+            $datasets[$idx] = array('dataset_info' => $dset_rec, 'dataset_data' => $dataset_data, 'chart_data' => $chart_data);
+        }
+        return array($station_data, $datasets);
+    }
+    
+    private function getSeriesData($dataset) {
+        $series = array();
+        foreach($dataset as $data) {
+            $d = new DateTime($data->observe_date);
+            $series[] = array($d->format('U') * 1000, (float)$data->yield);
+        }
+        return $series;
+    }
 
     public function fmtFert($fertcode) {
         switch ($fertcode) {

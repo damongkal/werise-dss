@@ -49,6 +49,9 @@ class compress_files
             case 'oryza':
                 $filelist = 'dss-class-wadvisory,dss-class-cropcalendar,dss-oryza-chart,dss-oryza-wchart,dss-oryza-advisory,dss-oryza-raw,dss-weather-map,dss-oryza-combilist,dss-oryza-onload';
                 break;
+            case 'oryzaadmin':
+                $filelist = 'dss-oryzaadm-chart';
+                break;
             default: 
                 return false;
         }
