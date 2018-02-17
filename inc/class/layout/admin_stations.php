@@ -3,6 +3,8 @@
         <p>Displays the contents of the database.</p>
     </div>
     
+    <?php if ($cls->action === 'list'): ?>    
+    
     <?php foreach ($cls->stations as $country_code => $regions) : ?>
 
         <h3><img class="icon-flag-<?php echo $country_code ?>" style="margin-top: 8px" /><?php echo werise_stations_country::getName($country_code) ?></h3>
@@ -41,7 +43,7 @@
                         <td colspan="6"><?php echo $cls->getRegionName($subregion_id) ?></td>
                     </tr>
 
-                    <?php foreach ($stations as $station) : ?>
+                    <?php foreach ($stations as $station) : ?>                    
                         <tr>
                             <td><span class="label label-<?php echo ($station->is_enabled == 1) ? "success" : "important" ?>"><i class="icon-<?php echo ($station->is_enabled == 1) ? "ok-circle" : "remove-circle" ?>"></i></span></td>
                             <td><a href="admin.php?pageaction=weatherref&action=detail&station_id=<?php echo $country_code.'-'.$station->station_id ?>"><span class="badge"><?php echo $station->station_id ?></span></a></td>
@@ -57,7 +59,11 @@
             <?php endforeach; ?>
         </table>
     <?php endforeach; ?>        
-         
+        
+    <?php endif; ?>
+        
+    <?php if ($cls->action === 'clean'): ?>        
+    <?php endif; ?>     
 </div>
 
 

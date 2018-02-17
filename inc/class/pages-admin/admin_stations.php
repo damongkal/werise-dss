@@ -4,23 +4,44 @@ define('_CURRENT_OPT', 'Administration &raquo; Database Overview');
 
 class admin_stations {
 
+    public $action;
+
     public $stations;
     public $regions;
 
     public function __construct() {
+
+        // requested action
+        $this->action = 'list';
+        if (isset($_REQUEST['action']))
+        {
+            $this->action = $_REQUEST['action'];
+        }
+        switch($this->action)
+        {
+            case 'list':
+                $this->actionList();
+                break;
+            case 'clean':
+                $this->actionClean();
+                break;
+        }
+    }
+
+    private function actionList() {
         // physical PRN weather files
         $files_r = $this->getFileCounts(werise_weather_properties::_REALTIME);
         $files_f = $this->getFileCounts(werise_weather_properties::_FORECAST);
         // weather data in DB
         $weather_r = $this->getWeatherDatasetCounts(werise_weather_properties::_REALTIME);
-        $weather_f = $this->getWeatherDatasetCounts(werise_weather_properties::_FORECAST);        
-        
+        $weather_f = $this->getWeatherDatasetCounts(werise_weather_properties::_FORECAST);
+
         // oryza datasets in DB
         $oryza_dset = $this->getOryzaCounts();
 
         $this->stations = array();
         $this->regions = array();
-        foreach (weather_stations::getAll() as $rec) {
+        foreach (weather_stations::getAll(array('is_enabled'=>true)) as $rec) {
             $country_code = $rec->country_code;
             $region_id = intval($rec->topregion_id);
             if (is_null($region_id)) {
@@ -50,7 +71,7 @@ class admin_stations {
             $rec->forecastdb = false;
             if (isset($weather_f[$country_code][$station_id])) {
                 $rec->forecastdb = $weather_f[$country_code][$station_id];
-            }            
+            }
             // merge oryza data
             $rec->oryza = false;
             if (isset($oryza_dset[$country_code][$station_id])) {
@@ -61,11 +82,28 @@ class admin_stations {
             $this->regions[$region_id] = $rec->topregion_name;
             $this->regions[$subregion_id] = $rec->subregion_name;
         }
-
-          /*echo '<pre>';
-          print_r($this->stations);
-          echo '</pre>';
-          die(); */
+    }
+    
+    private function actionClean() {
+        $db = Database_MySQL::getInstance();
+        $sql = 'UPDATE `weather_stations` SET `is_enabled` = 0';
+        $db->query($sql);
+        $sql2 = "UPDATE `weather_stations` SET `is_enabled` = 1 WHERE country_code = '%s' AND station_id = %u";
+        // physical PRN weather files
+        $files_r = $this->getFileCounts(werise_weather_properties::_REALTIME);
+        foreach($files_r as $country_code => $stations) {
+            foreach($stations as $station_id => $rec) {
+                $sql3 = sprintf($sql2,$country_code,$station_id);
+                $db->query($sql3);
+            }
+        }
+        $files_f = $this->getFileCounts(werise_weather_properties::_FORECAST);        
+        foreach($files_f as $country_code => $stations) {
+            foreach($stations as $station_id => $rec) {
+                $sql3 = sprintf($sql2,$country_code,$station_id);
+                $db->query($sql3);
+            }
+        }        
     }
 
     private function getFileCounts($wtype) {
@@ -92,7 +130,7 @@ class admin_stations {
         }
         return $files2;
     }
-    
+
     private function getWeatherDatasetCounts($wtype) {
         $weather_dset = weather_data::getDatasets(null, $wtype);
         $files2 = array();
@@ -114,7 +152,7 @@ class admin_stations {
             }
         }
         return $files2;
-    }    
+    }
 
     private function getOryzaCounts() {
         $oryza_dset = oryza_data::getAllDatasets(werise_weather_properties::_FORECAST);
@@ -184,14 +222,14 @@ class admin_stations {
     }
 
     public function fmtDataFiles($data,$data2 = false) {
-        if ($data === false) {
-            if ($data2 === false) {
+        if ($data2 === false) {
+            if ($data === false) {
                 echo '<span class="label label-important">no data</span>';
             } else {
-                echo $data2['min'] . ' to ' . $data2['max'];
+                echo $data['min'] . ' to ' . $data['max'];
             }
         } else {
-            echo $data['min'] . ' to ' . $data['max'];
+            echo 'DB ' . $data2['min'] . ' to ' . $data2['max'];
         }
     }
 

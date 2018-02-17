@@ -97,11 +97,20 @@ class admin_weatherfile
         {
             return;
         }
-        foreach (weather_stations::getAll() as $station)
+        foreach (weather_stations::getAll(array('is_enabled'=>true)) as $station)
         {
             $idx = $station->country_code.$station->station_id;
             $this->station_names[$idx] = $station->station_name;
         }
+    }
+    
+    private function getStationRecord($country_code,$station_id) {
+        $filter = array(
+            'country' => $country_code,
+            'station' => $station_id,
+            'is_enabled' => true);
+        $station = weather_stations::getAll($filter);        
+        return $station[0];
     }
 
     /**
@@ -183,9 +192,7 @@ class admin_weatherfile
         $dset = weather_data::getDatasets($filter,'');
         $this->dataset_info = $dset[0];
         // station info
-        $filter2 = array('country'=>$dset[0]->country_code,'station'=>$dset[0]->station_id);
-        $station = weather_stations::getAll($filter2);
-        $this->dataset_station = $station[0];
+        $this->dataset_station = $this->getStationRecord($dset[0]->country_code, $dset[0]->station_id);
         // dataset records
         $this->dataset_data = weather_data::getDatasetRecords($filter);
         // is data available
@@ -212,9 +219,7 @@ class admin_weatherfile
         $station_id = intval($tmp[1]);
 
         // station info
-        $filter2 = array('country'=>$country,'station'=>$station_id);
-        $station = weather_stations::getAll($filter2);
-        $this->pctile_station = $station[0];
+        $this->pctile_station = $this->getStationRecord($country, $station_id);
 
         // decadal data
         $filter = array(
@@ -329,7 +334,7 @@ class weather_action extends admin_weather_action
         $files_f = $this->getWeatherFiles(werise_weather_properties::_FORECAST);
         $files_a = array();
         // station / region names
-        foreach (weather_stations::getAll() as $station)
+        foreach (weather_stations::getAll(array('is_enabled'=>true)) as $station)
         {
             $country = $station->country_code;
             $station_id = $station->station_id;
@@ -536,9 +541,7 @@ class weather_action_grasp extends admin_weather_action {
         $arg_country = $tmp[0];
         $arg_station = $tmp[1];
         // station info
-        $filter = array('country'=>$arg_country,'station'=>$arg_station);
-        $station = weather_stations::getAll($filter);
-        $this->station_info = $station[0];
+        $this->station_info = $this->getStationRecord($arg_country,$arg_station);
         if (count($_FILES)>0) {
             $this->deleteOldFiles();
             $this->uploadFiles();
