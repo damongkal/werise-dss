@@ -54,13 +54,13 @@ class oryza_data
      */
     private function loadOutput(oryza2000_api $oryza2000,$datasets) {
         $debug = array();
-
         $cols = array('RUNNUM','WRR14');        
         $columns = oryza2000_api::getVariableIndex('op.dat', $cols, null);        
         $this->debug->addLog($columns,true,'op.dat COLUMNS');
         
         $file = $oryza2000->getOpFileName();
-        $debug[] = 'file = ' . $file;
+        $debug[] = 'FILE = '.$file;
+        $this->debug->addLog('FILE: '.$file,false,'op.dat');
         $handle = werise_core_files::getHandle($file);        
         while (($buffer = fgets($handle, 4096)) !== false) {
             $this->debug->addLog('LINE: '.$buffer,false,'op.dat');
@@ -76,9 +76,6 @@ class oryza_data
             $this->debug->addLog($vars,true,'op.dat VARS');
             if ($vars) {
                 $this->addData($datasets, $vars, $columns);
-                if (_opt(sysoptions::_ADM_SHOW_LOAD_ORYZA_DETAIL)) {
-                    $debug[] = $vars;
-                }
             }
         }
         if (!feof($handle)) {
@@ -86,7 +83,6 @@ class oryza_data
         }
 
         fclose($handle);
-
         return $debug;
     }
     
@@ -116,7 +112,8 @@ class oryza_data
      * @return type
      */
     private function loadRes(oryza2000_api $oryza2000, $datasets) {
-        $debug = array();        
+        $debug = array();
+        $is_debug = _opt(sysoptions::_ORYZA_DBG_RES);
         
         // get column index
         $cols = array('TIME','DVS','ZW','DOY');
@@ -126,23 +123,32 @@ class oryza_data
             $outfile = 'res.dat fert1';
         }            
         $columns = oryza2000_api::getVariableIndex($outfile, $cols, null);
-        $this->debug->addLog($columns,true,'res.dat COLUMNS');
+        if ($is_debug) {
+            $this->debug->addLog($columns,true,'res.dat COLUMNS');
+        }
         
         $file = $oryza2000->getResFileName();
-        $debug[] = 'file = ' . $file;
+        $debug[] = 'FILE = '.$file;
+        $this->debug->addLog('FILE: '.$file,false,'res.dat');
         $handle = werise_core_files::getHandle($file);        
         while (($buffer = fgets($handle, 4096)) !== false) {
-            $this->debug->addLog('LINE: '.$buffer,false,'res.dat');
+            if ($is_debug) {
+                $this->debug->addLog('LINE: '.$buffer,false,'res.dat');
+            }
             
             // parse column titles
             if (strpos($buffer,'TIME')!==false)
             {
                 $columns = oryza2000_api::getVariableIndex($outfile, $cols, $this->getColumnIndex($buffer));
-                $this->debug->addLog($columns,true,'res.dat COLUMNS');
+                if ($is_debug) {
+                    $this->debug->addLog($columns,true,'res.dat COLUMNS');
+                }
             }            
             
             $vars = datafiles::validate3($buffer);
-            $this->debug->addLog($vars,true,'res.dat VAR');
+            if ($is_debug) {
+                $this->debug->addLog($vars,true,'res.dat VAR');
+            }
             
             if ($vars) {
                 if ($vars[0] == 'RUNNUM') {

@@ -337,7 +337,7 @@ WTRDIR = '{wtrdir}' \r
 CNTR = '{cntr}' \r
 STTIME = {sttime}. \r
 ISTN = {istn} \r
-FILEI1 = '{filei1}' \r
+FILEI1 = 'rice-variety/{filei1}' \r
 NITROENV = '{nitroenv}' \r
 FERTIL =  \r
 {fertil}

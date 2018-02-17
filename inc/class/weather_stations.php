@@ -151,6 +151,7 @@ class weather_stations
     {
         $db = Database_MySQL::getInstance();
         $where = array();
+        $where[] = "a.`is_enabled` = 1";
         if (isset($filter['country']))
         {
             $where[] = sprintf("a.`country_code` = '%s'",$db->escape($filter['country']));

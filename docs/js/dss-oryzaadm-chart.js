@@ -6,7 +6,7 @@ function OryzaChart()
      * @param {type} chart_data
      * @returns {undefined}
      */
-    this.callHighCharts = function (item_chart, chart_data)
+    this.callHighCharts = function (item_chart, chart_data, chart_subtitle)
     {        
         // resize viewport
         var scrw = screen.width;
@@ -31,6 +31,9 @@ function OryzaChart()
             title: {
                 text: _t('Simulated Attainable Grain Yield')
             },
+            subtitle: {
+                text: chart_subtitle
+            },            
             legend: {
                 enabled: false
             },
@@ -52,6 +55,13 @@ function OryzaChart()
                 tickInterval: 1,
                 min: 0
             },
+            legend: {
+                layout: 'vertical',
+                align: 'center',
+                verticalAlign: 'bottom',
+                borderWidth: 1,
+                backgroundColor: '#ffffff'
+            },            
             tooltip: {
                 formatter: function() {
                     return '<b>'+ this.series.name +'</b><br/>'+

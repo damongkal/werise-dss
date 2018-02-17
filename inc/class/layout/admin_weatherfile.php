@@ -51,7 +51,10 @@
 
                             <?php foreach ($subregion_info['station'] as $station_id => $station_info) : ?>                                        
 
-                                <?php foreach (array('r', 'f') as $wtype) : ?>                                                                
+                                <?php foreach (array('r', 'f') as $wtype) : ?>                                                                                            
+
+                                    <?php if (isset($station_info[$wtype])): ?>
+                            
                                     <tr class="tr-gray">
                                         <th width="20">&nbsp;</th>
                                         <th width="120">File</th>
@@ -60,24 +63,22 @@
                                         <th width="180">Action</th>
                                         <th width="400">Remarks</th>
                                     </tr>                                     
-                                    
+
                                     <tr>
                                         <td>&nbsp;</td>
                                         <td colspan="3" class="station-td"><?php echo $station_info['name'] ?> &raquo; <?php echo werise_weather_properties::getTypeDesc($wtype) ?> Data</td>
                                         <td colspan="2">
                                             <?php if (isset($station_info[$wtype])) : ?>
-                                            <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country.'-'.$station_id.'-ALL','load',$wtype) ?>"><i class="icon-download"></i> Load All</a>
-                                            <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country.'-'.$station_id.'-ALL','del',$wtype) ?>"><i class="icon-download"></i> Delete All</a>
-                                            <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country.'-'.$station_id.'-ALL'.'-ALL','pctile',$wtype) ?>"><i class="icon-search"></i> Percentile</a>
-                                            <?php else :?>
-                                                <?php if ($wtype===werise_weather_properties::_REALTIME) : ?>
-                                                    <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country.'-'.$station_id,'grasp',$wtype) ?>"><i class="icon-download"></i> Upload GRASP data</a>
+                                                <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country . '-' . $station_id . '-ALL', 'load', $wtype) ?>"><i class="icon-download"></i> Load All</a>
+                                                <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country . '-' . $station_id . '-ALL', 'del', $wtype) ?>"><i class="icon-download"></i> Delete All</a>
+                                                <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country . '-' . $station_id . '-ALL' . '-ALL', 'pctile', $wtype) ?>"><i class="icon-search"></i> Percentile</a>
+                                            <?php else : ?>
+                                                <?php if ($wtype === werise_weather_properties::_REALTIME) : ?>
+                                                    <a class="btn btn-small" href="<?php echo $cls->getBtnUrl($country . '-' . $station_id, 'grasp', $wtype) ?>"><i class="icon-download"></i> Upload GRASP data</a>
                                                 <?php endif; ?>&nbsp;
                                             <?php endif; ?>&nbsp;
                                         </td>
-                                    </tr>                                     
-
-                                    <?php if (isset($station_info[$wtype])): ?>
+                                    </tr>                                                                 
 
                                         <?php foreach ($station_info[$wtype] as $file) : ?>                                        
 
@@ -102,16 +103,18 @@
                                                     <?php echo $cls->showNotes($file) ?>
                                                 </td>
                                             </tr>                                
+
                                         <?php endforeach; ?>
+
                                     <?php else: ?>
                                         <tr>
-                                        <td>&nbsp;</td>    
-                                        <td colspan="5">No Data</td>
-                                    </tr>                                
+                                            <th width="20">&nbsp;</th>
+                                            <td colspan="5" class="station-td"><?php echo $station_info['name'] ?> &raquo; <?php echo werise_weather_properties::getTypeDesc($wtype) ?> Data &raquo; NO DATA!</td>
+                                        </tr>                                
                                     <?php endif; ?>                                    
-                                    
+
                                 <?php endforeach; ?>
-                                            
+
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
@@ -396,42 +399,42 @@
         </table>        
 
     <?php endif; ?>
-        
-        <?php if ($cls->action === 'grasp'): ?>
-            <h3>Dataset</h3>
-            <table class="table table-bordered adm-table">
-                <tr>
-                    <td class="tr-gray">Country</td>
-                    <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?></td>
-                </tr>
-                <tr>
-                    <td class="tr-gray">Region</td>
-                    <td><?php echo $cls->dataset_station->topregion_name ?></td>
-                </tr>
-                <tr>
-                    <td class="tr-gray">Sub-Region</td>
-                    <td><?php echo $cls->dataset_station->subregion_name ?></td>
-                </tr>
-                <tr>
-                    <td class="tr-gray">Station</td>
-                    <td><?php echo $cls->dataset_station->station_name ?></td>
-                </tr>            
-            </table>
 
-            <?php if (count($cls->grasp_files)>0): ?>
-                <div class="well" style="width:600px">
-                    <ul>
+    <?php if ($cls->action === 'grasp'): ?>
+        <h3>Dataset</h3>
+        <table class="table table-bordered adm-table">
+            <tr>
+                <td class="tr-gray">Country</td>
+                <td><img class="icon-flag-<?php echo $cls->dataset_station->country_code ?>"> <?php echo werise_stations_country::getName($cls->dataset_station->country_code) ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Region</td>
+                <td><?php echo $cls->dataset_station->topregion_name ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Sub-Region</td>
+                <td><?php echo $cls->dataset_station->subregion_name ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Station</td>
+                <td><?php echo $cls->dataset_station->station_name ?></td>
+            </tr>            
+        </table>
+
+        <?php if (count($cls->grasp_files) > 0): ?>
+            <div class="well" style="width:600px">
+                <ul>
                     <?php foreach ($cls->grasp_files as $file): ?>
                         <li><?php echo $file ?></li>
                     <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php else: ?>
+                </ul>
+            </div>
+        <?php else: ?>
             <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
 
                 <form id="upload_form" role="form" class="form" enctype="multipart/form-data" action="admin.php?pageaction=weatherfile" method="post">
                     <input name="action" type="hidden" value="grasp" />
-                    <input name="prnfile" type="hidden" value="<?php echo $cls->dataset_station->country_code.'-'.$cls->dataset_station->station_id ?>" />
+                    <input name="prnfile" type="hidden" value="<?php echo $cls->dataset_station->country_code . '-' . $cls->dataset_station->station_id ?>" />
 
                     <legend>Upload Raw GRASP Files</legend>
 
@@ -453,8 +456,8 @@
                     </fieldset>
                 </form>
             </div>
-            <?php endif; ?>
-        <?php endif; ?>    
+        <?php endif; ?>
+    <?php endif; ?>    
 
     <?php if ($cls->action !== 'list' && $cls->action !== 'detail'): ?>
         <p><a class="btn btn-small" href="admin.php?pageaction=weatherfile"><i class="icon-repeat"></i> Back to Directory List</a></p>
@@ -492,15 +495,15 @@
     <script type="text/javascript" src="js/highcharts-more.js"></script>
     <script type="text/javascript" src="gzip.php?file=admin-weatherfile-chart"></script>
     <script type="text/javascript">
-    /**
-     * page behaviours
-     */
-    jQuery(function () {
-        window.seriesdata = <?php echo json_encode($cls->dataset_data); ?>;
-        makeChart();
-        jQuery("#chart_wvar").change(function () {
+        /**
+         * page behaviours
+         */
+        jQuery(function () {
+            window.seriesdata = <?php echo json_encode($cls->dataset_data); ?>;
             makeChart();
+            jQuery("#chart_wvar").change(function () {
+                makeChart();
+            });
         });
-    });
     </script>
 <?php endif; ?>

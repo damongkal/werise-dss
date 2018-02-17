@@ -10,7 +10,6 @@ class sysoptions
     // admin
     const _ADM_SHOW_MENU = '_ADM_SHOW_MENU';
     const _ADM_SHOW_LOAD_WEATHER_DETAIL = '_ADM_SHOW_LOAD_WEATHER_DETAIL';
-    const _ADM_SHOW_LOAD_ORYZA_DETAIL = '_ADM_SHOW_LOAD_ORYZA_DETAIL';
     const _ADM_ORYZA_LOAD_TEST = '_ADM_ORYZA_LOAD_TEST';
 
     // oryza2000
@@ -23,6 +22,7 @@ class sysoptions
     const _ORYZA_NITROENV_NOFERT = '_ORYZA_NITROENV_NOFERT';
     const _ORYZA_NITROENV_GENFERT = '_ORYZA_NITROENV_GENFERT';
     const _ORYZA_NITROENV_SPCFERT = '_ORYZA_NITROENV_SPCFERT';
+    const _ORYZA_DBG_RES = '_ORYZA_DBG_RES';
 
     // page options
     const _OPT_SHOW_DATAGRID = '_OPT_SHOW_DATAGRID';
@@ -114,10 +114,7 @@ class sysoptions
         /*
         $this->default[self::_ADM_SHOW_LOAD_WEATHER_DETAIL] =  array(
             'value' => false,
-            'desc' => 'Show processing details of "Weather Data Files" section?');
-        $this->default[self::_ADM_SHOW_LOAD_ORYZA_DETAIL] =  array(
-            'value' => false,
-            'desc' => 'Show processing details of "Oryza2000 Interface" section?');*/
+            'desc' => 'Show processing details of "Weather Data Files" section?');*/
         $this->default[self::_ADM_ORYZA_LOAD_TEST] =  array(
             'value' => false,
             'desc' => 'Load only 1 set for Oryza2000? Set to TRUE to quickly test the result of "Oryza2000 Interface" section.');
@@ -151,6 +148,9 @@ class sysoptions
         $this->default[self::_ORYZA_NITROENV_SPCFERT] =  array(
             'value' => 'POTENTIAL',
             'desc' => 'RERUN.DAT NITROENV value for specific fertilizer recommendation. POTENTIAL or NITROGEN BALANCE?');
+        $this->default[self::_ORYZA_DBG_RES] =  array(
+            'value' => false,
+            'desc' => 'display res.dat debug info?');        
 
         // page options
         $this->default[] =  array('value' => 'category','desc' => 'Page Display Options');

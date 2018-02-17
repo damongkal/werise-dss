@@ -1,16 +1,19 @@
 <?php
 
-class fertilizer_application {
+class fertilizer_application
+{
 
     private $db;
     private $debug;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Database_MySQL::getInstance();
         $this->debug = debug::getInstance();
     }
 
-    public function getAll($ftype) {
+    public function getAll($ftype)
+    {
         $sql = "
             SELECT a.* , b.`station_name`
             FROM `rcm_fertilizer` AS a
@@ -28,10 +31,11 @@ class fertilizer_application {
      * @param type $yld
      * @return boolean
      */
-    public function getFertSched($ftype, $station, $variety, $yld) {
-/*echo "fert={$ftype};variety={$variety};yld={$yld}<pre>";
-print_r($station);
-echo '</pre>';*/
+    public function getFertSched($ftype, $station, $variety, $yld)
+    {
+        /* echo "fert={$ftype};variety={$variety};yld={$yld}<pre>";
+          print_r($station);
+          echo '</pre>'; */
         // general recommendation
         if ($ftype === advisory_fertilizer::_FERT_GEN) {
             // station
@@ -80,7 +84,8 @@ echo '</pre>';*/
         throw new Exception('no fertilizer schedule found.');
     }
 
-    private function getFertSchedDB($ftype, $filter, $sort_order = 'ASC') {
+    private function getFertSchedDB($ftype, $filter, $sort_order = 'ASC')
+    {
         $cond = '';
         if (isset($filter['country'])) {
             $cond .= " AND a.`country_code` = '{$filter['country']}'";
@@ -110,7 +115,8 @@ echo '</pre>';*/
      * @param object $fert_s
      * @return string|boolean
      */
-    private function getSchedArr($fert_s) {
+    private function getSchedArr($fert_s)
+    {
         if ($fert_s) {
 
             $arr = array(
@@ -126,7 +132,7 @@ echo '</pre>';*/
         }
         return false;
     }
-    
+
     /**
      * adjust fert sched based on availability of rain
      * @param type $fertil
@@ -134,68 +140,70 @@ echo '</pre>';*/
      * @param type $fert_apply
      * @return int
      */
-    public function adjustFertil($fertil, $sowdate, $fert_apply) {
-        $this->debug->addLog('SOWDATE: ' . $sowdate->format('Y-m-d'),false,'FERTCALC');
-        $this->debug->addLog('FERTIL: ' . implode(',', $fertil),false,'FERTCALC');
+    public function adjustFertil($fertil, $sowdate, $fert_apply)
+    {
+        $this->debug->addLog('SOWDATE: ' . $sowdate->format('Y-m-d'), false, 'FERTCALC');
+        $this->debug->addLog('FERTIL: ' . implode(',', $fertil), false, 'FERTCALC');
         foreach (array(2, 4) as $fertkey) {
             $das = clone $sowdate;
             $das->add(new DateInterval("P{$fertil[$fertkey]}D"));
-            $this->debug->addLog('DAS' . $fertkey . ':' . $das->format('Y-m-d'),false,'FERTCALC');
+            $this->debug->addLog('DAS' . $fertkey . ':' . $das->format('Y-m-d'), false, 'FERTCALC');
             $das_unix = $das->format('U') * 1000;
             $newdasval = null;
-            foreach ($fert_apply as $key => $rec) {
-                $this->debug->addLog('KEY: ' . $key,false,'FERTCALC');
-                $ref_from = DateTime::createFromFormat('U', $rec['from'][0] / 1000);
-                $ref_to = DateTime::createFromFormat('U', $rec['to'][0] / 1000);
-                $this->debug->addLog('REF: ' . $ref_from->format('Y-m-d') . ' to ' . $ref_to->format('Y-m-d'),false,'FERTCALC');
-                if ($rec['from'][0] <= $das_unix && $rec['to'][0] >= $das_unix) {
-                    $this->debug->addLog('RAIN FOUND',false,'FERTCALC');
-                    break; // rain found. no need to adjust
-                }
+            if ($fert_apply) {
+                foreach ($fert_apply as $key => $rec) {
+                    $this->debug->addLog('KEY: ' . $key, false, 'FERTCALC');
+                    $ref_from = DateTime::createFromFormat('U', $rec['from'][0] / 1000);
+                    $ref_to = DateTime::createFromFormat('U', $rec['to'][0] / 1000);
+                    $this->debug->addLog('REF: ' . $ref_from->format('Y-m-d') . ' to ' . $ref_to->format('Y-m-d'), false, 'FERTCALC');
+                    if ($rec['from'][0] <= $das_unix && $rec['to'][0] >= $das_unix) {
+                        $this->debug->addLog('RAIN FOUND', false, 'FERTCALC');
+                        break; // rain found. no need to adjust
+                    }
 
-                if (($rec['from'][0] > $das_unix)) {
-                    if ($key > 0) {
-                        // new DAS date
-                        $ref = $fert_apply[$key - 1]['to'][0];
-                        $tmp = DateTime::createFromFormat('U', $ref / 1000);
-                        $this->debug->addLog('NEWDAS :' . $tmp->format('Y-m-d'),false,'FERTCALC');
+                    if (($rec['from'][0] > $das_unix)) {
+                        if ($key > 0) {
+                            // new DAS date
+                            $ref = $fert_apply[$key - 1]['to'][0];
+                            $tmp = DateTime::createFromFormat('U', $ref / 1000);
+                            $this->debug->addLog('NEWDAS :' . $tmp->format('Y-m-d'), false, 'FERTCALC');
 
-                        // date diff must be less than 6 days
-                        if ($das->diff($tmp)->format('%a') > 6) {
-                            $this->debug->addLog('TOO EARLY',false,'FERTCALC');
-                        } else {
-                            $newdasval = $sowdate->diff($tmp)->format('%a');
+                            // date diff must be less than 6 days
+                            if ($das->diff($tmp)->format('%a') > 6) {
+                                $this->debug->addLog('TOO EARLY', false, 'FERTCALC');
+                            } else {
+                                $newdasval = $sowdate->diff($tmp)->format('%a');
+                            }
                         }
-                    }
 
-                    if (is_null($newdasval)) {
-                        // new DAS date
-                        $ref = $rec['from'][0];
-                        $tmp = DateTime::createFromFormat('U', $ref / 1000);
-                        $this->debug->addLog('NEWDAS :' . $tmp->format('Y-m-d'),false,'FERTCALC');
+                        if (is_null($newdasval)) {
+                            // new DAS date
+                            $ref = $rec['from'][0];
+                            $tmp = DateTime::createFromFormat('U', $ref / 1000);
+                            $this->debug->addLog('NEWDAS :' . $tmp->format('Y-m-d'), false, 'FERTCALC');
 
-                        // date diff must be less than 6 days
-                        if ($das->diff($tmp)->format('%a') > 6) {
-                            $this->debug->addLog('TOO LATE',false,'FERTCALC');
-                        } else {
-                            $newdasval = $sowdate->diff($tmp)->format('%a');
+                            // date diff must be less than 6 days
+                            if ($das->diff($tmp)->format('%a') > 6) {
+                                $this->debug->addLog('TOO LATE', false, 'FERTCALC');
+                            } else {
+                                $newdasval = $sowdate->diff($tmp)->format('%a');
+                            }
                         }
-                    }
 
-                    if (!is_null($newdasval)) {
-                        $this->debug->addLog('NEWDASVAL :' . $newdasval,false,'FERTCALC');
-                        $fertil[$fertkey] = $newdasval;
-                    } else {
-                        $this->debug->addLog('NO RAIN FOUND',false,'FERTCALC');
-                        $fertil[$fertkey + 1] = 0;
-                        break; // no rain found. no need to adjust
-                    }
+                        if (!is_null($newdasval)) {
+                            $this->debug->addLog('NEWDASVAL :' . $newdasval, false, 'FERTCALC');
+                            $fertil[$fertkey] = $newdasval;
+                        } else {
+                            $this->debug->addLog('NO RAIN FOUND', false, 'FERTCALC');
+                            $fertil[$fertkey + 1] = 0;
+                            break; // no rain found. no need to adjust
+                        }
 
-                    break;
+                        break;
+                    }
                 }
             }
         }
         return $fertil;
-    }    
-
+    }
 }

@@ -3,7 +3,7 @@
         <p>Displays the Oryza2000 data available.</p>
     </div>
 
-    <?php if ($cls->action !== 'detail'): ?>
+    <?php if ($cls->action !== 'detail'): ?>    
         <h3><?php echo werise_weather_properties::getTypeDesc(werise_weather_properties::_REALTIME) ?> Data</h3>
         <table class="table table-bordered adm-table">
             <tr class="tr-gray">
@@ -87,37 +87,40 @@
     <?php endif; ?>
 
     <?php if ($cls->action === 'detail'): ?>        
-        
+            
         <h3>Station</h3>
         <p>
             <img class="icon-flag-<?php echo $cls->station->country_code ?>"> <?php echo $cls->station->station_name ?>, <?php echo $cls->station->subregion_name ?>, <?php echo $cls->station->topregion_name ?>, <?php echo werise_stations_country::getName($cls->station->country_code) ?>
-        </p>            
+        </p>       
+        
+        <h3>Grain Yield Chart</h3>
+        <div id="yieldchart"></div>                
         
         <?php foreach ($cls->datasets as $idx => $dataset) : ?>                    
         
         <h3>Dataset</h3>
 
-        <table class="table table-bordered adm-table">
+        <table id="dataset-<?php echo $dataset['dataset_info']->id ?>" class="table table-bordered adm-table">
             <tr>
                 <td class="tr-gray">ID</td>
                 <td><?php echo $dataset['dataset_info']->id ?></td>
             </tr>
             <tr>
-                <td class="tr-gray">Date Processed</td>
-                <td><?php echo $dataset['dataset_info']->upload_date ?> <span class="badge">ver <?php echo $dataset['dataset_info']->oryza_ver ?></span></td>
-            </tr>
-            <tr>
                 <td class="tr-gray">Year</td>
-                <td><?php echo $dataset['dataset_info']->year ?> <?php echo werise_weather_properties::getTypeDesc($dataset['dataset_info']->wtype) ?></td>
+                <td class="dataset-year"><?php echo $dataset['dataset_info']->year ?> <?php echo werise_weather_properties::getTypeDesc($dataset['dataset_info']->wtype) ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Variety</td>
-                <td><?php echo $dataset['dataset_info']->variety ?></td>
+                <td class="dataset-var"><?php echo $dataset['dataset_info']->variety ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Fertilization</td>
-                <td><?php echo werise_oryza_fertilizer::getTypeDesc($dataset['dataset_info']->fert) ?></td>
+                <td class="dataset-fert"><?php echo werise_oryza_fertilizer::getTypeDesc($dataset['dataset_info']->fert) ?></td>
             </tr>
+            <tr>
+                <td class="tr-gray">Date Processed</td>
+                <td><?php echo $dataset['dataset_info']->upload_date ?> <span class="badge">ver <?php echo $dataset['dataset_info']->oryza_ver ?></span></td>
+            </tr>            
         </table>
         
         <h4>Data</h4>
@@ -145,10 +148,7 @@
                     <td style="text-align: right"><?php echo $data->harvest ?></td>
                 </tr>
             <?php endforeach; ?>
-        </table>
-        
-        <h4>Grain Yield Chart</h4>
-        <div id="yieldchart-<?php echo $dataset['dataset_info']->id ?>"></div>        
+        </table>        
 
         <?php endforeach; ?>
     <?php endif; ?>
@@ -163,12 +163,16 @@
      * page behaviours
      */
     jQuery(function() {
-        var station_name = 'location';
         var chart = new OryzaChart();
-        var chart_data;
-        <?php foreach ($cls->datasets as $idx => $dataset) : ?>                    
-        chart_data = [{data:<?php echo json_encode($dataset['chart_data']) ?>}];        
-        chart.callHighCharts('#yieldchart-<?php echo $dataset['dataset_info']->id ?>', chart_data, station_name);
+        var dataset_id, dataset_name, variety, fert;
+        var chart_data = [];        
+        <?php foreach ($cls->datasets as $idx => $dataset) : ?>                
+        dataset_id = <?php echo $dataset['dataset_info']->id; ?>;        
+        dataset_name = jQuery('#dataset-'+dataset_id+' .dataset-year').html();
+        variety = jQuery('#dataset-'+dataset_id+' .dataset-var').html();
+        fert = jQuery('#dataset-'+dataset_id+' .dataset-fert').html();
+        chart_data.push({name: variety + ' ' + fert ,data: <?php echo json_encode($dataset['chart_data']) ?>});        
         <?php endforeach; ?>
+        chart.callHighCharts('#yieldchart', chart_data, dataset_name);    
     });
 </script>
