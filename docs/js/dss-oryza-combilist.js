@@ -402,11 +402,21 @@ var CombiListForm = {
         jQuery(item_sowdate_id + ' option').remove();
         var newitem = jQuery("<option></option>");
         for(i=0; i<12; i++) {
+            // day 1
+            d.setDate(1);
             monthcode = formatDate2(d,'','abbr2');
-            monthdesc = formatDate2(d,'m-y','abbr');
+            monthdesc = formatDate2(d,'','abbr');
             newitem = jQuery("<option></option>");
             newitem.attr("value",monthcode).text(monthdesc);
             dropdown.append(newitem);
+            // day 15
+            d.setDate(15);
+            monthcode = formatDate2(d,'','abbr2');
+            monthdesc = formatDate2(d,'','abbr');
+            newitem = jQuery("<option></option>");
+            newitem.attr("value",monthcode).text(monthdesc);
+            dropdown.append(newitem);
+            // next month
             d.setMonth(d.getMonth() + 1);
         };
     },
@@ -420,18 +430,27 @@ var CombiListForm = {
 
         var dropdown = jQuery(item_sowdate_id);
         jQuery(item_sowdate_id + ' option').remove();
-        //dropdown.append(jQuery('<option></option>').attr("class",'select-extra').attr("value",0).text(_t('Sow Date')+' »'));
         var newitem = jQuery("<option></option>");
         for(i=0; i<6; i++) {
+            // day 1
+            d.setDate(1);
             monthcode = formatDate2(d,'','abbr2');
-            monthdesc = formatDate2(d,'m-y','abbr');
+            monthdesc = formatDate2(d,'','abbr');
             newitem = jQuery("<option></option>");
             newitem.attr("value",monthcode).text(monthdesc);
             if (i===0)
             {
                 newitem.attr("selected","selected");
             }
+            dropdown.append(newitem);            
+            // day 15
+            d.setDate(15);
+            monthcode = formatDate2(d,'','abbr2');
+            monthdesc = formatDate2(d,'','abbr');
+            newitem = jQuery("<option></option>");
+            newitem.attr("value",monthcode).text(monthdesc);
             dropdown.append(newitem);
+            // next month
             d.setMonth(d.getMonth() + 1);
         };
     },
