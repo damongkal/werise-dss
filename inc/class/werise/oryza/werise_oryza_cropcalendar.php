@@ -27,9 +27,9 @@ class werise_oryza_cropcalendar
         // choose best of week
         $sql2 = '
             UPDATE '._DB_DATA.'.`oryza_data` AS a INNER JOIN (
-                SELECT `dataset_id`, WEEK(`observe_date`) as observe_week , MAX(`yield`) AS max_yield
-                FROM '._DB_DATA.'.`oryza_data`
-                GROUP BY observe_week ) AS b
+                SELECT c.`dataset_id`, WEEK(c.`observe_date`) as observe_week , MAX(c.`yield`) AS max_yield
+                FROM '._DB_DATA.'.`oryza_data` AS c
+                GROUP BY c.`dataset_id`, observe_week ) AS b
             ON a.`dataset_id` = b.`dataset_id`
                 AND WEEK(`observe_date`) = b.observe_week
                 AND a.`yield` = b.max_yield
