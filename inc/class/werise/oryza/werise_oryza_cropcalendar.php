@@ -23,6 +23,18 @@ class werise_oryza_cropcalendar
         $db->query(sprintf($sql,0.65,'panicle_init'));
         $db->query(sprintf($sql,1,'flowering'));
         $db->query(sprintf($sql,2,'harvest'));
+        
+        // choose best of week
+        $sql2 = '
+            UPDATE `oryza_data` AS a INNER JOIN (
+                SELECT `dataset_id`, WEEK(`observe_date`) as observe_week , MAX(`yield`) AS max_yield
+                FROM `oryza_data`
+                GROUP BY observe_week ) AS b
+            ON a.`dataset_id` = b.`dataset_id`
+                AND WEEK(`observe_date`) = b.observe_week
+                AND a.`yield` = b.max_yield
+            SET a.`week_best` = 1';        
+        $db->query($sql2);
     }
     
     /**

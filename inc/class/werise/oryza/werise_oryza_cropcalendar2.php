@@ -39,14 +39,15 @@ class werise_oryza_cropcalendar2
         $cutoff2 = 365 - $maxharvest - $rest;          
         // main SQL
         $sql4 = "
-            SELECT a.variety,a.fert AS fertcode,b.*
+            SELECT a.`variety`, a.`fert` AS fertcode, b.*
             FROM "._DB_DATA.".`oryza_dataset` AS a
             INNER JOIN "._DB_DATA.".`oryza_data` AS b
                 ON a.`id` = b.`dataset_id`
             WHERE a.`country_code` = '%s'
                 AND a.`station_id` = %u
-                AND a.wtype = '%s'
-                AND a.fert = 1";               
+                AND a.`wtype` = '%s'
+                AND a.`fert` = 1
+                AND b.`week_best` = 1";               
         $sql5 = sprintf($sql4,
             $dataset->getCountryCode(),
             $dataset->getStationId(),
@@ -58,8 +59,8 @@ class werise_oryza_cropcalendar2
         // 1st crop
         $sql6 = sprintf("{$sql5}
             AND b.`observe_date` >= '%s'
-            AND b.observe_date < '%s'
-            AND a.variety = '%s'",
+            AND b.`observe_date` < '%s'
+            AND a.`variety` = '%s'",
             $db->escape($season_start),
             $cutoff1,
             $db->escape($crop1['variety']));
@@ -69,8 +70,8 @@ class werise_oryza_cropcalendar2
             // second crop
             $sql7 = sprintf("{$sql5}
                 AND b.`observe_date` >= DATE_ADD('%s', INTERVAL %u DAY)
-                AND b.observe_date < DATE_ADD('%s', INTERVAL %u DAY)
-                AND a.variety = '%s'",
+                AND b.`observe_date` < DATE_ADD('%s', INTERVAL %u DAY)
+                AND a.`variety` = '%s'",
                 $rec3->observe_date, 
                 intval($rec3->harvest+$rest),
                 $rec3->observe_date,     
@@ -131,13 +132,14 @@ class werise_oryza_cropcalendar2
             
         // main SQL
         $sql1 = "
-            SELECT a.variety,a.fert AS fertcode,b.*
+            SELECT a.`variety`, a.`fert` AS fertcode, b.*
             FROM "._DB_DATA.".`oryza_dataset` AS a
             INNER JOIN "._DB_DATA.".`oryza_data` AS b
                 ON a.`id` = b.`dataset_id`
             WHERE a.`country_code` = '%s'
                 AND a.`station_id` = %u
-                AND a.wtype = '%s'";               
+                AND a.`wtype` = '%s'
+                AND b.`week_best` = 1";               
         $sql2 = sprintf($sql1,
             $dataset->getCountryCode(),
             $dataset->getStationId(),
@@ -148,8 +150,8 @@ class werise_oryza_cropcalendar2
         // 1st crop
         $sql4 = "{$sql2}
             AND b.`observe_date` >= '%s'
-            AND a.variety = '%s'
-            AND a.fert = '%s'                
+            AND a.`variety` = '%s'
+            AND a.`fert` = '%s'                
             ORDER BY b.`observe_date`
             LIMIT 2";
         $sql3 = sprintf($sql4,

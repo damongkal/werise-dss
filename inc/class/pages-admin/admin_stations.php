@@ -22,8 +22,8 @@ class admin_stations {
             case 'list':
                 $this->actionList();
                 break;
-            case 'clean':
-                $this->actionClean();
+            case 'sandbox':
+                $this->actionSandbox();
                 break;
         }
     }
@@ -84,26 +84,20 @@ class admin_stations {
         }
     }
     
-    private function actionClean() {
+    private function actionSandbox() {
+        return;
         $db = Database_MySQL::getInstance();
-        $sql = 'UPDATE `weather_stations` SET `is_enabled` = 0';
-        $db->query($sql);
-        $sql2 = "UPDATE `weather_stations` SET `is_enabled` = 1 WHERE country_code = '%s' AND station_id = %u";
-        // physical PRN weather files
-        $files_r = $this->getFileCounts(werise_weather_properties::_REALTIME);
-        foreach($files_r as $country_code => $stations) {
-            foreach($stations as $station_id => $rec) {
-                $sql3 = sprintf($sql2,$country_code,$station_id);
-                $db->query($sql3);
-            }
+        // get max-date
+        $sql = "SELECT MAX(`cal_date`) AS maxdate FROM `calendar`";
+        $rs = $db->getRow($sql);
+        $d = new DateTime($rs->maxdate);
+        // create new dates
+        $sql2 = "INSERT IGNORE INTO `calendar` VALUES ('%s')";
+        for ($i=0;$i<10000;$i++) {
+            $d->add(new DateInterval('P1D'));            
+            $sql3 = sprintf($sql2,$d->format('Y-m-d'));
+            $db->query($sql3);
         }
-        $files_f = $this->getFileCounts(werise_weather_properties::_FORECAST);        
-        foreach($files_f as $country_code => $stations) {
-            foreach($stations as $station_id => $rec) {
-                $sql3 = sprintf($sql2,$country_code,$station_id);
-                $db->query($sql3);
-            }
-        }        
     }
 
     private function getFileCounts($wtype) {

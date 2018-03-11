@@ -154,7 +154,7 @@ class oryza_data
                 if ($vars[0] == 'RUNNUM') {
                     // determine dataset from runnum
                     $runnum = $vars[1];
-                    $id = floor(($runnum - 1) / 24);
+                    $id = 0;
                 } else {
                     $this->addDataRes($datasets[$id], $runnum, $vars, $columns);
                 }
@@ -253,7 +253,7 @@ class oryza_data
         $wrr14 = $data[$colref['WRR14']] / 1000; // yield (g/ha) OLD ORYZA
         
         // determine dataset from runnum
-        $id = floor(($runnum - 1) / 24);        
+        $id = 0;
         $dataset = $dset[$id];
 
         // sttime

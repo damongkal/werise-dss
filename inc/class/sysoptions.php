@@ -23,6 +23,7 @@ class sysoptions
     const _ORYZA_NITROENV_GENFERT = '_ORYZA_NITROENV_GENFERT';
     const _ORYZA_NITROENV_SPCFERT = '_ORYZA_NITROENV_SPCFERT';
     const _ORYZA_DBG_RES = '_ORYZA_DBG_RES';
+    const _ORYZA_INTERVAL = '_ORYZA_INTERVAL';
 
     // page options
     const _OPT_SHOW_DATAGRID = '_OPT_SHOW_DATAGRID';
@@ -122,8 +123,11 @@ class sysoptions
         // oryza2000
         $this->default[] =  array('value' => 'category','desc' => 'Oryza2000');
         $this->default[self::_ORYZA_VERSION] =  array(
-            'value' => '2',
+            'value' => '3',
             'desc' => 'Version of Oryza2000 to use. 1 or 3?');
+        $this->default[self::_ORYZA_INTERVAL] =  array(
+            'value' => 15,
+            'desc' => 'RERUN STTIME interval to use. 1, 5 or 15?');        
         $this->default[self::_ORYZA_VARIETIES] =  array(
             'value' => 'IR64.J96,IR72.DAT,YTH183.D12',
             'desc' => 'List of varieties to use in Oryza2000 runs. Example: IR64.J96,IR72.DAT,YTH183.D12');

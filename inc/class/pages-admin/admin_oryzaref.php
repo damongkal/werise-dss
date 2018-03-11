@@ -8,7 +8,8 @@ class admin_oryzaref {
     private $stations;
     
     public $station;
-    public $datasets;   
+    public $datasets; 
+    public $dset_year;
 
     public function __construct() {
 
@@ -58,6 +59,7 @@ class admin_oryzaref {
         // get first dataset info
         $filter = array('id' => $id);
         $dset = oryza_data::getDatasets(array('id' => $id));
+        $this->dset_year = $dset[0]->year;
         // get station
         $filterw = array('country' => $dset[0]->country_code, 'station' => $dset[0]->station_id);
         $station = weather_stations::getAll($filterw);

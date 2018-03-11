@@ -20,9 +20,11 @@
             <h3 style="margin-top: 0">List Options</h3>
             <form id="list-options" class="form">
                 <label class="checkbox">
-                    <input type="checkbox" name="show_only_loaded" id="show_only_loaded" value="1" /> Show only loaded files?
+                    <input type="checkbox" name="show_only_loaded" id="show_only_loaded" value="1" /> Only show stations already loaded to database?
                 </label>
             </form>
+            
+            <p><a class="btn btn-small" href="admin.php?pageaction=weatherfile&action=clean"><i class="icon-repeat"></i> Reset stations with PRN files</a></p>
         </div>
 
         <h3>File Location</h3>

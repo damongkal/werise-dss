@@ -80,7 +80,7 @@ class werise_cdfdm_downscale {
             $debug[] = $this->fmtCmdOut($cmdout);
         }
         // delete debug files
-        array_map('unlink', glob($dir2.DIRECTORY_SEPARATOR.'*debug*'));
+        //array_map('unlink', glob($dir2.DIRECTORY_SEPARATOR.'*debug*'));
         return $debug;
     }
 

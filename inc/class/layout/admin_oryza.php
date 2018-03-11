@@ -34,16 +34,14 @@
     <?php endif; ?>
 
     <?php if ($cls->action === 'list'): ?>
-        
-        <?php $wtype = 'f' ?>
 
         <div id ="dataselection" style="width:500px">
             <h3 style="margin-top: 0">List Options</h3>
-            <form id="list-options" class="form">            
-                <label class="checkbox">    
+            <form id="list-options" class="form">
+                <label class="checkbox">
                     <input type="checkbox" name="show_only_loaded" id="show_only_loaded" value="1" /> Show only loaded files?
-                </label>        
-            </form>    
+                </label>
+            </form>
         </div>
 
         <h3>Oryza2000 Program</h3>
@@ -51,31 +49,31 @@
             <?php $batchfile = _DATA_SUBDIR_ORYZA . 'oryza.bat'; ?>
             <?php $batchfileinfo = file_get_contents($batchfile); ?>
             <span style="font-weight: 700">MS-DOS batch file:</span> <?php echo $batchfile ?>
-        </p>                    
+        </p>
         <pre><?php echo $batchfileinfo ?></pre>
 
-        <?php if ($cls->files['a']) : ?>
+        <?php if ($cls->files) : ?>
 
-            <?php foreach ($cls->files['a'] as $country => $topregions) : ?>
+            <?php foreach ($cls->files as $country => $topregions) : ?>
 
                 <h3><img class="icon-flag-<?php echo $country ?>" style="margin-top: 8px" /><?php echo werise_stations_country::getName($country) ?></h3>
 
-                <table class="table table-bordered adm-table">      
+                <table class="table table-bordered adm-table">
 
-                    <?php foreach ($topregions as $topregion_id => $topregion_info) : ?>
+                    <?php foreach ($topregions as $topregion_id => $subregions) : ?>
 
                         <tr class="tr-gray region-td">
-                            <td colspan="6"><?php echo $topregion_info['name'] ?></td>
+                            <td colspan="6"><?php echo $cls->getStationName($country,$topregion_id,'topregion') ?></td>
                         </tr>
 
-                        <?php foreach ($topregion_info['subregion'] as $subregion_id => $subregion_info) : ?>        
+                        <?php foreach ($subregions as $subregion_id => $stations) : ?>
 
                             <tr class="tr-gray subregion-td">
                                 <td>&nbsp;</td>
-                                <td colspan="5"><?php echo $subregion_info['name'] ?></td>
-                            </tr>                                
+                                <td colspan="5"><?php echo $cls->getStationName($country,$subregion_id,'subregion') ?></td>
+                            </tr>
 
-                            <?php foreach ($subregion_info['station'] as $station_id => $station_info) : ?>                                        
+                            <?php foreach ($stations as $station_id => $wtypes) : ?>
 
                                 <tr class="tr-gray">
                                     <th width="20">&nbsp;</th>
@@ -84,14 +82,21 @@
                                     <th width="140">Is displayed to<br /> yield chart?</th>
                                     <th width="180">Action</th>
                                     <th width="400">Notes</th>
-                                </tr>                                 
+                                </tr>
 
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td colspan="5" class="station-td"><?php echo $station_info['name'] ?></td>
-                                </tr>                                     
+                                    <td colspan="5" class="station-td"><?php echo $cls->getStationName($country,$station_id,'station') ?></td>
+                                </tr>
 
-                                <?php foreach ($station_info[$wtype] as $file) : ?>                                        
+                                <?php foreach ($wtypes as $wtype => $station_info) : ?>
+                                
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td colspan="5" class="station-td"><?php echo werise_weather_properties::getTypeDesc($wtype) ?></td>
+                                </tr>                                
+                                
+                                <?php foreach ($station_info as $file) : ?>
 
                                     <tr class="<?php echo ( $file['is_oryza_loaded'] ) ? 'tr_loaded' : 'tr_nloaded' ?>">
                                         <td>&nbsp;</td>
@@ -108,20 +113,21 @@
                                             <?php echo $cls->showActionElements($file, $wtype) ?>
                                         </td>
                                         <td><?php echo $cls->showNotes($file) ?></td>
-                                    </tr>                                
+                                    </tr>
 
                                 <?php endforeach; ?>
-
+                                <?php endforeach; ?>
+                                    
                             <?php endforeach; ?>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
-                </table>                            
+                </table>
 
             <?php endforeach; ?>
 
-        <?php endif; ?>        
+        <?php endif; ?>
 
-    <?php endif; ?>     
+    <?php endif; ?>
 
 </div>
 

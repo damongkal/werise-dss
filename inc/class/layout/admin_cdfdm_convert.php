@@ -39,8 +39,6 @@
 
     <?php if ($cls->action==='export') : ?>
 
-        <p><a class="btn btn-small" href="admin.php?pageaction=sintex"><i class="icon-repeat"></i> Back to Directory List</a></p>
-
         <?php if ($cls->is_error===true) : ?>
 
         <div class="well" style="width:800px">

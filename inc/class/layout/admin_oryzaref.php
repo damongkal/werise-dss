@@ -89,9 +89,28 @@
     <?php if ($cls->action === 'detail'): ?>        
             
         <h3>Station</h3>
-        <p>
-            <img class="icon-flag-<?php echo $cls->station->country_code ?>"> <?php echo $cls->station->station_name ?>, <?php echo $cls->station->subregion_name ?>, <?php echo $cls->station->topregion_name ?>, <?php echo werise_stations_country::getName($cls->station->country_code) ?>
-        </p>       
+        <table class="table table-bordered adm-table">
+            <tr>
+                <td class="tr-gray">Year</td>
+                <td><?php echo $cls->dset_year?></td>
+            </tr>            
+            <tr>
+                <td class="tr-gray">Country</td>
+                <td><img class="icon-flag-<?php echo $cls->station->country_code ?>"> <?php echo werise_stations_country::getName($cls->station->country_code) ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Region</td>
+                <td><?php echo $cls->station->topregion_name ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Sub-region</td>
+                <td><?php echo $cls->station->subregion_name ?></td>
+            </tr>
+            <tr>
+                <td class="tr-gray">Station</td>
+                <td><?php echo $cls->station->station_name ?></td>
+            </tr>
+        </table>    
         
         <h3>Grain Yield Chart</h3>
         <div id="yieldchart"></div>                
@@ -107,7 +126,7 @@
             </tr>
             <tr>
                 <td class="tr-gray">Year</td>
-                <td class="dataset-year"><?php echo $dataset['dataset_info']->year ?> <?php echo werise_weather_properties::getTypeDesc($dataset['dataset_info']->wtype) ?></td>
+                <td class="dataset-year"><?php echo werise_weather_properties::getTypeDesc($dataset['dataset_info']->wtype) ?></td>
             </tr>
             <tr>
                 <td class="tr-gray">Variety</td>
@@ -171,7 +190,7 @@
         dataset_name = jQuery('#dataset-'+dataset_id+' .dataset-year').html();
         variety = jQuery('#dataset-'+dataset_id+' .dataset-var').html();
         fert = jQuery('#dataset-'+dataset_id+' .dataset-fert').html();
-        chart_data.push({name: variety + ' ' + fert ,data: <?php echo json_encode($dataset['chart_data']) ?>});        
+        chart_data.push({name: dataset_name + ' ' + variety + ' ' + fert ,data: <?php echo json_encode($dataset['chart_data']) ?>});        
         <?php endforeach; ?>
         chart.callHighCharts('#yieldchart', chart_data, dataset_name);    
     });

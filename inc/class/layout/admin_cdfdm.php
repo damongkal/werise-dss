@@ -15,7 +15,7 @@
                 <tr class="tr-gray">
                     <th width="300">Region</th>
                     <th width="250">SINTEX-F</th>
-                </tr>                
+                </tr>
 
                 <?php foreach ($regions as $region_id => $subregions) : ?>
                     <tr data="<?php echo $region_id ?>">
@@ -29,16 +29,16 @@
                         </tr>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
-            </table>                        
+            </table>
         <?php endforeach; ?>
 
 
     <?php else: ?>
 
         <div class="dselect" style="width:500px; margin-bottom:15px; padding: 5px 10px 15px 10px">
-            <div class="pull-left" style="padding-top: 5px"><b>Region:</b> [<span id="region_id"><?php echo $cls->arg_region ?></span>] <?php echo $cls->fmtRegion() ?></div> 
+            <div class="pull-left" style="padding-top: 5px"><b>Region:</b> [<span id="region_id"><?php echo $cls->arg_region ?></span>] <?php echo $cls->fmtRegion() ?></div>
             <?php if ( (count($cls->raw) > 0) && $cls->action !== 'chart') : ?>
-                <div class="pull-right"><input type="button" class="btn btn-small" id="chart_btn" value="Weather Chart" /></div>
+                <div class="pull-right"><input type="button" class="btn btn-small" id="chart_btn" value="Show weather data" /></div>
             <?php endif; ?>
             <div class="clear">&nbsp;</div>
         </div>
@@ -54,23 +54,23 @@
                         <?php echo $debug ?><br />
                     <?php endif; ?>
                 <?php endforeach; ?>
-            </div>    
+            </div>
         <?php endif; ?>
 
         <?php if ($cls->action !== 'chart') : ?>
             <h3 style="margin-top: 0">Raw SINTEX-F Data</h3>
 
             <table class="table table-bordered adm-table" style="margin:3px">
-                <tr>
+                <tr class="tr-gray">
                     <th width="130">From</th>
                     <th width="130">To</th>
                     <th width="70">PR</th>
                     <th width="70">TN</th>
                     <th width="70">TX</th>
                     <th width="70">WS</th>
-                </tr>            
+                </tr>
                 <?php if (count($cls->raw) === 0): ?>
-                    <tr>                        
+                    <tr>
                         <td colspan="6"><div class="dselect" style="margin-bottom:10px;width:600px">No data found.</div></td>
                     </tr>
                 <?php else: ?>
@@ -87,7 +87,7 @@
                     <?php endforeach; ?>
 
                 <?php endif; ?>
-                <?php if (_ADM_ENV!=='PROD') : ?>        
+                <?php if (_ADM_ENV!=='PROD') : ?>
                 <tr>
                     <td colspan="6">
                         <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
@@ -118,11 +118,11 @@
                         </div>
                     </td></tr>
                 <?php endif; ?>
-            </table>                        
+            </table>
 
             <?php if (_ADM_ENV!=='PROD') : ?>
-            
-            <h3 style="margin-top: 0">General Circulation Model (GCM)</h3>
+
+            <h3>General Circulation Model (GCM)</h3>
 
             <table class="table table-bordered adm-table" style="margin:3px">
                 <tr class="tr-gray">
@@ -165,14 +165,16 @@
 
             <table class="table table-bordered adm-table" style="margin:3px">
                 <tr class="tr-gray">
-                    <th colspan="2">OBS Folder: <span style="font-weight:100"><?php echo $cls->datafiles[werise_cdfdm_folder::_SRC_OBS][0] ?></span></th>
-                </tr>
-                <tr class="tr-gray">
                     <th colspan="2">
-                        Last PRN Import: <span style="font-weight:100"><?php echo $cls->getLastHistoryLog() ?></span>
-                        <span id="station_id_val" data="<?php echo $cls->arg_station_id ?>" style="display:none"></span>                    
+                        <p>
+                            OBS Folder: <span style="font-weight:100"><?php echo $cls->datafiles[werise_cdfdm_folder::_SRC_OBS][0] ?></span>
+                        </p>
+                        <p>
+                            Last PRN Import: <span style="font-weight:100"><?php echo $cls->getLastHistoryLog() ?></span>
+                        </p>
+                        <span id="station_id_val" data="<?php echo $cls->arg_station_id ?>" style="display:none"></span>
                     </th>
-                </tr>            
+                </tr>
                 <tr class="tr-gray">
                     <th width="180">File</th>
                     <th width="400">Info</th>
@@ -193,9 +195,20 @@
 
                 <tr>
                     <td colspan="2">
+                        <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
                         <form id="obsreal_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
-                            <input id="action" name="action" type="hidden" value="obsreal" />
-                            <input name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
+
+                            <input type="hidden" id="action" name="action" value="obsreal" />
+                            <input type="hidden" name="region_id" value="<?php echo $cls->arg_region ?>" />
+                            <legend>Import from historical weather data</legend>
+
+                            <p>
+                            <span style="font-weight:700">Last PRN Import: </span><span style="font-weight:100"><?php echo $cls->getLastHistoryLog() ?></span>
+                            </p>
+
+                            <p>
+                            <span style="font-weight:700">New PRN Import: </span>
+                            </p>
 
                             <fieldset style="margin: 0">
                                 <label for="station_id">Station: </label>
@@ -204,14 +217,22 @@
                                     <?php foreach ($cls->getStations() as $station) : ?>
                                         <option value="<?php echo $station->station_id ?>" ><?php echo $station->station_name ?></option>
                                     <?php endforeach; ?>
-                                </select>               
-                            </fieldset>    
-                            <fieldset style="margin: 0">    
-                                <input type="submit" class="btn btn-small" name="realobs" value="Import from Weather Files (PRN format)" />
+                                </select>
                             </fieldset>
+
+                            <fieldset style="margin: 0">
+                                <input type="submit" class="btn btn-small" name="realobs" value="Import" />
+                            </fieldset>
+
                         </form>
+                        </div>
                     </td>
                 </tr>
+            </table>
+
+            <h3>CDF-DM.exe</h3>
+
+            <table class="table table-bordered adm-table" style="margin:3px">
 
                 <tr>
                     <td colspan="2">
@@ -219,12 +240,12 @@
                             <input id="action" name="action" type="hidden" value="downscale" />
                             <input id="ftype" name="ftype" type="hidden" value="real-time" />
                             <input id="gcm_region" name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
-                            <fieldset style="margin: 0">
-                                <input type="submit" class="btn btn-small" name="downscale" value="Downscale" />
+                            <fieldset style="margin: 0;">
+                                <input type="submit" class="btn" name="downscale" value="Run downscaling software CDF-DM.exe" />
                             </fieldset>
                         </form>
                     </td>
-                </tr>                  
+                </tr>
 
                 <tr class="tr-gray">
                     <th colspan="2">OUT Folder: <span style="font-weight:100"><?php echo $cls->datafiles[werise_cdfdm_folder::_SRC_OUT][0] ?></span></th>
@@ -248,28 +269,33 @@
 
                     <tr>
                         <td colspan="2">
+                            
+                            <div class="dselect" style="width:600px; margin:10px 0 15px 3px;">
                             <form id="out_form" role="form" class="form" action="admin.php?pageaction=cdfdm_convert" method="post">
-                                <input id="action" name="action" type="hidden" value="export" />
-                                <input id="ftype" name="ftype" type="hidden" value="real-time" />
+                                
+                                <input type="hidden" id="action" name="action" value="export" />
+                                <input type="hidden" id="ftype" name="ftype" value="real-time" />
                                 <input name="region_id" type="hidden" value="<?php echo $cls->arg_region ?>" />
                                 <input id="ftype" name="year" type="hidden" value="<?php echo $cls->outmaxyear ?>" />
+                                <legend>Export to forecast weather data</legend>
 
                                 <fieldset style="margin: 0">
-                                    <label for="station2_id">Station: </label>  
+                                    <label for="station2_id">Station: </label>
                                     <span id="station2_id_val" data="<?php echo $cls->arg_station_id ?>" style="display:none"></span>
                                     <select class="form-control" name="station_id" id="station2_id" style="width:200px">
                                         <option value="0" >&nbsp;</option>
                                         <?php foreach ($cls->getStations() as $station) : ?>
                                             <option value="<?php echo $station->station_id ?>" ><?php echo $station->station_name ?></option>
                                         <?php endforeach; ?>
-                                    </select>               
-                                </fieldset>    
-                                <fieldset style="margin: 0">    
-                                    <input type="submit" class="btn btn-small" name="createprn" value="Export to Weather Files (PRN Format)" />
+                                    </select>
+                                </fieldset>
+                                <fieldset style="margin: 0">
+                                    <input type="submit" class="btn btn-small" name="createprn" value="Export" />
                                 </fieldset>
                             </form>
+                            </div>    
                         </td>
-                    </tr>                       
+                    </tr>
 
                 <?php endif; ?>
 
@@ -333,21 +359,21 @@
 
                 </table>
             </div>
-            
+
             <?php endif; ?>
-            
-            
+
+
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php if ($cls->action === 'chart') : ?>    
-        <div class="dselect" style="width:500px; margin-bottom:15px; padding: 5px 10px 15px 10px">            
+    <?php if ($cls->action === 'chart') : ?>
+        <div class="dselect" style="width:500px; margin-bottom:15px; padding: 5px 10px 15px 10px">
 
-            <form id="chart_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">    
+            <form id="chart_form" role="form" class="form" action="admin.php?pageaction=cdfdm" method="post">
                 <input type="hidden" name="action" value="chart" />
                 <input type="hidden" name="region_id" value="<?php echo $cls->arg_region ?>" />
                 <fieldset style="margin-top:0">
-                    <legend>Chart Options</legend>                
+                    <legend>Chart Options</legend>
 
                     <label class="control-label" for="chart_year"><?php __('Year') ?></label>
                     <span id="chart_year_val" data="<?php echo $cls->arg_chart_year ?>" style="display:none"></span>
@@ -363,18 +389,18 @@
                         <?php foreach (werise_cdfdm_file::getTypes() as $cdfdm_col) : ?>
                             <option value="<?php echo $cdfdm_col ?>"><?php echo werise_cdfdm_chart::getWvarField($cdfdm_col) ?></option>
                         <?php endforeach; ?>
-                    </select>                     
+                    </select>
 
                 </fieldset>
                 <button class="form-control btn btn-success" id="show" type="submit"><i class="icon-picture icon-white"></i> <?php __('Show Chart') ?></button>
-            </form>            
+            </form>
 
-        </div>        
+        </div>
         <div class="charts">
             <h3 style="margin-top: 25px">Weather Chart</h3>
             <div id="chart_pr" style="width:1000px;height:300px"></div>
         </div>
-    <?php endif; ?>    
+    <?php endif; ?>
 </div>
 
 <script type="text/javascript" src="gzip.php?file=dss-common-dropdown"></script>
@@ -396,7 +422,7 @@
             });
 </script>
 
-<?php if ($cls->action === 'chart') : ?>        
+<?php if ($cls->action === 'chart') : ?>
     <script type="text/javascript" src="js/highcharts.js"></script>
     <script type="text/javascript" src="js/highcharts-more.js"></script>
     <script type="text/javascript" src="gzip.php?file=dss-cdfdm-chart"></script>
@@ -413,4 +439,4 @@
                 chart.callHighCharts(charttitle, seriesdata);
             });
     </script>
-<?php endif; ?>    
+<?php endif; ?>

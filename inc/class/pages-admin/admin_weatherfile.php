@@ -83,10 +83,44 @@ class admin_weatherfile
                 $this->dataset_station = $grasp->station_info;
                 $this->grasp_files = $grasp->files_created;
                 break;
+            case 'clean':
+                $this->actionClean();
+                break;            
         }
 
         $this->ver = _opt(sysoptions::_ORYZA_VERSION);
     }
+    
+    private function actionClean() {
+        $db = Database_MySQL::getInstance();
+        $sql = 'UPDATE `weather_stations` SET `is_enabled` = 0';
+        $db->query($sql);
+        $sql2 = "UPDATE `weather_stations` SET `is_enabled` = 1 WHERE country_code = '%s' AND station_id = %u";
+        // physical PRN weather files
+        $files_r = $this->getFilesDatasets(werise_weather_properties::_REALTIME);
+        foreach($files_r as $dset) {
+            $sql3 = sprintf($sql2,$dset[0],$dset[1]);
+            $db->query($sql3);
+        }
+        $files_f = $this->getFilesDatasets(werise_weather_properties::_FORECAST);
+        foreach($files_f as $dset) {
+            $sql3 = sprintf($sql2,$dset[0],$dset[1]);
+            $db->query($sql3);
+        }
+    }    
+    
+    private function getFilesDatasets($wtype) {
+        $df = new datafiles;
+        $files = werise_weather_file::getFileList($wtype);
+        $files2 = array();
+        if ($files) {
+            foreach ($files as $file) {
+                $arr = $df->getDatasetFromFilename($file['file']);
+                $files2[] = array($arr['country'],$arr['station']);
+            }
+        }
+        return $files2;
+    }    
 
     /**
      * station name reference for layout
