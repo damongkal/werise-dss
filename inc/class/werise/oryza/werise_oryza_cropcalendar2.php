@@ -34,7 +34,7 @@ class werise_oryza_cropcalendar2
         // get max crop calendar period
         $maxharvest = $this->getMaxHarvest($dataset,$season_start,$season_end);
         // get 1st crop calendar cutoff
-        $cutoff1 = $this->getCalendarCutoff($season_start,$maxharvest+$rest);
+        $cutoff1 = $this->getCalendarCutoff($season_end,$maxharvest+$rest);
         // get 2nd crop calendar cutoff
         $cutoff2 = 365 - $maxharvest - $rest;          
         // main SQL
@@ -60,7 +60,7 @@ class werise_oryza_cropcalendar2
         $sql6 = sprintf("{$sql5}
             AND b.`observe_date` >= '%s'
             AND b.`observe_date` < '%s'
-            AND a.`variety` = '%s'",
+            AND a.`variety` = '%s' /*1st crop reco*/",
             $db->escape($season_start),
             $cutoff1,
             $db->escape($crop1['variety']));
@@ -71,7 +71,7 @@ class werise_oryza_cropcalendar2
             $sql7 = sprintf("{$sql5}
                 AND b.`observe_date` >= DATE_ADD('%s', INTERVAL %u DAY)
                 AND b.`observe_date` < DATE_ADD('%s', INTERVAL %u DAY)
-                AND a.`variety` = '%s'",
+                AND a.`variety` = '%s'/*2nd crop reco*/",
                 $rec3->observe_date, 
                 intval($rec3->harvest+$rest),
                 $rec3->observe_date,     
@@ -157,7 +157,7 @@ class werise_oryza_cropcalendar2
         $sql3 = sprintf($sql4,
             $db->escape($crop1['date']),
             $db->escape($crop1['variety']),
-            $db->escape($crop1['fert']));
+            $db->escape($crop1['fert'])).' /*1st crop custom*/';
         $rs3 = $db->getRowList($sql3);
         foreach($rs3 as $rec3) // 1st crop
         {
@@ -165,7 +165,7 @@ class werise_oryza_cropcalendar2
             $sql7 = sprintf($sql4,
                 $db->escape($crop2['date']),
                 $db->escape($crop2['variety']),
-                $db->escape($crop2['fert']));            
+                $db->escape($crop2['fert'])).' /*2nd crop custom*/';            
             $rs4 = $db->getRowList($sql7);
             $second = $this->getSecondCropList($rs4);
             $scount = count($second);
