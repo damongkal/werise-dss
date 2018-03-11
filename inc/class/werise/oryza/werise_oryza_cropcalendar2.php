@@ -34,7 +34,7 @@ class werise_oryza_cropcalendar2
         // get max crop calendar period
         $maxharvest = $this->getMaxHarvest($dataset,$season_start,$season_end);
         // get 1st crop calendar cutoff
-        $cutoff1 = $this->getCalendarCutoff($season_end,$maxharvest+$rest);
+        $cutoff1 = $this->getCalendarCutoff($season_start,$maxharvest+$rest);
         // get 2nd crop calendar cutoff
         $cutoff2 = 365 - $maxharvest - $rest;          
         // main SQL

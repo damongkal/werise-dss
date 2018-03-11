@@ -35,7 +35,7 @@ class ajax_oryza2 extends ajax_base {
         {
             // get crop season
             list($season_start,$season_tmp1) = dss_utils::getCropSeason(1,$dataset->getYear());        
-            list($season_tmp2,$season_end) = dss_utils::getCropSeason(12,$dataset->getYear());                           
+            list($season_tmp2,$season_end) = dss_utils::getCropSeason(1,$dataset->getYear());                           
             // get rain dates
             $raindates = $this->getRainDates($dataset,$season_start,$season_end);
             $high_yield = $cal->getRecommended($dataset,$raindates,$season_start,$season_end,$crop1,$crop2);
