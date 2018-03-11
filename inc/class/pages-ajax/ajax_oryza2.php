@@ -85,11 +85,13 @@ class ajax_oryza2 extends ajax_base {
         foreach ($years as $year)
         {
             $raindate1 = $fertcls->getAdvisoryFert($dataset->getStation(), $year, $dataset->getWType(), advisory_fertilizer::_FERT_GEN );            
-            foreach ($raindate1 as $tmp)
-            {
-                if ($tmp['from'][2]>$season_start && $tmp['to'][2]<$season_end)
+            if ($raindate1) {
+                foreach ($raindate1 as $tmp)
                 {
-                    $raindate[] = $tmp;
+                    if ($tmp['from'][2]>$season_start && $tmp['to'][2]<$season_end)
+                    {
+                        $raindate[] = $tmp;
+                    }
                 }
             }
         }     
