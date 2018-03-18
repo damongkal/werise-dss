@@ -28,7 +28,6 @@ var WeatherForm = {
      */
     initForm: function () {
 
-        jQuery('.chartdiv').hide();
         this.renderStation(this.getCountry());
 
         // country change
@@ -40,6 +39,12 @@ var WeatherForm = {
         jQuery(this.item_station).change(function () {
             WeatherForm.stationChange();
         });
+        
+        // year change
+        jQuery(this.item_tyear).change(function () {
+            var typeyear = jQuery(this).val();
+            jQuery("#type-year-pre").html(getWeatherType(typeyear.substr(0,1)));
+        });        
 
         // show station select
         jQuery('#location_btn').click(function () {

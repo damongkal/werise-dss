@@ -23,12 +23,10 @@ if (_ADM_ENV==='PROD' && in_array($pageaction,$secured))
 }
 dss_auth::logAccess($pageaction);
 
-$cls = new $pageaction; // referenced in layout files
-
-$layout = new layout();
+// route action
+$cls = new $pageaction;
+// layout
+$layout = new layout($pageaction);
 echo $layout->getHeader();
-
-// content
-include(_CLASS_DIR . 'layout' . DIRECTORY_SEPARATOR . $pageaction . '.php');
-
+include $layout->getLayoutContent();
 echo $layout->getFooter();

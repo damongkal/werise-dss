@@ -32,12 +32,11 @@ if ($allow)
 {
     $cls = new $pageaction; // $cls can be referenced in layout files
 }
-$layout = new layout();
+$layout = new layout($pageaction);
 echo $layout->getHeader();
 // class content
 if ($allow)
 {
-    include(_CLASS_DIR.'layout'.DIRECTORY_SEPARATOR.$pageaction.'.php');
+    include $layout->getLayoutContent();
 }
-
 echo $layout->getFooter();

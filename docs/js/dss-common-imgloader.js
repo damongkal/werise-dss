@@ -3,22 +3,22 @@
  * @type type
  */
 var weriseApp = {
-    showError : function(errmsg) {
-        if (window._env=='STAGE')
+    showError: function (errmsg) {
+        if (window._env == 'STAGE')
         {
             jQuery("#werise-error-msg").html(errmsg);
         } else
-        {            
-            weriseApp.dbg('','error',errmsg);
+        {
+            weriseApp.dbg('', 'error', errmsg);
             jQuery("#werise-error-msg").html('Please contact the website administrator.');
         }
-        jQuery("#werise-error-div").show();                    
-    },    
-    recentSelect : [],
-    varietyInfo : false,
-    ajaxCache : [],
-    ajaxCacheIdx : [],
-    dropDownData : { station : [] },
+        jQuery("#werise-error-div").show();
+    },
+    recentSelect: [],
+    varietyInfo: false,
+    ajaxCache: [],
+    ajaxCacheIdx: [],
+    dropDownData: {station: []},
     ajax: function (urlparams) {
         return jQuery.ajax({
             type: "GET",
@@ -26,42 +26,44 @@ var weriseApp = {
             data: urlparams,
             dataType: 'json',
             timeout: 5000})
-            .fail(function() {weriseApp.showError('ajax error: '+urlparams);});
+                .fail(function () {
+                    weriseApp.showError('ajax error: ' + urlparams);
+                });
     },
-    getStoredCountry : function() {
+    getStoredCountry: function () {
         return this.recentSelect.country;
-    },    
-    getStoredStation : function() {
+    },
+    getStoredStation: function () {
         return this.recentSelect.station;
-    },    
-    getStoredYear : function() {
+    },
+    getStoredYear: function () {
         return this.recentSelect.year;
-    },    
-    getStoredVariety : function() {
+    },
+    getStoredVariety: function () {
         return this.recentSelect.variety;
     },
-    setVarietyInfo : function(data) {
+    setVarietyInfo: function (data) {
         this.varietyInfo = data;
-    },    
-    getVarietyInfo : function() {
+    },
+    getVarietyInfo: function () {
         return this.varietyInfo;
-    },      
-    setAjaxCache : function(url,data) {
+    },
+    setAjaxCache: function (url, data) {
         var idx = 0;
         this.ajaxCache[idx] = data;
-    },    
-    getAjaxCache : function(url) {
+    },
+    getAjaxCache: function (url) {
         var idx = 0;
         return this.ajaxCache[idx];
     },
-    dbg : function(callerobj,marker,obj) {
-        var oktypes = ["string","number"];
-        if (oktypes.indexOf(typeof obj)!== -1)
+    dbg: function (callerobj, marker, obj) {
+        var oktypes = ["string", "number"];
+        if (oktypes.indexOf(typeof obj) !== -1)
         {
-            console.log(callerobj+'.'+weriseApp.dbg.caller.name + ' : ' + marker + ' => ' + obj);
+            console.log(callerobj + '.' + weriseApp.dbg.caller.name + ' : ' + marker + ' => ' + obj);
         } else
         {
-            console.log('dbg: '+marker);
+            console.log('dbg: ' + marker);
             console.log(typeof obj);
             console.log(obj);
         }
@@ -73,24 +75,24 @@ var weriseApp = {
  * @param {type} base
  * @returns {UrlBuilder}
  */
-function UrlBuilder(base){
+function UrlBuilder(base) {
     this.base = base;
     this.args = [];
 }
 UrlBuilder.prototype = {
-    base: '',    
-    args: [],    
+    base: '',
+    args: [],
     constructor: UrlBuilder,
-    addArg: function(key,val)
+    addArg: function (key, val)
     {
         this.args.push(key + '=' + val);
     },
-    getUrl: function()
+    getUrl: function ()
     {
-        return this.base+this.args.join('&');
+        return this.base + this.args.join('&');
     }
 };
-        
+
 /**
  * show loader for dropdown
  * @param {type} item_id
@@ -99,8 +101,8 @@ UrlBuilder.prototype = {
 function showLoader(item_id)
 {
     jQuery(item_id).css("background-image", "url('images/ajax-loader2.gif')")
-        .css("background-repeat", "no-repeat")  
-        .css("color", "#ffffff");
+            .css("background-repeat", "no-repeat")
+            .css("color", "#ffffff");
 }
 
 /**
@@ -111,8 +113,8 @@ function showLoader(item_id)
 function showLoaderChart(item_chart)
 {
     jQuery(item_chart).css("display", "block")
-        .css("height", "100px")
-        .html('<div style="text-align:center"><img src="images/ajax-loader.gif" /><br />'+_t('Generating chart. Please wait...')+'</div>');    
+            .css("height", "100px")
+            .html('<div style="text-align:center"><img src="images/ajax-loader.gif" /><br />' + _t('Generating chart. Please wait...') + '</div>');
 }
 
 /**
@@ -122,7 +124,7 @@ function showLoaderChart(item_chart)
  */
 function hideLoaderChart(item_chart)
 {
-    jQuery(item_chart).css("display", "none");    
+    jQuery(item_chart).css("display", "none");
 }
 
 /**
@@ -133,7 +135,7 @@ function hideLoaderChart(item_chart)
 function hideLoader(item_id)
 {
     jQuery(item_id).css("background-image", "")
-        .css("color", "#555555");
+            .css("color", "#555555");
 }
 
 /**
@@ -142,7 +144,7 @@ function hideLoader(item_id)
 function showErrorChart(error_txt)
 {
     var error_txt2 = 'There was a problem generating the data you requested. Please contact the website Administrator.';
-    if (error_txt=='')
+    if (error_txt == '')
     {
         jQuery('#dss-error-box').html(error_txt2).show();
     } else
@@ -161,11 +163,11 @@ function hideErrorChart()
 
 
 var weriseLogin = {
-    init: function() {
-        jQuery(function() {
+    init: function () {
+        jQuery(function () {
 
             jQuery('#login-modal').on('shown.bs.modal', function () {
-              jQuery('#login-form #username').focus();
+                jQuery('#login-form #username').focus();
             });
 
             // display login
@@ -173,55 +175,57 @@ var weriseLogin = {
             {
                 weriseLogin.showForm();
             }
-
             // login submit
-            jQuery('#login-form #username').change(function() {
+            jQuery('#login-form #login-submit').click(function () {
                 weriseLogin.submitForm();
             });
-            // login submit
-            jQuery('#login-form #password').change(function() {
-                weriseLogin.submitForm();
-            });    
-            // login submit
-            jQuery('#login-form #login-submit').click(function() {
-                weriseLogin.submitForm();
-            }); 
-        });        
-    },      
-    showForm: function() {
-        jQuery('#login-modal').modal('show');        
+        });
     },
-    submitForm: function() {
+    showForm: function () {
+        jQuery('#login-modal').modal('show');
+    },
+    errorForm: function (errormsg) {
+        jQuery('#login-error-msg').html(errormsg);
+        jQuery('#login-error').addClass('d-block');
+    },
+    submitForm: function () {
+        // validate username
         var username = jQuery('#username').val();
-        var password = jQuery('#password').val();
-
-            if (username==='' || password==='')
-            {	
-                    return false;
-            }
-
+        if (username === '')
+        {
+            weriseLogin.errorForm('Please choose a username.');
+            return false;
+        }
+        // validate password
+        var password = jQuery('#password').val();        
+        if (password === '')
+        {
+            weriseLogin.errorForm('Please choose a password.');
+            return false;
+        }
+        // validate credentials
         jQuery.ajax({
             type: "GET",
             url: "ajax.php",
-            data: "pageaction=index&action=login&username="+username+"&password="+password,
-            dataType : 'json',
-            timeout : 20000,
+            data: "pageaction=index&action=login&username=" + username + "&password=" + password,
+            dataType: 'json',
+            timeout: 20000,
             success: function (data) {
-                if (data==='success')
+                if (data === 'success')
                 {
                     jQuery('#login-modal').modal('hide');
                     location.reload();
                 } else
                 {
-                    jQuery('#login-error').show();
+                    weriseLogin.errorForm('Invalid Credentials.');
                 }
             },
             error: function (e, t, n) {
-                jQuery('#login-error').show();
+                weriseLogin.errorForm(e);
             }
         });
 
-        return true;        
+        return true;
     }
 };
 weriseLogin.init();

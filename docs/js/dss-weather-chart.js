@@ -1,9 +1,9 @@
 function WeatherChart()
 {
-    var type_year =  WeatherForm.getYear();
+    var type_year = WeatherForm.getYear();
     var year = parseInt(type_year.substr(1, 4));
     var wtype = type_year.substr(0, 1);
-    
+
     /**
      *
      * @returns {undefined}
@@ -12,12 +12,13 @@ function WeatherChart()
         var wvar = 0;
         hideErrorChart();
         jQuery('#homeimages').hide();
+        jQuery('.afterload').show();
         for (i = 1; i <= 5; i++)
         {
             if (jQuery("#wvar" + i).is(':checked'))
             {
                 wvar = i;
-                if (i<3)
+                if (i < 3)
                 {
                     wvar = i - 1;
                 }
@@ -33,8 +34,6 @@ function WeatherChart()
      */
     function getData(item_chart, wvar)
     {
-        jQuery(item_chart).show();
-
         // build URL
         var url = new UrlBuilder('');
         url.addArg('pageaction', 'weather');
@@ -56,8 +55,6 @@ function WeatherChart()
                 // toggle chart visibility
                 var wvar_opt = item_chart.replace('chart', 'wvar_chart');
                 jQuery(wvar_opt).show();
-                // show other info
-                jQuery('.afterload').show();
             }
         });
     }
@@ -70,13 +67,16 @@ function WeatherChart()
      */
     function callHighCharts(item_chart, wvar, ajaxdata)
     {
-        // resize viewport
-        var scrw = screen.width;
-        if (scrw > 1300)
-        {
-            scrw = 800;
+        var new_width = parseInt(jQuery("#width-ref").width());
+        if (new_width < 500) {
+            new_width = 500;
         }
-        jQuery(item_chart).width(scrw - 0).height('300px');
+        var new_height = parseInt(new_width / 3);
+        if (new_height < 300) {
+            new_height = 300;
+        }
+        jQuery(item_chart).width(new_width - 30).height(new_height);
+
 
         var station_name = jQuery('#location_name').val();
         var wvar_props = getWeatherVarProps(wvar);

@@ -1,0 +1,185 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (https://startbootstrap.com/template-overviews/scrolling-nav)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
+ */
+body, section {
+    font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 
+{
+    font-family: 'Open Sans Light', sans-serif;
+}
+h1 {
+    font-size: 35px;
+    line-height: 35px;
+}
+header {
+    padding: 154px 0 100px;
+}
+body, p, ul, li {
+    color: #1e1e1e !important;
+}
+#mainNav .navbar-nav > li > a:hover, #mainNav .navbar-nav > li > a:focus {
+    background-color: #4A722D;
+    color: #ffffff;
+}
+#mainNav .navbar-brand{
+    padding-top: 5px;
+    background: url('IRRI-logo2.png');
+    width: 100px;
+    height: 47px;
+}
+section#irri-japan #irri-japan-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: #547e1a !important;
+    margin-top: 10px;
+}
+section#irri-japan p {
+    font-size: 15px;
+}
+#page-title {
+    margin-top: 20px;
+}
+#home-title {
+    font-weight: 700; 
+    color:#547e1a;
+}
+#home-heroimage {
+    margin-bottom: 30px;    
+}
+#homeimages {
+    background-color: #ebebeb;
+    padding: 20px 0 20px 0
+}
+#homeimages .col{
+    margin-bottom: 20px;
+}
+#homeimages img {
+    width: 250px;
+    height: 210px
+}
+.home-features-wrapper-left, .home-features-wrapper-right {
+    float: left;
+    position:relative;
+}
+.home-features-overlay {
+    color: #fff;
+    font-weight: 700;
+    line-height: 40px;
+    height:40px;
+    width:100%;
+    position:absolute;
+    z-index:10;
+    bottom:0;
+    background: rgba(0,0,0,.65);
+    text-align: center
+}
+.afterload {
+    display: none;
+}
+form #station {
+    display: none;
+}
+.chartdiv {
+    display: none;
+}
+.chart {
+    width: 500px;
+}
+.chartdiv h3 {
+    font-weight: 700;
+    color: #547e1a;
+}
+.chartdiv p {
+    font-size: 14px;
+}
+footer {
+    background-color: #303030 !important;
+    font-size: 12px;
+    margin-top: 20px;
+}
+footer ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer li{
+    padding: 2px 0 3px 0;
+}
+
+footer p{
+    color: #ffffff !important;
+    font-weight: 700;
+}
+footer a:hover{
+    color: #aeaeae;
+}
+footer a{
+    color: #ffffff;
+    text-decoration: none
+}
+
+@media (min-width: 600px) {
+    #mainNav {
+        background: #e9e9e9 url('headerbg.jpg') repeat-x 0 -16px !important;
+        padding-top: 0;
+        padding-bottom: 0;
+        font-size: 15px;
+        height: 70px;
+    }
+    #mainNav ul.navbar-nav {
+        margin-top: 35px;
+    }
+    #mainNav .navbar-brand {
+        float: left;
+        background-color: #4A722D;
+        padding-bottom: 0;    
+    }
+    #mainNav .navbar-brand{
+        padding-top: 5px;
+        background: url('IRRI-logo.png');
+        width: 100px;
+        height: 80px;
+    }
+    #mainNav .navbar-nav > li {
+        padding: 4px 10px 3px 10px;
+    }    
+    section#bread-crumbs #btn-group-top{
+        text-align: right;
+    }    
+    #homeimages {
+        padding: 40px 0 40px 0
+    }
+    #homeimages img {
+        width: 383px;
+        height: 322px
+    }
+    .home-features-wrapper-left {
+        float: right;
+    }    
+    .home-features-overlay {
+        font-size: 2em;
+        line-height: 70px;
+        height: 70px;    
+    }
+}
+@media (min-width: 992px) {
+    header {
+        padding: 156px 0 100px;
+    }    
+}
+section#bread-crumbs {
+    padding: 90px 0 0 0;
+    font-size:14px !important
+}
+.breadcrumb {
+    background-color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+section#bread-crumbs .col{
+    margin-bottom: 10px;
+}
