@@ -12,7 +12,7 @@ About
 --lang--
 Weather Advisory
 --lang--
-Grain Yield Advisory
+Crop Advisory
 --lang--
 Terms And Conditions
 --lang--

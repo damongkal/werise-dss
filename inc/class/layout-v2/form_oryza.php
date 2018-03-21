@@ -12,663 +12,462 @@ $all_country = werise_stations_country::getAll();
     window.opt_postvars = <?php echo $cls->postvars ?>;
 </script>
 
-<div class="width-center">
+<section id="main-content">
+    <div class="container">
+        <h2 id="page-title"><?php echo _CURRENT_OPT ?></h2>
 
-    <header>
-        <h1 class="title"><?php echo _CURRENT_OPT ?></h1>
-    </header>
+        <div class="card mb-4">
+            <div class="card-body">
 
-    <div id ="cropseason" class="dselect" class="disabled-view" style="width:300px;text-align:center">
-        <div style="margin:auto;width:260px;height:40px">
-            <div class="pull-left">
-                <button id="csonex" type="button" class="btn btn-large">WeRise v.1</button>
-            </div>
-            <div class="pull-right">
-                <button id="cstwox" type="button" class="btn btn-large btn-success">WeRise (RR)</button>
-            </div>
-            <div style:clear:both></div>
-        </div>
-    </div>
+                <form id ="frm" name="frm" action="#" method="post">
 
-    <div id ="dataselection" style="width:600px;display:none">
+                    <input type="hidden" id="cs2_country" name="cs2_country" value="<?php echo $country_choice ?>">
+                    <input type="hidden" id="cs2_type" name="cs2_type" value="recommend" />
+                    <input type="hidden" id="cs2_fertil1" name="cs2_fertil1" value="1" />
+                    <input type="hidden" id="cs2_fertil2" name="cs2_fertil2" value="1" />
 
-        <div class="alert alert-success">
-            Click <a id="cstwo" href="#">here</a> to use the new version of this feature.
-        </div>
+                    <legend><?php echo __('Dataset') ?></legend>
 
-        <form role="form" class="form-inline" id ="frm" name="frm" action="#" method="post">
-
-            <fieldset style="margin-top:0">
-                <legend><?php echo __('Dataset') ?></legend>
-
-                <div class="form-group" style="padding: 3px">
-                    <div class="btn-group">
-                        <button class="btn btn-small dropdown-toggle country-dropdown" data-toggle="dropdown"><i class="icon-flag-<?php echo strtoupper($country_choice) ?>"> </i> <?php echo $all_country[$country_choice]['country'] ?> &nbsp;&nbsp;<span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <?php foreach ($all_country as $country_code => $country_attr): ?>
-                                <li><a href="index.php?pageaction=oryza&country=<?php echo $country_code ?>"><i class="icon-flag-<?php echo $country_code ?>"> </i> <?php echo $country_attr['country'] ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
+                    <div class="form-group m-0">
+                        <label for="station"><?php __('Location') ?></label>
                     </div>
 
-                    &nbsp;
-                    <div class="input-append" id="location_div">
-                        <input class="form-control span2" id="location_name" type="text" disabled="disabled" style="width:400px;padding:4px 10px">
-                        <button id="location_btn" class="form-control btn" type="button"><i class="icon-map-marker"></i></button>
-                    </div>
+                    <div class="form-row">
 
-                    <select class="form-control" style="width:450px;display:none" name="station" id="station">
-                        <option value="0"><?php __('Location') ?> &raquo;</option>
-                    </select>
-
-                </div>
-
-                <div class="form-group" style="padding: 3px">
-                    <div id="set" style="padding:10px 0 0 0">
-                        <label><?php echo __('Set') ?> 1: </label>
-
-                        <select class="form-control" name="type_year" id="type_year" style="width:100px">
-                            <option value=""><?php __('Year') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="variety" id="variety" style="width:150px">
-                            <option value=""><?php __('Variety') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="fertil" id="fertil" style="width:210px">
-                            <?php foreach ($cls->getFertOpts() as $opts) : ?>
-                                <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div id="set2" style="display:none;padding:10px 0 0 0">
-                        <label><?php echo __('Set') ?> 2: </label>
-
-                        <select class="form-control" name="type_year2" id="type_year2" style="width:100px">
-                            <option value=""><?php __('Year') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="variety2" id="variety2" style="width:150px">
-                            <option value=""><?php __('Variety') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="ferti2" id="fertil2" style="width:210px">
-                            <?php foreach ($cls->getFertOpts() as $opts) : ?>
-                                <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div id="set3" style="display:none;padding:10px 0 0 0">
-                        <label><?php echo __('Set') ?> 3: </label>
-
-                        <select class="form-control" name="type_year3" id="type_year3" style="width:100px">
-                            <option value=""><?php __('Year') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="variety3" id="variety3" style="width:150px">
-                            <option value=""><?php __('Variety') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="fertil3" id="fertil3" style="width:210px">
-                            <?php foreach ($cls->getFertOpts() as $opts) : ?>
-                                <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                    </div>
-
-                    <div id="set4" style="display:none;padding:10px 0 0 0">
-                        <label><?php echo __('Set') ?> 4: </label>
-
-                        <select class="form-control" name="type_year4" id="type_year4" style="width:100px">
-                            <option value=""><?php __('Year') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="variety4" id="variety4" style="width:150px">
-                            <option value=""><?php __('Variety') ?> &raquo;</option>
-                        </select>
-                        &nbsp;&nbsp;
-
-                        <select class="form-control" name="fertil4" id="fertil4" style="width:210px">
-                            <?php foreach ($cls->getFertOpts() as $opts) : ?>
-                                <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-
-                    </div>
-
-                    <div style="padding:10px 18px 0 0;height:30px">
-                        <div class="pull-left">
-                            <button class="form-control btn" id="compare" type="button"><i class="icon-chevron-down"></i> <?php __('Compare to another set') ?></button>
+                        <div class="col-md-auto mb-2">
+                            <button id="btn-select-country" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="flag-icon flag-icon-<?php echo strtolower($country_choice) ?>"></span> <?php echo $all_country[$country_choice]['country'] ?>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btn-select-country">
+                                <?php foreach ($all_country as $country_code => $country_attr): ?>
+                                    <a class="dropdown-item" href="index.php?pageaction=weather&country=<?php echo $country_code ?>"><span class="flag-icon flag-icon-<?php echo strtolower($country_code) ?>"></span> <?php echo $country_attr['country'] ?></a>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                        <div class="pull-right">
-                            <button class="form-control btn btn-success" name="show" id="show" type="submit"><i class="icon-picture icon-white"></i> <?php __('Show Advisory') ?></button>
+
+                        <div class="col">
+                            <div class="input-group">
+                                <input id="location2_name" type="text" class="form-control" disabled="disabled">
+                                <div id="location_div" class="input-group-append">
+                                    <button id="location2_btn" class="btn btn-outline-secondary" type="button"><i class="fas fa-map"></i></button>
+                                </div>
+                            </div>
+
+                            <select class="form-control" name="cs2_station" id="cs2_station">
+                                <option value="0"><?php __('Location') ?> &raquo;</option>
+                            </select>
                         </div>
-                        <div style:clear:both></div>
+
                     </div>
 
-                </div>
-            </fieldset>
-
-        </form>
-    </div>
-
-    <div id="dataselection2" class="dselect" style="width:600px">
-
-        <div class="alert alert-success disabled-view">
-            Click <a id="csone" href="#">here</a> to use the previous version of this feature.
-        </div>
-
-        <form role="form" class="form" id ="frm" name="frm" action="#" method="post">
-            <input type="hidden" name="cs2_type" value="recommend" />
-            <input type="hidden" id="cs2_fertil1" name="cs2_fertil1" value="1" />
-            <input type="hidden" id="cs2_fertil2" name="cs2_fertil2" value="1" />
-
-            <fieldset style="margin-top:0">
-                <legend><?php echo __('Dataset') ?></legend>
-
-                <label class="control-label" for="cs2_station"><?php __('Location') ?></label>
-
-                <input id="cs2_country" name="cs2_country" type="hidden" value="<?php echo $country_choice ?>">
-                <div class="btn-group">
-                    <button class="btn btn-small dropdown-toggle country-dropdown" data-toggle="dropdown"><i class="icon-flag-<?php echo strtoupper($country_choice) ?>"> </i> <?php echo $all_country[$country_choice]['country'] ?> &nbsp;&nbsp;<span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <?php foreach ($all_country as $country_code => $country_attr): ?>
-                            <li><a href="index.php?pageaction=oryza&country=<?php echo $country_code ?>"><i class="icon-flag-<?php echo $country_code ?>"> </i> <?php echo $country_attr['country'] ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-
-                &nbsp;
-                <div class="input-append" id="location2_div">
-                    <input class="form-control span2" id="location2_name" type="text" disabled="disabled" style="width:400px;padding:4px 10px">
-                    <button id="location2_btn" class="form-control btn" type="button"><i class="icon-map-marker"></i></button>
-                </div>
-
-                <select class="form-control" style="width:450px;display:none" name="cs2_station" id="cs2_station">
-                    <option value="0"><?php __('Location') ?> &raquo;</option>
-                </select>
-
-                <label class="control-label" for="cs2_type_year"><?php __('Year') ?></label>
-                <select class="form-control" name="cs2_type_year" id="cs2_type_year" style="width:100px">
-                    <option value=""><?php __('Year') ?> &raquo;</option>
-                </select>
-
-                <div class="cs2_recommend" style="padding:3px">
-                    <legend><?php echo __('Select Rice Variety Combination') ?></legend>
-
-                    <div id="combi-preview" class="panel panel-default">
-                        <div class="panel-body" style="text-align: center">
-                            <img id="fakeimg01" src="images/fake01.jpg" />
-                        </div>
-                    </div>
-
-                    <label class="control-label" for="cs2_variety1"><?php echo __('Variety for first crop') ?></label>
-                    <select class="form-control" name="cs2_variety1" id="cs2_variety1" style="width:150px">
-                        <option value=""><?php __('Variety') ?> &raquo;</option>
-                    </select>
-                    <div id="variety-info-1" class="variety-info"></div>
-
-                    <label class="control-label" for="cs2_variety2"><?php echo __('Variety for second crop') ?></label>
-                    <select class="form-control" name="cs2_variety2" id="cs2_variety2" style="width:150px">
-                        <option value=""><?php __('Variety') ?> &raquo;</option>
-                    </select>
-                    <div id="variety-info-2" class="variety-info"></div>
-                </div>
-
-                <div class="cs2_custom" style="padding:3px;display:none">
-                    <legend><?php echo __('Advisory Options') ?></legend>
-
-                    <label class="control-label" for="cs2_fertil0"><?php echo __('Fertilizer Application') ?></label>
-                    <select class="form-control" name="cs2_fertil0" id="cs2_fertil0" size="<?php echo $fertoptscount ?>" style="width:210px">
-                        <?php foreach ($fertopts as $opts) : ?>
-                            <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-
-                    <div id="grain-yield-preview" class="panel panel-default">
-                        <div class="panel-heading">Grain Yield Preview &nbsp;&nbsp; <button class="form-control btn btn-default" id="showcustomgy" type="button"><i class="icon-picture"></i> <?php __('Show') ?></button></div>
-                        <div class="panel-body">
-                            <img id="fakeimg03" src="images/fake02.jpg" style="width:100%;height:171px;display:none" />
-                        </div>
-                    </div>
-
-                    <label class="control-label" for="cs2_month1"><?php echo __('First crop sowing date') ?></label>
-                    <select class="form-control" name="cs2_month1" id="cs2_month1" style="width:120px">
-                        <option value=""><?php __('Sowing Date') ?> &raquo;</option>
-                    </select>
-
-                    <label class="control-label" for="cs2_month2"><?php echo __('2nd crop sowing date') ?></label>
-                    <select class="form-control" name="cs2_month2" id="cs2_month2" style="width:120px">
-                        <option value=""><?php __('Sow Date') ?> &raquo;</option>
-                    </select>
-
-                </div>
-
-            </fieldset>
-            <button class="form-control btn btn-success showcombi" type="button"><i class="icon-certificate icon-white"></i> <?php __('Show advisory') ?></button>&nbsp;&nbsp;
-            <button id="showcustom" class="form-control btn" type="button"><i class="icon-wrench"></i> <?php __('... More Options') ?></button>
-        </form>
-    </div>
-
-    <div id="dss-error-box" class="alert alert-error alert-fixed"></div>
-
-    <div id="homeimages" style="margin-top:30px">
-        <div style="width:383px;position:relative;margin-left:auto; margin-right:auto">
-            <img src="images/home02.jpg" width="383" height="322" style="width:383px;height:322px" />
-            <div class="homeimages_overlay"><?php __('Grain Yield Advisory') ?></div>
-        </div>
-    </div>
-
-    <div id="grainyield_chart">
-        <h2 id="advisory_anchor" class="title" style="font-weight: 700; color:#547e1a"><?php __('Simulated Grain Yield') ?></h2>
-        <div id="chart1" class="chart"></div>
-    </div>
-
-    <div id="advisory" class="disabled-view">
-
-        <!-- START: one calendar -->
-        <div id="opt-sow-adv" class="hide">
-            <h2 class="title" style="font-weight: 700; color:#547e1a"><?php __('Optimum sowing dates for rainfed rice crop') ?></h2>
-
-            <table id="opt-planting" class="table table-bordered table-condensed table-dss">
-                <thead>
-                    <tr style="background-color: #567B11">
-                        <th style="width:100px;text-align:right"><?php __('Rainfall') ?> (mm)</th>
-                        <th style="width:120px"><a style="color:#ffffff" href="javascript:launch_help('q1')"><?php __('Category') ?> <i class="icon-question-sign icon-white"> </i></a></th>
-                        <th style="width:100px"><?php __('Sowing Date') ?></th>
-                        <th style="width:90px;text-align:right"><?php __('Yield') ?> (t/ha)</th>
-                        <th style="width:80px;text-align:center"><?php __('Advisory') ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <!-- END: one calendar -->
-
-        <!-- START: two calendar -->
-        <div id="twocropcal" class="hide">
-
-        <h2 class="title" style="font-weight: 700; color:#547e1a">Dataset</h2>
-        <table class="table table-bordered table-condensed table-dss">
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Location') ?></td>
-                <td><span id="adv-location"></span></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Year') ?></td>
-                <td><span id="adv-year"></span></td>
-            </tr>
-        </table>            
-            
-            
-            <h2 class="title" style="font-weight: 700; color:#547e1a">Optimum sowing dates for two cropping seasons</h2>
-
-            <table id="twocropcalbest" class="table table-bordered table-condensed table-dss">
-                <thead>
-                    <tr style="background-color: #8CB730">
-                        <th colspan="4"><span class="label label-info">1</span> First crop</th>
-                        <th colspan="4"><span class="label label-warning">2</span> Second crop</th>
-                        <th rowspan="2" style="width:80px">Total<br />Yield(t/ha)</th>
-                        <th rowspan="2" style="width:100px;text-align:center">Advisory</th>
-                    </tr>
-                    <tr style="background-color: #8CB730">
-                        <th style="width:200px">Variety</th>
-                        <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
-                        <th style="width:150px">Sowing /<br />Harvest</th>
-                        <th style="width:100px">Yield<br />(t/ha)</th>
-                        <th style="width:200px">Variety</th>
-                        <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
-                        <th style="width:150px">Sowing /<br />Harvest</th>
-                        <th style="width:100px">Yield<br />(t/ha)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-
-        </div>
-        <!-- END: two calendar -->
-
-        <div id="fert-apply-adv" class="disabled-view">
-            <p class="form-inline">2. <?php __('Show the advisory if sowing date is ') ?>
-
-            <table id="opt-planting3" class="table table-bordered table-condensed table-dss hide">
-                <thead>
-                    <tr style="background-color: #567B11">
-                        <th rowspan="2" style="width:90px"><?php __('Sowing Date') ?></th>
-                        <th rowspan="2" style="width:90px"><?php __('Panicle Init.') ?></th>
-                        <th rowspan="2" style="width:90px"><?php __('Flowering') ?></th>
-                        <th rowspan="2" style="width:90px"><?php __('Harvest Date') ?></th>
-                        <th rowspan="2" style="width:70px;text-align:right"><?php __('Yield') ?><br />(t/ha)</th>
-                        <th colspan="3" style="width:400px;text-align:center"><?php __('Fertilizer Schedule') ?></th>
-                        <th colspan="3"  class="hide" style="width:250px;text-align:center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
-                    </tr>
-                    <tr style="background-color: #567B11">
-                        <th style="width:130px"><?php __('Basal') ?></th>
-                        <th style="width:130px"><?php __('Top Dress 1') ?></th>
-                        <th style="width:130px"><?php __('Top Dress 2') ?></th>
-                        <th class="hide" style="width:80px"><?php __('Basal') ?></th>
-                        <th class="hide" style="width:80px"><?php __('Top Dress 1') ?></th>
-                        <th class="hide" style="width:80px"><?php __('Top Dress 2') ?></th>
-                    </tr>
-                    <tr>
-                        <td id="adv2fld1"></td>
-                        <td id="adv2fldp"></td>
-                        <td id="adv2fldf"></td>
-                        <td id="adv2fld2"></td>
-                        <td id="adv2fld3" style=text-align:right"></td>
-                        <td id="adv2fld4"></td>
-                        <td id="adv2fld5"></td>
-                        <td id="adv2fld6"></td>
-                        <td id="adv2fld7" class="hide"></td>
-                        <td id="adv2fld8" class="hide"></td>
-                        <td id="adv2fld9" class="hide"></td>
-                    </tr>
-                    <tr>
-                        <td id="adv2misc" colspan="9"></td>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="highest-compare-diff" class="disabled-view">
-            3. Rainfed rice yield of <span id="highest-compare-diff-seta"></span> is <span id="highest-compare-diff-yld"></span> t/ha higher than <span id="highest-compare-diff-setb"></span> for crops that are sown in <span id="highest-compare-diff-date"></span>
-        </div>
-
-        <h2 id="advisory_anchor" class="title" style="font-weight: 700; color:#547e1a"><?php __('Advisory') ?></h2>
-
-        <div id="weather-advisory-div" class="disabled-view">
-            <h3><?php __('Weather Advisory') ?></h3>
-            <table id="rain-advisory" class="table" style="width:770px;">
-                <thead>
-                    <tr style="background-color: #ffffff;height:3px;">
-                        <th style="width:70px"></th>
-                        <th style="width:350px"></th>
-                        <th style="width:350px"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="rainadv-twocc" style="background-color: #a9a9a9;">
-                        <th>&nbsp;</th>
-                        <th><span class="label label-info">1</span> <?php __('First crop') ?></th>
-                        <th><span class="label label-warning">2</span> <?php __('Second Crop') ?></th>
-                    </tr>
-                    <tr style="background-color: #d9ff84">
-                        <td><img class="img-circle" src="images/advisory01.png" style="width:50px;height:50px" /></td>
-                        <td><span id="f-year"></span> <?php __('Total rainfall is') ?> <a href="javascript:launch_help('q1')"><span id="f-rain"></span></a></td>
-                        <td class="rainadv-twocc"><span id="f-year2"></span> <?php __('Total rainfall is') ?> <a href="javascript:launch_help('q1')"><span id="f-rain2"></span></a></td>
-                    </tr>
-                    <tr>
-                        <td><img class="img-circle" src="images/advisory02.png" style="width:50px;height:50px" /></td>
-                        <td><a href="javascript:launch_help('q2')"><?php __('Onset of rain is on ') ?></a> <span id="rain-onset"></span></td>
-                        <td class="rainadv-twocc"><a href="javascript:launch_help('q2')"><?php __('Onset of rain is on ') ?></a> <span id="rain-onset2"></span></td>
-                    </tr>
-                    <tr style="background-color: #d9ff84">
-                        <td><img class="img-circle" src="images/advisory03.png" style="width:50px;height:50px" /></td>
-                        <td><a href="javascript:launch_help('q3')"><?php __('Expected flooding dates:') ?></a><br /> <span id="wet-dates"></span></td>
-                        <td class="rainadv-twocc"><a href="javascript:launch_help('q3')"><?php __('Expected flooding dates:') ?></a><br /> <span id="wet-dates2"></span></td>
-                    </tr>
-                    <tr>
-                        <td><img class="img-circle" src="images/advisory04.png" style="width:50px;height:50px" /></td>
-                        <td><a href="javascript:launch_help('q4')"><?php __('Expected drought dates:') ?></a><br /> <span id="dry-dates"></span></td>
-                        <td class="rainadv-twocc"><a href="javascript:launch_help('q4')"><?php __('Expected drought dates:') ?></a><br /> <span id="dry-dates2"></span></td>
-                    </tr>
-                    <tr style="height:3px">
-                        <td colspan="2" style="background-color: #d9ff84"></td>
-                        <td class="rainadv-twocc" style="background-color: #d9ff84"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h3><?php __('Weather Chart') ?></h3>
-        <div id="chart2" class="chart"></div>
-
-        <h3><?php __('Calendar') ?></h3>
-        <table id="opt-planting2" class="table table-bordered table-condensed table-dss">
-            <thead>
-                <tr style="background-color: #567B11">
-                    <th rowspan="2" style="width:120px"><?php __('Crop') ?></th>
-                    <th rowspan="2" style="width:105px"><?php __('Sowing Date') ?></th>
-                    <th rowspan="2" class="alldates" style="width:90px"><?php __('Panicle Init.') ?></th>
-                    <th rowspan="2" class="alldates" style="width:90px"><?php __('Flowering') ?></th>
-                    <th rowspan="2" style="width:105px"><?php __('Harvest Date') ?></th>
-                    <th rowspan="2" style="width:50px;text-align:right"><?php __('Yield') ?><br />(t/ha)</th>
-                    <th colspan="3" style="text-align:center"><?php __('Fertilizer Schedule') ?></th>
-                    <th colspan="3" class="npkamt" style="width:250px;text-align:center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
-                </tr>
-                <tr style="background-color: #567B11">
-                    <th style="width:145px"><?php __('Basal') ?></th>
-                    <th style="width:145px"><?php __('Top Dress 1') ?></th>
-                    <th style="width:145px"><?php __('Top Dress 2') ?></th>
-                    <th class="npkamt" style="width:80px"><?php __('Basal') ?></th>
-                    <th class="npkamt" style="width:80px"><?php __('Top Dress 1') ?></th>
-                    <th class="npkamt" style="width:80px"><?php __('Top Dress 2') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
-        <h3><?php __("Farmer's Information") ?></h3>
-        <table id="farm-info-table" class="table table-bordered table-condensed table-dss">
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Farm size') ?></td>
-                <td>
-                    <div class="input-append">
-                        <input class="form-control" id="farm-size" type="text" style="width:35px" value="1" />
-                        <span class="add-on">ha.</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Number of family members') ?></td>
-                <td>
                     <div class="form-group">
-                    <span class="help-inline">0-14 yrs. old</span> <input class="form-control" id="family-num-young" type="text" style="width:35px" value="2" />
-                    <span class="help-inline">15+ yrs. old</span> <input class="form-control" id="family-num-old" type="text" style="width:35px" value="2" />
+                        <label for="cs2_type_year"><?php __('Year') ?></label>
+                        <div class="row">
+                            <div class="col-md-auto">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="type-year-pre">Historical</span>
+                                    </div>
+                                    <select class="form-control" name="cs2_type_year" id="cs2_type_year">
+                                        <option value=""><?php __('Year') ?> &raquo;</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </td>
-            </tr>
-        </table>
 
-        <h3><?php __('Supplementary Irrigation') ?></h3>
-        <table id="water-reqt-table" class="table table-bordered table-condensed table-dss">
-            <tr style="background-color: #567B11">
-                <th style="width:290px">&nbsp;</th>
-                <th style="width:290px"><span class="label label-info">1</span> First crop</th>
-                <th style="width:290px"><span class="label label-warning">2</span> Second crop</th>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Rice Variety') ?></td>
-                <td><span id="suppl-1-var">IR64</span></td>
-                <td><span id="suppl-2-var">IR64</span></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Total Rainfall') ?></td>
-                <td><span id="suppl-1-1">0</span> mm</td>
-                <td><span id="suppl-2-1">0</span> mm</td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Water requirement') ?></td>
-                <td><span id="suppl-1-2">0</span> mm (<span id="suppl-1-method">0</span>)</td>
-                <td><span id="suppl-2-2">0</span> mm (<span id="suppl-2-method">0</span>)</td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Water deficit') ?></td>
-                <td><span id="suppl-1-3">0</span> mm</td>
-                <td><span id="suppl-2-3">0</span> mm</td>
-            </tr>
-            <tr>
-                <td colspan="3" style="font-weight: 700"><?php __('Water pump info') ?></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Pump discharge rate') ?></td>
-                <td colspan="2">
-                    <div class="input-append">
-                        <input class="form-control" id="pump-rate" type="text" style="width:35px" value="20" />
-                        <span class="add-on">L / sec</span>
+                    <div class="cs2_recommend">
+                        <legend><?php echo __('Select Rice Variety Combination') ?></legend>
+
+                        <div id="combi-preview" class="card mb-2">
+                            <div class="card-body">
+                                <img id="fakeimg01" class="img-fluid" src="images/fake01.jpg" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="cs2_variety1"><?php echo __('Variety for first crop') ?></label>
+                            <select class="form-control" name="cs2_variety1" id="cs2_variety1">
+                                <option value=""><?php __('Variety') ?> &raquo;</option>
+                            </select>
+                            <div id="variety-info-1" class="variety-info"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="cs2_variety2"><?php echo __('Variety for second crop') ?></label>
+                            <select class="form-control" name="cs2_variety2" id="cs2_variety2">
+                                <option value=""><?php __('Variety') ?> &raquo;</option>
+                            </select>
+                            <div id="variety-info-2" class="variety-info"></div>
+                        </div>
+
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel consumption<br />rate') ?></td>
-                <td colspan="2">
-                    <div class="input-append">
-                        <input class="form-control" id="fuel-rate" type="text" style="width:35px" value="1" />
-                        <span class="add-on">L / hr</span>
+
+                    <div class="cs2_custom">
+                        <legend><?php echo __('Advisory Options') ?></legend>
+
+                        <div id="grain-yield-preview" class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo __('Grain Yield Preview') ?></h5>
+                                <img id="fakeimg03" class="img-fluid" src="images/fake02.jpg" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="cs2_fertil0"><?php echo __('Fertilizer Application') ?></label>
+                            <select class="form-control" name="cs2_fertil0" id="cs2_fertil0" size="<?php echo $fertoptscount ?>">
+                                <?php foreach ($fertopts as $opts) : ?>
+                                    <option value="<?php echo $opts[0] ?>" <?php echo ($opts[0] == '') ? 'class="select-extra"' : '' ?> <?php echo (dss_utils::getLastSelectValues('fert') == $opts[0]) ? 'selected="selected"' : '' ?> ><?php echo $opts[1] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="cs2_month1"><?php echo __('First crop sowing date') ?></label>
+                            <select class="form-control" name="cs2_month1" id="cs2_month1">
+                                <option value=""><?php __('Sowing Date') ?> &raquo;</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="cs2_month2"><?php echo __('2nd crop sowing date') ?></label>
+                            <select class="form-control" name="cs2_month2" id="cs2_month2">
+                                <option value=""><?php __('Sow Date') ?> &raquo;</option>
+                            </select>
+                        </div>
+
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel Price') ?></td>
-                <td colspan="2">
-                    <div class="input-append">
-                        <input class="form-control" id="fuel-price" type="text" style="width:50px" value="9300" />
-                        <span class="add-on currency-name"></span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" style="font-weight: 700"><?php __('Guidelines') ?></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Schedule') ?></td>
-                <td id="suppl-1-sched">Drought period (5-6 day interval)</td>
-                <td id="suppl-2-sched">Drought period (5-6 day interval)</td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Amount of time needed<br />to irrigate deficit') ?></td>
-                <td id="suppl-1-4">(55 hr/ha) X (1 ha) = 55 hr</td>
-                <td id="suppl-2-4">(55 hr/ha) X (1 ha) = 55 hr</td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel consumption') ?></td>
-                <td id="suppl-1-5">0 L</td>
-                <td id="suppl-2-5">0 L</td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Fuel cost') ?></td>
-                <td id="suppl-1-6">0 Pesos</td>
-                <td id="suppl-2-6">0 Pesos</td>
-            </tr>
-        </table>
 
-        <h3><?php __('Total Production') ?></h3>
+                    <button id="show" class="btn" type="submit"><i class="fas fa-chart-area"></i> <?php __('Show Advisory') ?></button>
+                    <button id="showcustom" class="btn" type="button"><i class="fas fa-wrench"></i> <?php __('... More Options') ?></button>
 
-        <table id="total-production-table">
-            <tr>
-                <td style="text-align:center;padding:5px">
-                    <p style="padding:0;margin-bottom: 5px">
-                        Grain Yield for<br />
-                        <span class="label label-info">1</span> first crop is <span id="grain_yield1" style="font-weight: 700"></span> t/ha
-                    </p>
-                    <div id="rice-sack1" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
-                </td>
-                <td style="text-align:center;padding: 0 20px 0 20px;font-size: 30px;font-weight: 700">
-                    <img src="images/plus.jpg" style="width:45px;height:45px;border:none" />
-                </td>
-                <td style="text-align:center;padding:5px">
-                    <p style="padding:0;margin-bottom: 5px">
-                        Grain Yield for<br />
-                        <span class="label label-warning">2</span> second crop is <span id="grain_yield2" style="font-weight: 700"></span> t/ha
-                    </p>
-                    <div id="rice-sack2" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
-                </td>
-                <td style="text-align:center;padding: 0 20px 0 20px;font-size: 30px;font-weight: 700">
-                    <img src="images/equals.png" style="width:80px;height:100px;border:none" />
-                </td>
-                <td style="text-align:center;padding:5px;margin:auto">
-                    <p style="padding:0;margin:0;font-weight:700">TOTAL YIELD</p>
-                    <p style="line-height:30px;font-size:24px;font-weight:700">
-                        <span id="total_grain_yield"></span> t/ha
-                    </p>
-                </td>
-            </tr>
-        </table>
+                </form>
 
-        <table id="farmer-advisory-table" class="table table-bordered table-condensed table-dss">
-            <tr style="background-color: #567B11">
-                <th style="width:290px">&nbsp;</th>
-                <th style="width:290px"><span class="label label-info">1</span> First crop (t)</th>
-                <th style="width:290px"><span class="label label-warning">2</span> Second crop (t)</th>
-                <th style="width:290px">TOTAL (t)</th>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Actual production') ?></td>
-                <td><span id="actual-yield-1">0</span></td>
-                <td><span id="actual-yield-2">0</span></td>
-                <td><span id="actual-yield-3">0</span></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Family consumption') ?></td>
-                <td><span id="yield-consume-1">0</span></td>
-                <td><span id="yield-consume-2">0</span></td>
-                <td><span id="yield-consume-3">0</span></td>
-            </tr>
-            <tr>
-                <td style="font-weight: 700;background-color: #d9ff84"><?php __('Surplus') ?></td>
-                <td><span id="yield-surplus-1">0</span></td>
-                <td><span id="yield-surplus-2">0</span></td>
-                <td><span id="yield-surplus-3">0</span></td>
-            </tr>
-        </table>
-
-<?php if (_opt(sysoptions::_OPT_SHOW_DATAGRID)) : ?>
-            <div id="rawcomputation">
-                <h2>Raw Data and Computations</h2>
-                <div class="alert"><i class="icon-warning-sign"> </i>
-                    CONFIDENTIAL INFORMATION: For Internal use only!. Make sure this is not shown during demonstration.
-                </div>
-                <h3>Chart Data</h3>
-                <div id="datagrid1" class="datagrid-dss"></div>
-                <h3>Rainfall Schedule</h3>
-                <div id="raw_rain" class="datagrid-dss"></div>
             </div>
-<?php endif; ?>
+        </div>
 
-    </div>
+        <div class="alert alert-danger">
+            <span class="fa-stack">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+            </span>
+            <span id="dss-error-box">error message here</span>
+        </div>
 
-</div>
+        <div id="homeimages" class="card">
+            <div class="card-body text-center">
+                <img src="images/home02.jpg" />
+            </div>
+        </div>
 
-<!-- TEMPLATE: Fertilizer Schedule -->
-<div id="fert_sched_template3" class="html-template"></div>
-<!-- TEMPLATE: Observed Rainfall -->
-<div id="fert_sched_template2" class="html-template">
-    <p><b>Observed Rainfall</b></p>
-    <table class="table table-bordered table-condensed" style="width:440px">
-        <thead>
-            <tr style="background-color: #8CB730">
-                <th style="width:210px">Date</th>
-                <th style="width:150px">Rainfall (mm/decade)</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-<!-- TEMPLATE: Variety Info -->
-<div id="variety-info-template" class="html-template">
-    <h4><i class="icon-book"></i> Info on {{variety_name}}:</h4>
-    <p>
-        &bull; Maturity: {{maturity}} days ({{maturity_grp}})<br />
-        &bull; Yield Average: {{yield_avg}} t.<br />
-        &bull; Yield Potential: {{yield_potential}} t.
-    </p>
-</div>
+        <div id="advisory">
+
+            <h2 class="title">Dataset</h2>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-auto"><?php __('Location') ?></div>
+                        <div class="col"><span id="adv-location"></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto"><?php __('Year') ?></div>
+                        <div class="col"><span id="adv-year"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- START: two calendar -->
+            <div id="twocropcal">
+
+                <h2 class="title">Optimum sowing dates for two cropping seasons</h2>
+
+                <div class="table-responsive">
+                    <table id="twocropcalbest" class="table table-bordered table-condensed">
+                        <thead>
+                            <tr>
+                                <th colspan="4"><span class="badge badge-info">First crop</span></th>
+                                <th colspan="4"><span class="badge badge-warning">Second crop</span></th>
+                                <th rowspan="2" style="width:80px">Total<br />Yield(t/ha)</th>
+                                <th rowspan="2" style="width:100px;text-align:center">Advisory</th>
+                            </tr>
+                            <tr>
+                                <th style="width:200px">Variety</th>
+                                <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
+                                <th style="width:150px">Sowing /<br />Harvest</th>
+                                <th style="width:100px">Yield<br />(t/ha)</th>
+                                <th style="width:200px">Variety</th>
+                                <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
+                                <th style="width:150px">Sowing /<br />Harvest</th>
+                                <th style="width:100px">Yield<br />(t/ha)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- END: two calendar -->
+
+            <h2 id="advisory_anchor" class="title"><?php __('Advisory') ?></h2>
+
+            <!-- START: calendar details -->
+            <h3><?php __('Calendar') ?></h3>
+            <div class="chartdiv table-responsive mb-3">
+                <table class="table table-sm">
+                    <tr>
+                        <td>
+                            <div id="chart2" class="chart mb-2"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="table-responsive">
+                <table id="opt-planting2" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width:120px"><?php __('Crop') ?></th>
+                            <th rowspan="2" style="width:105px"><?php __('Sowing Date') ?></th>
+                            <th rowspan="2" class="alldates" style="width:90px"><?php __('Panicle Init.') ?></th>
+                            <th rowspan="2" class="alldates" style="width:90px"><?php __('Flowering') ?></th>
+                            <th rowspan="2" style="width:105px"><?php __('Harvest Date') ?></th>
+                            <th rowspan="2" style="width:50px;text-align:right"><?php __('Yield') ?><br />(t/ha)</th>
+                            <th colspan="3" style="text-align:center"><?php __('Fertilizer Schedule') ?></th>
+                            <th colspan="3" class="npkamt" style="width:250px;text-align:center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
+                        </tr>
+                        <tr>
+                            <th style="width:145px"><?php __('Basal') ?></th>
+                            <th style="width:145px"><?php __('Top Dress 1') ?></th>
+                            <th style="width:145px"><?php __('Top Dress 2') ?></th>
+                            <th class="npkamt" style="width:80px"><?php __('Basal') ?></th>
+                            <th class="npkamt" style="width:80px"><?php __('Top Dress 1') ?></th>
+                            <th class="npkamt" style="width:80px"><?php __('Top Dress 2') ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <!-- END: calendar details -->
+
+            <!-- START: farmers details -->
+            <h3><?php __("Farmer's Information") ?></h3>
+
+            <div id="farm-info-table" class="card mb-3">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label class="control-label" for="farm-size"><?php echo __('Farm size') ?></label>
+                        <div class="input-group">
+                            <input class="form-control" id="farm-size" type="text" value="1" />
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">ha.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="family-num-young""><?php echo __('Number of family members') ?></label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">0-14 yrs. old</div>
+                            </div>
+                            <input class="form-control" id="family-num-young" type="text" value="2" />
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">15+ yrs. old</div>
+                            </div>
+                            <input class="form-control" id="family-num-old" type="text" value="2" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END: farmers details -->
+
+            <!-- START: irrigation -->
+            <h3><?php __('Supplementary Irrigation') ?></h3>
+
+            <div class="table-responsive">
+                <table id="water-reqt-table" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col"><span class="badge badge-info">First crop</span></th>
+                            <th scope="col"><span class="badge badge-warning">Second crop</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php __('Rice Variety') ?></th>
+                            <td><span id="suppl-1-var"></span></td>
+                            <td><span id="suppl-2-var"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Total Rainfall') ?></th>
+                            <td><span id="suppl-1-1">0</span> mm</td>
+                            <td><span id="suppl-2-1">0</span> mm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Water requirement') ?></th>
+                            <td><span id="suppl-1-2">0</span> mm (<span id="suppl-1-method">0</span>)</td>
+                            <td><span id="suppl-2-2">0</span> mm (<span id="suppl-2-method">0</span>)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Water deficit') ?></th>
+                            <td><span id="suppl-1-3">0</span> mm</td>
+                            <td><span id="suppl-2-3">0</span> mm</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="3"><?php __('Water pump info') ?></th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+
+                                <div class="form-group">
+                                    <label class="control-label" for="pump-rate"><?php echo __('Pump discharge rate') ?></label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="pump-rate" type="text" value="20" />
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">liters / second</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="fuel-rate"><?php echo __('Fuel consumption rate') ?></label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="fuel-rate" type="text" value="1" />
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">liters / hour</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label" for="fuel-price"><?php echo __('Fuel Price') ?></label>
+                                    <div class="input-group">
+                                        <input class="form-control" id="fuel-price" type="text" value="9300" />
+                                        <div class="input-group-prepend">
+                                            <div id="currency-name" class="input-group-text">rupiah</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="3"><?php __('Guidelines') ?></th>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Schedule') ?></th>
+                            <td id="suppl-1-sched">Drought period (5-6 day interval)</td>
+                            <td id="suppl-2-sched">Drought period (5-6 day interval)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Amount of time needed<br />to irrigate deficit') ?></th>
+                            <td id="suppl-1-4">(55 hr/ha) X (1 ha) = 55 hr</td>
+                            <td id="suppl-2-4">(55 hr/ha) X (1 ha) = 55 hr</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Fuel consumption') ?></th>
+                            <td id="suppl-1-5">0 L</td>
+                            <td id="suppl-2-5">0 L</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php __('Fuel cost') ?></th>
+                            <td id="suppl-1-6">0 Pesos</td>
+                            <td id="suppl-2-6">0 Pesos</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--END: irrigation -->
+
+                <!-- START: summary -->
+                <h3><?php __('Total Production') ?></h3>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        <div class="table-responsive-sm">
+                            <table id="total-production-table">
+                                <tr>
+                                    <td>
+                                        <p>
+                                            Grain Yield for<br />
+                                            <span class="badge badge-info">first crop</span> is <span id="grain_yield1" style="font-weight: 700"></span> t/ha
+                                        </p>
+                                        <div id="rice-sack1" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-plus-circle"></i>
+                                    </td>
+                                    <td>
+                                        <p>
+                                            Grain Yield for<br />
+                                            <span class="badge badge-warning">second crop</span> is <span id="grain_yield2" style="font-weight: 700"></span> t/ha
+                                        </p>
+                                        <div id="rice-sack2" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-arrow-alt-circle-right"></i>
+                                    </td>
+                                    <td>
+                                        <p>TOTAL YIELD</p>
+                                        <p>
+                                            <span id="total_grain_yield"></span> t/ha
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="farmer-advisory-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">&nbsp;</th>
+                                <th scope="col"><span class="badge badge-info">First crop</span> (t)</th>
+                                <th scope="col"><span class="badge badge-warning">Second crop</span> (t)</th>
+                                <th scope="col">TOTAL (t)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><?php __('Actual production') ?></th>
+                                <td><span id="actual-yield-1">0</span></td>
+                                <td><span id="actual-yield-2">0</span></td>
+                                <td><span id="actual-yield-3">0</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php __('Family consumption') ?></th>
+                                <td><span id="yield-consume-1">0</span></td>
+                                <td><span id="yield-consume-2">0</span></td>
+                                <td><span id="yield-consume-3">0</span></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><?php __('Surplus') ?></th>
+                                <td><span id="yield-surplus-1">0</span></td>
+                                <td><span id="yield-surplus-2">0</span></td>
+                                <td><span id="yield-surplus-3">0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- END: summary -->
+
+            </div>
+
+            <div id="width-ref">&nbsp;</div>
+
+
+        </div>
+</section>
 
 
 
