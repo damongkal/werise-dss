@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php $lang_choice = language::getInstance()->getLang(); ?>
+    <?php $lang_choice = language::getInstance()->getLang(); ?>
     <head>
 
         <meta charset="utf-8">
@@ -76,7 +76,7 @@
         <section id="bread-crumbs">
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-12 col-md-6">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="http://irri.org">IRRI</a></li>
@@ -85,7 +85,7 @@
                             </ol>
                         </nav>
                     </div>
-                    <div id="btn-group-top" class="col">
+                    <div id="btn-group-top" class="col-sm-12 col-md-6">
                         <div class="btn-group" role="group">
                             <div class="btn-group" role="group">
                                 <button id="btn-select-lang" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,7 +93,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="btn-select-lang">
                                     <?php foreach (language::getLangs() as $lang_id => $lang_name): ?>
-                                    <a class="dropdown-item" href="index.php?lang=en"><span class="flag-icon flag-icon-<?php echo language::convertToCountry($lang_id) ?>"></span> <?php echo $lang_name ?></a>
+                                        <a class="dropdown-item" href="index.php?lang=en"><span class="flag-icon flag-icon-<?php echo language::convertToCountry($lang_id) ?>"></span> <?php echo $lang_name ?></a>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
@@ -109,6 +109,18 @@
                 </div>
             </div>
         </section>
+
+        <section id="werise-error-div" class="hide">
+            <div class="container">
+                <div class="alert alert-danger">
+                    <span class="fa-stack">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <span id="werise-error-msg">error message here</span>
+                </div>     
+            </div>
+        </section>        
 
         -content-
 

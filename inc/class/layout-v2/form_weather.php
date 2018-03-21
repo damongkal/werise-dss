@@ -104,8 +104,6 @@ $all_country = werise_stations_country::getAll();
             </div>
         </div>
 
-        <div id="dss-error-box" class="alert alert-error alert-fixed"></div>
-
         <div id="homeimages" class="card">
             <div class="card-body text-center">
                 <img src="images/home01-aug2015.gif" />
@@ -116,13 +114,15 @@ $all_country = werise_stations_country::getAll();
 
             <div id="wvar_chart1" class="chartdiv mb-3">
                 <h3><?php echo _('Chart') . ' : ' . _t('Rainfall') ?></h3>
-                <table class="table table-sm table-responsive">
-                    <tr>
-                        <td>
-                            <div id="chart1" class="chart mb-2"></div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="table-responsive-sm">
+                    <table class="table table-sm">
+                        <tr>
+                            <td>
+                                <div id="chart1" class="chart mb-2"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>    
                 <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
                 <img class="img-fluid" src="images/chartdef04.jpg" />
             </div>

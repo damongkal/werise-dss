@@ -48,11 +48,11 @@ var weriseApp = {
     getVarietyInfo: function () {
         return this.varietyInfo;
     },
-    setAjaxCache: function (url, data) {
+    setAjaxCache: function (data) {
         var idx = 0;
         this.ajaxCache[idx] = data;
     },
-    getAjaxCache: function (url) {
+    getAjaxCache: function () {
         var idx = 0;
         return this.ajaxCache[idx];
     },
@@ -67,7 +67,15 @@ var weriseApp = {
             console.log(typeof obj);
             console.log(obj);
         }
-    }
+    },
+    isJson: function (str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }            
 };
 
 /**

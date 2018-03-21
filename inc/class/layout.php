@@ -12,7 +12,7 @@ class layout
         
         // load layout
         ob_start();        
-        if (in_array($pageaction,array('form_index','form_about','form_terms','form_weather','xform_oryza'))) {
+        if (in_array($pageaction,array('form_index','form_about','form_terms','form_weather','form_oryza'))) {
             $this->layout_dir = 'layout-v2';
         } else {
             $this->layout_dir = 'layout';
