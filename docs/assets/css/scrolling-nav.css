@@ -142,7 +142,9 @@ select[name="cs2_variety1"], select[name="cs2_variety2"], select[name="cs2_month
 select[name="cs2_fertil0"] {
     width: 250px;
 }
-
+.chart {
+	margin-bottom: 150px;
+}
 @media (min-width: 600px) {
     #mainNav {
         background: #e9e9e9 url('headerbg.jpg') repeat-x 0 -16px !important;

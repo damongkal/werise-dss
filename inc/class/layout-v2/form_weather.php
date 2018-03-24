@@ -99,7 +99,7 @@ $all_country = werise_stations_country::getAll();
                         <table class="table table-sm">
                             <tr>
                                 <td>
-                                    <div id="chart<?php echo $key ?>" class="chart mb-2"></div>
+                                    <div id="chart<?php echo $key ?>" class="chart"></div>
                                 </td>
                             </tr>
                         </table>
