@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-sm" onclick="javascript:window.print()"><i class="fas fa-print"></i> Print</button>
-                            <?php if (_opt(sysoptions::_ADM_SHOW_MENU) || (dss_auth::getUsername() === 'admin')) : ?>
+                            <?php if (_ADM_ENV!=='PROD' || _opt(sysoptions::_ADM_SHOW_MENU) || (dss_auth::getUsername() === 'admin')) : ?>
                                 <button class="btn btn-sm" onclick="javascript:window.location.assign('admin.php')"><i class="fas fa-cog"></i> Admin</a></button>
                             <?php endif; ?>    
                             <?php if (dss_auth::getUsername() !== '') : ?>
@@ -275,6 +275,7 @@
 
         <section id="post-footer" style="background-color: #282828">
             <div class="container">
+                <div id="width-ref">&nbsp;</div>                
                 <div class="row">
                     <div class="col-lg-12 py-2">
                         <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank"><img src="images/layout/creative_commons.png" class="cc" width="149" height="40" style="float: right;" /></a>

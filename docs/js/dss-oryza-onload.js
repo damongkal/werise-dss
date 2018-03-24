@@ -130,13 +130,13 @@ var OryzaFormV1 = {
         var country = this.getCountry();
         if (country === '')
         {
-            showErrorChart(_t('Please select Country.'));
+            weriseApp.showError(_t('Please select Country.'));
             return false;
         }
         var station_id = this.getStation();        
         if (station_id <= 0)
         {
-            showErrorChart(_t('Please select Station.'));
+            weriseApp.showError(_t('Please select Station.'));
             return false;
         }        
         for (var i = 0 ; i < this.comparesets.length; i++) {
@@ -153,7 +153,7 @@ var OryzaFormV1 = {
         var fertil = this.getFertil(setno);        
         if (fertil === '2')
         {
-            showErrorChart('Site Specific Fertilizer Recommendation is not yet available. Please visit <a href="http://webapps.irri.org/nm/id" target="_blank">Nutrient Manager for Rice</a> for more information.');
+            weriseApp.showError('Site Specific Fertilizer Recommendation is not yet available. Please visit <a href="http://webapps.irri.org/nm/id" target="_blank">Nutrient Manager for Rice</a> for more information.');
             return false;
         }
                 
@@ -167,7 +167,7 @@ var OryzaFormV1 = {
         var type_year = this.getYear(setno);
         if (setno === '' && type_year === '')
         {
-            showErrorChart(_t('Please select Year') + ' ' + _t('for Set') + ' ' + set_number);
+            weriseApp.showError(_t('Please select Year') + ' ' + _t('for Set') + ' ' + set_number);
             return false;
         }
 
@@ -175,14 +175,14 @@ var OryzaFormV1 = {
         var variety = this.getVariety(setno);
         if (type_year !== '' && variety === '')
         {
-            showErrorChart(_t('Please select Variety') + ' ' + _t('for Set') + ' ' + set_number);
+            weriseApp.showError(_t('Please select Variety') + ' ' + _t('for Set') + ' ' + set_number);
             return false;
         }
         
         // check fertil if year is supplied
         if (type_year !== '' && fertil === '')
         {
-            showErrorChart(_t('Please select Fertilization') + ' ' + _t('for Set') + ' ' + set_number);
+            weriseApp.showError(_t('Please select Fertilization') + ' ' + _t('for Set') + ' ' + set_number);
             return false;
         }
 

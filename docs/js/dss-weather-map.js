@@ -71,7 +71,7 @@ function draw_google_maps(country, source) {
         success: function (data) {
             if (data===false)
             {
-                showErrorChart('');
+                weriseApp.showError('google map error');
                 return;
             }
             if(data!=''){
@@ -122,7 +122,7 @@ function draw_google_maps2(markers) {
     map.fitBounds(bounds);
     
     google.maps.event.addListenerOnce(map, 'idle', function(){
-        //showErrorChart('map done');
+        //weriseApp.showError('map done');
     });    
 }
 

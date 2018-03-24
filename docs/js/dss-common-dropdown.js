@@ -6,6 +6,7 @@ function DropDownBase()
 {
     this.buildAll = function(data, item_id, item_label, defaultval)
     {
+        weriseApp.dbg('DropDownBase', 'args', item_id+' '+defaultval);        
         // check if multi-level
         var multi = 0;
         jQuery.each(data, function(i) {
@@ -22,14 +23,11 @@ function DropDownBase()
             buildAll2(data, item_id, item_label, defaultval);
             return;
         }
-
-        showLoader(item_id);
         var dropdown = initOptions(item_id,item_label);
         if (data===false)
         {
             return;
         }
-
         var newitem;
         jQuery.each(data, function(i){
             newitem = newOption(data[i][1],data[i][0]);
@@ -39,7 +37,6 @@ function DropDownBase()
             }
             dropdown.append(newitem);
         });
-        hideLoader(item_id);
         jQuery(item_id).trigger('change');
     };
     /**
@@ -57,7 +54,6 @@ function DropDownBase()
         {
             return;
         }
-        showLoader(item_id);
         var newitem, newgroup, lvl, indentlvl, optlabel = "", optvalue = "";
         var new_default = '';
         jQuery.each(data, function(i){
@@ -184,7 +180,7 @@ var DropDown = {
         url.addArg('wtype',wtype);
         weriseApp.ajax(url.getUrl()).done(function(data) {
             var dd = new DropDownBase;
-            dd.buildAll(data, item_id, _t('Variety'), weriseApp.getStoredVariety());
+            dd.buildAll(data, item_id, '', weriseApp.getStoredVariety());
         });
     },
     /**
@@ -224,7 +220,7 @@ var DropDown = {
                 last_subregion_id = subregion_id;
             });
             var dd = new DropDownBase;
-            dd.buildAll(newdata, item_id, _t('Location'), weriseApp.getStoredStation());
+            dd.buildAll(newdata, item_id, '', weriseApp.getStoredStation());
         });
     },
     getStationName : function (station_id) {
@@ -276,13 +272,13 @@ var DropDown = {
         });
     },
     makeYear : function(country_key, station_key, dbsource, item_tyear_ids) {
-        weriseApp.dbg('DropDown','args',item_tyear_ids[0]+' '+station_key);
+        weriseApp.dbg('DropDown','args',station_key);
         // reset if no station is selected
         if (station_key==0)
         {
             for (var i = 0; i < item_tyear_ids.length; i++) {
                 var dd = new DropDownBase;
-                dd.buildAll(false, item_tyear_ids[i], _t('Year'), false);
+                dd.buildAll(false, item_tyear_ids[i], '', false);
             }
             return;
         }
@@ -306,7 +302,7 @@ var DropDown = {
             });
             for (var i = 0; i < item_tyear_ids.length; i++) {
                 var dd = new DropDownBase;
-                dd.buildAll(newdata, item_tyear_ids[i], _t('Year'), window.dataselect.wtype+window.dataselect.year);
+                dd.buildAll(newdata, item_tyear_ids[i], '', window.dataselect.wtype+window.dataselect.year);
             }
         });
     },

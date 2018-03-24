@@ -5,7 +5,6 @@ function OryzaChart()
      * @returns {undefined}
      */
     this.showChart = function () {
-        hideErrorChart();
         jQuery('#homeimages').hide();
         getData('#chart1');
     };
@@ -73,7 +72,7 @@ function OryzaChart()
         if (ajaxdata == false)
         {
             hideLoaderChart(item_chart);
-            showErrorChart(_t('No data available.'));
+            weriseApp.showError(_t('No data available.'));
             return;
         }
         

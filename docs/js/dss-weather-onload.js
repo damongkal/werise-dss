@@ -49,7 +49,7 @@ var WeatherForm = {
         // show station select
         jQuery('#location_btn').click(function () {
             jQuery('#location_div').hide();
-            jQuery('#station').show();
+            jQuery(WeatherForm.item_station).show();
         });
 
         // form submission
@@ -102,6 +102,7 @@ var WeatherForm = {
      * submit form
      */
     submitForm: function () {
+        jQuery('.afterload').show();        
         var chart = new WeatherChart();
         chart.showChart();
     },
@@ -109,13 +110,13 @@ var WeatherForm = {
         var country = this.getCountry();
         if (country === '')
         {
-            showErrorChart(_t('Please select Country.'));
+            weriseApp.showError(_t('Please select Country.'));
             return false;
         }
         var station_id = this.getStation();       
         if (station_id <= 0)
         {
-            showErrorChart(_t('Please select Location.'));
+            weriseApp.showError(_t('Please select Location.'));
             return false;
         }
         var type_year = this.getYear();
@@ -123,7 +124,7 @@ var WeatherForm = {
         var wtype = type_year.substr(0, 1);        
         if (year <= 0 || (wtype !== 'r' && wtype !== 'f'))
         {
-            showErrorChart(_t('Please select Year.'));
+            weriseApp.showError(_t('Please select Year.'));
             return false;
         }
         return true;

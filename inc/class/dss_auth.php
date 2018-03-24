@@ -101,6 +101,9 @@ class dss_auth {
     
     public static function logAccess($pageaction)
     {
+        if (_ADM_ENV !== 'PROD') {
+            return;
+        }
         $userid = self::getUserId();
         $ip = 'none';
         if (isset($_SERVER['REMOTE_ADDR']))

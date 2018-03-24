@@ -494,8 +494,8 @@ $all_country = werise_stations_country::getAll();
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Rice Variety') ?></td>
-                <td><span id="suppl-1-var">IR64</span></td>
-                <td><span id="suppl-2-var">IR64</span></td>
+                <td><span id="suppl-1-var"></span></td>
+                <td><span id="suppl-2-var"></span></td>
             </tr>
             <tr>
                 <td style="font-weight: 700;background-color: #d9ff84"><?php __('Total Rainfall') ?></td>

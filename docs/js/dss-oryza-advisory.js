@@ -42,9 +42,7 @@ var OryzaAdvisory = {
         // show calendar
         AllCalendars.showChoice(newcal.dataset_id + '_' + newcal.runnum);
         // show weather chart
-        this.showWeatherChart(newcal);
-        // focus on advisory
-        document.getElementById('advisory_anchor').scrollIntoView();
+        this.showWeatherChart(newcal);        
     },
     showWeatherChart : function (calendar_data) {
         var weather_chart = new OryzaWeatherChart();
@@ -123,15 +121,11 @@ var AllCalendars = {
     makeTable: function (allcropdata)
     {
         this.prot = jQuery("#opt-planting2").find("tbody");
-        var crop = 1, croptitle = '1st';
+        var cropnum = 1;
         for (var k in allcropdata)
         {
-            if (crop > 1)
-            {
-                croptitle = '2nd';
-            }
-            this.addCalendar(croptitle, allcropdata[k]);
-            crop++;
+            this.addCalendar(cropnum, allcropdata[k]);
+            cropnum++;
         }
         if (window.opt_show_npk === false)
         {
@@ -142,20 +136,27 @@ var AllCalendars = {
             jQuery('.alldates').hide();
         }
     },
-    addCalendar: function (croptitle, cropdata)
+    addCalendar: function (cropnum, cropdata)
     {
         var newcal = new CropCalendar;
         newcal.setCalendar(cropdata);
         var fert = new FertilizerSchedule;
         variety_info = CombiListStorage.getVarietyInfo(cropdata.variety,'varcode');
 
+        var tmp2 = '<tr id="calhead_' + newcal.dataset_id + '_' + newcal.runnum + '" class="allcalendar">';
+        tmp2 = tmp2 + '<td colspan="10"><span class="cropnum"></span> &raquo; ';
+        tmp2 = tmp2 + '<strong>Variety:</strong> ' + variety_info.variety_name + ' &bull; ';
+        tmp2 = tmp2 + '<strong>Yield:</strong> ' + newcal.yield.toFixed(2) + ' t/ha';
+        tmp2 = tmp2 + '</td>';
+        tmp2 = tmp2 + '</tr>';
+        this.prot.append(tmp2);
+
         var tmp = '<tr id="calendar_' + newcal.dataset_id + '_' + newcal.runnum + '" class="allcalendar">';
-        tmp = tmp + '<td style="font-weight:700">' + croptitle + ': ' + variety_info.variety_name + '</td>';
         tmp = tmp + '<td>' + formatDate2(newcal.sow_date, '', 'abbr') + '</td>';
         tmp = tmp + '<td class="alldates">' + formatDate2(newcal.panicle_init_date, '', 'abbr') + '</td>';
         tmp = tmp + '<td class="alldates">' + formatDate2(newcal.flower_date, '', 'abbr') + '</td>';
         tmp = tmp + '<td>' + formatDate2(newcal.harvest_date, '', 'abbr') + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + newcal.yield.toFixed(2) + '</td>';
+        //tmp = tmp + '<td style="text-align:right">' + newcal.yield.toFixed(2) + '</td>';
         tmp = tmp + '<td>' + fert.getApplyPeriod(newcal.fert_basal) + '</td>';
         tmp = tmp + '<td>' + fert.getApplyPeriod(newcal.fert_topdress1) + '</td>';
         tmp = tmp + '<td>' + fert.getApplyPeriod(newcal.fert_topdress2) + '</td>';
@@ -166,11 +167,17 @@ var AllCalendars = {
         this.prot.append(tmp);
     },
     showChoice: function (first_idx, second_idx) {
-        // diplay the choice
+        // hide all choices
         jQuery('.allcalendar').hide();
+        // display first crop
+        jQuery('#calhead_' + first_idx + ' .cropnum').addClass('badge').addClass('badge-info').html('First crop');        
+        jQuery('#calhead_' + first_idx).show();
         jQuery('#calendar_' + first_idx).show();
         if (second_idx !== '')
         {
+            // display second crop
+            jQuery('#calhead_' + second_idx + ' .cropnum').addClass('badge').addClass('badge-warning').html('Second crop');
+            jQuery('#calhead_' + second_idx).show();
             jQuery('#calendar_' + second_idx).show();
         }
     }

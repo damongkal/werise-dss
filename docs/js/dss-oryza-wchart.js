@@ -75,8 +75,6 @@ OryzaWeatherChart.prototype = {
             return;
         }
         this.getData();
-
-        hideErrorChart();
     },
     getData: function () {
         var that = this;
@@ -143,13 +141,8 @@ OryzaWeatherChart.prototype = {
             ajaxdata.series.push(this.cropcalendar2);
         }
 
-        // resize chart
-        var scrw = screen.width;
-        if (scrw > 1300)
-        {
-            scrw = 960;
-        }
-        jQuery(item_chart).width(scrw - 0).height('300px');
+        var chartdim = weriseApp.getChartDimensions();
+        jQuery(item_chart).width(chartdim[0] - 30).height(chartdim[1]);
 
         // dataset 
         var wtype = this.wtype;

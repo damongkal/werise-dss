@@ -38,9 +38,9 @@ There is high risk of flooding.
 --lang--
 There is high risk of drought.
 --lang--
-real-time
+Historical
 --lang--
-forecast
+Forecast
 --lang--
 Variety
 --lang--

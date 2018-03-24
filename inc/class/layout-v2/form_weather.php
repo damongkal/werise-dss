@@ -1,7 +1,6 @@
 <?php
 $country_choice = dss_utils::getLastSelectValues('country');
 $all_country = werise_stations_country::getAll();
-
 ?>
 <section id="main-content">
     <div class="container">
@@ -32,14 +31,14 @@ $all_country = werise_stations_country::getAll();
                         </div>
 
                         <div class="col">
-                            <div class="input-group">
+                            <div id="location_div" class="input-group">
                                 <input id="location_name" type="text" class="form-control" disabled="disabled">
-                                <div id="location_div" class="input-group-append">
+                                <div class="input-group-append">
                                     <button id="location_btn" class="btn btn-outline-secondary" type="button"><i class="fas fa-map"></i></button>
                                 </div>
                             </div>
 
-                            <select class="form-control" name="station" id="station">
+                            <select class="form-control hide" name="station" id="station">
                                 <option value="0"><?php __('Location') ?> &raquo;</option>
                             </select>
                         </div>
@@ -64,124 +63,53 @@ $all_country = werise_stations_country::getAll();
 
                     <legend><?php echo __('Weather data') ?></legend>
 
-                    <div class="form-check">
-                        <input class="form-check-input" id="wvar1" name="wvar1" type="checkbox" checked="checked" disabled="1" />
-                        <label class="form-check-label" for="wvar1">
-                            <?php __('Rainfall') ?>
-                        </label>
-                    </div>
+                    <?php foreach ($cls->getWvars() as $key_tmp => $wvar): ?>
+                        <?php $key = $key_tmp + 1; ?>
+                        <div class="form-check">
+                            <input class="form-check-input" id="wvar<?php echo $key ?>" name="wvar<?php echo $key ?>" type="checkbox" <?php if ($key === 1) echo 'checked="checked"' ?> <?php if ($key === 1) echo 'disabled="1"' ?> />
+                            <label class="form-check-label" for="wvar<?php echo $key ?>">
+                                <?php echo $wvar ?>
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
 
-                    <div class="form-check">
-                        <input class="form-check-input" id="wvar2" name="wvar2" class="wvar_show" type="checkbox" />
-                        <label class="form-check-label" for="wvar2">
-                            <?php __('Temperature') ?>
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" id="wvar3" name="wvar3" class="wvar_show" type="checkbox" />
-                        <label class="form-check-label" for="wvar3">
-                            <?php __('Solar Radiation') ?>
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" id="wvar4" name="wvar4" class="wvar_show" type="checkbox" />
-                        <label class="form-check-label" for="wvar4">
-                            <?php __('Early Morning Vapor Pressure') ?>
-                        </label>
-                    </div>
-
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" id="wvar5" name="wvar5" class="wvar_show" type="checkbox" />
-                        <label class="form-check-label" for="wvar5">
-                            <?php __('Wind Speed') ?>
-                        </label>
-                    </div>
-
-                    <button class="btn" id="show" type="submit"><i class="fas fa-chart-area"></i> <?php __('Show Advisory') ?></button>
+                    <button class="btn mt-2" id="show" type="submit"><i class="fas fa-chart-area"></i> <?php __('Show Advisory') ?></button>
                 </form>
             </div>
         </div>
 
-        <div id="homeimages" class="card">
-            <div class="card-body text-center">
-                <img src="images/home01-aug2015.gif" />
+        <div class="row">
+            <div class="col text-center">
+                <figure class="figure jamstec">
+                    <img class="figure-img img-fluid rounded" src="images/ssta.glob.MAM2018.1mar2018.gif" alt="JAMSTEC" />
+                    <figcaption class="figure-caption"><strong>image source:</strong> http://www.jamstec.go.jp/frsgc/research/d1/iod/sintex_f1_forecast.html.en</figcaption>
+                </figure>
             </div>
         </div>
 
-        <div class="afterload">
+        <div class="afterload hide">
+            
+            <h4><?php __('Advisory') ?></h4>
 
-            <div id="wvar_chart1" class="chartdiv mb-3">
-                <h3><?php echo _('Chart') . ' : ' . _t('Rainfall') ?></h3>
-                <div class="table-responsive-sm">
-                    <table class="table table-sm">
-                        <tr>
-                            <td>
-                                <div id="chart1" class="chart mb-2"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>    
-                <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
-                <img class="img-fluid" src="images/chartdef04.jpg" />
-            </div>
-
-            <div id="wvar_chart2" class="chartdiv mb-3">
-                <h3><?php echo _('Chart') . ' : ' . _t('Temperature') ?></h3>
-                <table class="table table-sm table-responsive">
-                    <tr>
-                        <td>
-                            <div id="chart2" class="chart mb-2"></div>
-                        </td>
-                    </tr>
-                </table>
-                <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
-                <img class="img-fluid" src="images/chartdef05.jpg" />
-            </div>
-
-            <div id="wvar_chart3" class="chartdiv mb-3">
-                <h3><?php echo _('Chart') . ' : ' . _t('Solar Radiation') ?></h3>
-                <table class="table table-sm table-responsive">
-                    <tr>
-                        <td>
-                            <div id="chart3" class="chart mb-2"></div>
-                        </td>
-                    </tr>
-                </table>
-                <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
-                <img class="img-fluid" src="images/chartdef05.jpg" />
-            </div>
-
-            <div id="wvar_chart4" class="chartdiv mb-3">
-                <h3><?php echo _('Chart') . ' : ' . _t('Early Morning Vapor Pressure') ?></h3>
-                <table class="table table-sm table-responsive">
-                    <tr>
-                        <td>
-                            <div id="chart4" class="chart mb-2"></div>
-                        </td>
-                    </tr>
-                </table>
-                <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
-                <img class="img-fluid" src="images/chartdef05.jpg" />
-            </div>
-
-            <div id="wvar_chart5" class="chartdiv mb-3">
-                <h3><?php echo _('Chart') . ' : ' . _t('Wind Speed') ?></h3>
-                <table class="table table-sm table-responsive">
-                    <tr>
-                        <td>
-                            <div id="chart5" class="chart mb-2"></div>
-                        </td>
-                    </tr>
-                </table>
-                <p><a href="javascript:launch_help('q4')">chart notes:</a></p>
-                <img class="img-fluid" src="images/chartdef05.jpg" />
-            </div>
+            <?php foreach ($cls->getWvars() as $key_tmp => $wvar): ?>
+                <?php $key = $key_tmp + 1; ?>
+                <div id="wvar_chart<?php echo $key ?>" class="chartdiv mb-3 hide">
+                    <h5><?php echo $wvar ?></h5>
+                    <div class="table-responsive-sm">
+                        <table class="table table-sm">
+                            <tr>
+                                <td>
+                                    <div id="chart<?php echo $key ?>" class="chart mb-2"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div> 
+                </div>
+            <?php endforeach; ?>
 
         </div>
 
-        <div class="afterload">
+        <div class="afterload hide">
 
             <div id="advisory" style="display:none">
                 <h2 class="title" style="font-weight: 700; color:#547e1a"><?php __('Advisory') ?></h2>
@@ -232,7 +160,7 @@ $all_country = werise_stations_country::getAll();
             </div>
         </div>
 
-        <div class="afterload">
+        <div class="afterload hide">
             <?php if (_opt(sysoptions::_OPT_SHOW_DATAGRID)) : ?>
                 <div id="rawcomputation">
                     <h2>Raw Data and Computations</h2>
@@ -246,9 +174,6 @@ $all_country = werise_stations_country::getAll();
                 </div>
             <?php endif; ?>
         </div>
-
-        <div id="width-ref">&nbsp;</div>
-
 
     </div>
 </section>

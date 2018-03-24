@@ -70,7 +70,9 @@ var CombiListStorage = {
  * @type type
  */
 var TwoCropCombination = {
+    prot: false,
     makeTable: function(toprecs,runnums) {
+        this.prot = jQuery("#twocropcalbest").find("tbody");
         var idx, rec, idx2, rec2;
         for (var i=0; i<toprecs.length; i++)
         {
@@ -95,40 +97,39 @@ var TwoCropCombination = {
         });
     },
     addFirstCrop: function(idx, rec, minyld, maxyld) {
-        var prot = jQuery("#twocropcalbest").find("tbody");
-        var tmp = '<tr id="twocrop_'+idx+'" class="twocropall1" style="background-color:#EFEFEF">';
-        tmp = tmp + '<td>' + WeriseTerms.getVarietyLabel(rec.variety) + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + rec.rain_amt.toFixed(1) + '<br />' + rec.rain_code + '</td>';
-        tmp = tmp + '<td>' + formatDate2(rec.sow_date,'','abbr') + '<br />' + formatDate2(rec.harvest_date,'','abbr') + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + rec.yield.toFixed(2) + '</td>';
-        tmp = tmp + '<td colspan="3">&nbsp;</td>';
-        tmp = tmp + '<td style="text-align:right;font-weight:700" colspan="2">' + minyld +' to '+ maxyld + '</td>';
+        var tmp = '<tr id="twocrop_'+idx+'" class="twocropall1">';
+        tmp = tmp + '<td>' + formatDate2(rec.sow_date,'','abbr') + '<br />' + formatDate2(rec.harvest_date,'','abbr') + '</td>';        
         tmp = tmp + '<td>&nbsp;</td>';
+        tmp = tmp + '<td>' + WeriseTerms.getVarietyLabel(rec.variety) + '</td>';
+        tmp = tmp + '<td>' + rec.rain_amt.toFixed(1) + '<br />' + rec.rain_code + '</td>';
+        tmp = tmp + '<td class="text-right">' + rec.yield.toFixed(2) + '</td>';
+        tmp = tmp + '<td>&nbsp;</td>';
+        //tmp = tmp + '<td class="text-right"><strong>' + minyld +' to '+ maxyld + '</strong></td>';
         tmp = tmp + '</tr>';
-        prot.append(tmp);
+        this.prot.append(tmp);
     },
     addSecondCrop: function(idx, idx2, rec, rec2)
     {
-        var prot = jQuery("#twocropcalbest").find("tbody");
         var totalyld = parseFloat(rec.yield) + parseFloat(rec2.yield);
         var tmp = '<tr id="twocrop_'+idx+'_'+idx2+'" class="twocropall2">';
-        tmp = tmp + '<td colspan="4">&nbsp;</td>';
+        tmp = tmp + '<td>&nbsp;</td>';        
+        tmp = tmp + '<td>' + formatDate2(rec2.sow_date,'','abbr') + '<br />' + formatDate2(rec2.harvest_date,'','abbr') + '</td>';        
         tmp = tmp + '<td>' + WeriseTerms.getVarietyLabel(rec2.variety) + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + rec2.rain_amt.toFixed(1) + '<br />' + rec2.rain_code + '</td>';
-        tmp = tmp + '<td>' + formatDate2(rec2.sow_date,'','abbr') + '<br />' + formatDate2(rec2.harvest_date,'','abbr') + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + rec2.yield.toFixed(2) + '</td>';
-        tmp = tmp + '<td style="text-align:right">' + totalyld.toFixed(2) + '</td>';
-        tmp = tmp + '<td style="text-align:center"><a href="javascript:;" role="button" class="btn btn-small btn-success twocropbtn"><i class="icon-zoom-in icon-white"></i> </a></td>';
+        tmp = tmp + '<td>' + rec2.rain_amt.toFixed(1) + '<br />' + rec2.rain_code + '</td>';
+        tmp = tmp + '<td class="text-right">' + rec2.yield.toFixed(2) + '</td>';
+        tmp = tmp + '<td class="text-right">' + totalyld.toFixed(2) + '<br />';
+        tmp = tmp + '<a role="button" class="twocropbtn btn btn-outline-success btn-sm" href="javascript:;"><i class="fas fa-star"></i> Choose</a>';
+        tmp = tmp + '</td>';        
         tmp = tmp + '</tr>';
-        prot.append(tmp);
+        this.prot.append(tmp);
     },
     showChoice: function(first_idx,second_idx)
     {
         // highlight combination
-        jQuery('.twocropall1').css('background-color','#efefef');
-        jQuery('#twocrop_'+first_idx).css('background-color','yellow');
-        jQuery('.twocropall2').css('background-color','#ffffff');
-        jQuery('#twocrop_'+first_idx+'_'+second_idx).css('background-color','yellow');
+        jQuery('.twocropall1').removeClass('table-info');
+        jQuery('#twocrop_'+first_idx).addClass('table-info');
+        jQuery('.twocropall2').removeClass('table-warning');
+        jQuery('#twocrop_'+first_idx+'_'+second_idx).addClass('table-warning');
     }
 };
 
@@ -166,6 +167,9 @@ var CombiListForm = {
     getStation: function () {
         return parseInt(this._get(this.station));
     },
+    getTypeYear: function () {
+        return this._get(this.tyear);
+    },    
     bindEvents: function() {
         // initialize all when country change
         jQuery(this.country).change(function () {
@@ -185,15 +189,20 @@ var CombiListForm = {
 
         // change rice variety when year change
         jQuery(CombiListForm.tyear).change(function() {
-            CombiListForm.populateSowDate1(jQuery(this).val(), CombiListForm.c1date);
+            var typeyear = jQuery(this).val();
+            var year = typeyear.substr(1,4);
+            var tyear = getWeatherType(typeyear.substr(0,1));
+            CombiListForm.populateSowDate1(typeyear, CombiListForm.c1date);
             CombiListForm.makeVarietyData();
-            jQuery('#adv-year').html(jQuery(this).val());
+            jQuery('#adv-year').html(tyear+' '+year);
+            jQuery("#type-year-pre").html(tyear);
         });
 
-        // show variety data
+        // show variety data when variety change
         jQuery(CombiListForm.c1variety).change(function() {
             CombiListForm.showVarietyData(jQuery(CombiListForm.c1variety + ' option:selected').text(),'1');
         });
+        // show variety data when variety change
         jQuery(CombiListForm.c2variety).change(function() {
             CombiListForm.showVarietyData(jQuery(CombiListForm.c2variety + ' option:selected').text(),'2');
         });
@@ -202,6 +211,7 @@ var CombiListForm = {
         jQuery(this.c1date).change(function() {
             CombiListForm.populateSowDate2(jQuery(this).val(), CombiListForm.c2date);
         });
+        
         // two-crop extra parameters
         /*
         jQuery('#showreco').click(function() {
@@ -210,16 +220,18 @@ var CombiListForm = {
             jQuery('#showreco').hide();
             jQuery('#showcustom').hide();
         });*/
+        
+        // show custom parameters
         jQuery('#showcustom').click(function() {
             jQuery('input[name='+CombiListForm.adv_type+']').val('custom');
             jQuery('.cs2_custom').show();
             jQuery('#showcustom').hide();
         });
         // show two-crop calendar list
-        jQuery('.showcombi').click(function() {
-            jQuery('#homeimages').hide();
+        jQuery('#showcombi').click(function() {
             if (CombiListForm.validateForm())
             {
+                jQuery('#crop-advisory-form').hide();                
                 CombiListForm.showCombinations();
             }
         });
@@ -306,7 +318,7 @@ var CombiListForm = {
         // populate location name
         var location_name = DropDown.getStationName(station_id);
         jQuery("#location2_name").val(location_name);
-        jQuery("#adv-location").html(location_name+', '+BFHCountriesList[this.getCountry()]);
+        jQuery("#adv-location").html(location_name);
 
         // show location placeholder
         jQuery('#location2_div').show();
@@ -321,14 +333,14 @@ var CombiListForm = {
         var country = jQuery(this.country).val();
         if (country==='')
         {
-            this.showError(_t('Please select Country.'));
+            weriseApp.showError(_t('Please select Country.'));
             return false;
         }
         // validate station
         var station_id = parseInt(jQuery(this.station).val()) || 0;
         if (station_id===0)
         {
-            this.showError(_t('Please select Station.'));
+            weriseApp.showError(_t('Please select Station.'));
             return false;
         }
         // validate type-year
@@ -337,12 +349,12 @@ var CombiListForm = {
         var wtype = type_year.substr(0, 1);
         if (year===0)
         {
-            this.showError(_t('Please select Year'));
+            weriseApp.showError(_t('Please select Year'));
             return false;
         }
         if (wtype!=='r' && wtype!=='f')
         {
-            this.showError(_t('Please select Year'));
+            weriseApp.showError(_t('Please select Year'));
             return false;
         }
         var cstype = jQuery('input[name='+this.adv_type+']').val();
@@ -355,38 +367,38 @@ var CombiListForm = {
             var sowdate1 = jQuery(this.c1date).val();
             if (sowdate1==='0')
             {
-                this.showError(_t('Please select Sow Date'));
+                weriseApp.showError(_t('Please select Sow Date'));
                 return false;
             }
             var variety1 = jQuery(this.c1variety).val();
             if (variety1==='')
             {
-                this.showError(_t('Please select Variety'));
+                weriseApp.showError(_t('Please select Variety'));
                 return false;
             }
             var fert1 = jQuery(this.c1fert).val();
             if (fert1==='')
             {
-                this.showError(_t('Please select Fertilizer Application'));
+                weriseApp.showError(_t('Please select Fertilizer Application'));
                 return false;
             }
             // validate variety
             var sowdate2 = jQuery(this.c2date).val();
             if (sowdate2==='0')
             {
-                this.showError(_t('Please select Sow Date'));
+                weriseApp.showError(_t('Please select Sow Date'));
                 return false;
             }
             var variety2 = jQuery(this.c2variety).val();
             if (variety2==='')
             {
-                this.showError(_t('Please select Variety'));
+                weriseApp.showError(_t('Please select Variety'));
                 return false;
             }
             var fert2 = jQuery(this.c2fert).val();
             if (fert2==='')
             {
-                this.showError(_t('Please select Fertilizer Application'));
+                weriseApp.showError(_t('Please select Fertilizer Application'));
                 return false;
             }
         }
@@ -483,7 +495,6 @@ var CombiListForm = {
             url.addArg('c2date',jQuery(this.c2date).val());
             url.addArg('c2fert',jQuery(this.c2fert).val());
         }
-        //showLoaderChart('#chart1');
         weriseApp.ajax(url.getUrl()).done(function(data) {
             CombiListForm.showCombinationsCallBack(data);
         });
@@ -501,15 +512,15 @@ var CombiListForm = {
         var idx = toprecs[0].first.dataset_id+'_'+toprecs[0].first.runnum;
         var idx2 = toprecs[0].second[0].dataset_id+'_'+toprecs[0].second[0].runnum;
         this.showAdvisory(idx,idx2);
+        
         // yield chart
         // showOryzaChart(data.chart_yield);
         //var chart = new OryzaChart();
         //chart.callHighCharts('#chart1',data.chart_yield,'test');
+
         // cleanup display
-        jQuery("#dataselection2").hide();
         jQuery("#twocropcal").show();
         jQuery("#advisory").show();
-        //jQuery(".rainadv-twocc").show();
     },
     showAdvisory: function(first_idx,second_idx)
     {
@@ -532,10 +543,10 @@ var CombiListForm = {
         // total production advisory
         TotalProduction.showAdvisory();
         // focus on advisory
-        document.getElementById('advisory_anchor').scrollIntoView();
+        document.getElementById('bread-crumbs').scrollIntoView();        
     },
     /**
-     * display error in chart div
+     * display highcharts
      */
     showWeatherChart: function(first_data,second_data)
     {
@@ -547,12 +558,12 @@ var CombiListForm = {
         weather_chart.setAjaxPage('weather2');
         weather_chart.setCalendar1(_t('Crop')+' 1',CropCalendarChart.getProps(newcal));
         weather_chart.setCalendar2(_t('Crop')+' 2',CropCalendarChart.getProps(newcal2));
-        var country,station_id,year,type_year,wtype,month;
-        country = jQuery(CombiListForm.country).val();
-        station_id = jQuery(CombiListForm.station).val();
-        type_year = jQuery(CombiListForm.tyear).val();
-        year = type_year.substr(1, 4);
-        wtype = type_year.substr(0, 1);
+        var country, station_id, year, tyear, wtype,month;
+        country = this.getCountry();
+        station_id = this.getStation();
+        tyear = this.getTypeYear();
+        year = tyear.substr(1, 4);
+        wtype = tyear.substr(0, 1);
         var cstype = jQuery('input[name='+this.adv_type+']').val();
         if (cstype==='recommend') {
             month = jQuery(this.c1month).val();
@@ -563,20 +574,6 @@ var CombiListForm = {
             month = parseInt(tmpmonth2[1]) || 1;
         }
         weather_chart.makeChart(country,station_id,0,wtype,false);
-    },
-    /**
-     * display error in chart div
-     */
-    showError: function(error_txt)
-    {
-        var error_txt2 = _t('There was a problem generating the data you requested. Please contact the website Administrator.');
-        if (error_txt==='')
-        {
-            jQuery('#dss-error-box').html(error_txt2).show();
-        } else
-        {
-            jQuery('#dss-error-box').html(error_txt).show();
-        }
     },
     /**
      *

@@ -16,10 +16,10 @@ $all_country = werise_stations_country::getAll();
     <div class="container">
         <h2 id="page-title"><?php echo _CURRENT_OPT ?></h2>
 
-        <div class="card mb-4">
+        <div id="crop-advisory-form" class="card">
             <div class="card-body">
 
-                <form id ="frm" name="frm" action="#" method="post">
+                <form action="#">
 
                     <input type="hidden" id="cs2_country" name="cs2_country" value="<?php echo $country_choice ?>">
                     <input type="hidden" id="cs2_type" name="cs2_type" value="recommend" />
@@ -45,15 +45,15 @@ $all_country = werise_stations_country::getAll();
                             </div>
                         </div>
 
-                        <div class="col">
-                            <div class="input-group">
+                        <div class="col mb-2">
+                            <div id="location2_div" class="input-group">
                                 <input id="location2_name" type="text" class="form-control" disabled="disabled">
-                                <div id="location_div" class="input-group-append">
+                                <div class="input-group-append">
                                     <button id="location2_btn" class="btn btn-outline-secondary" type="button"><i class="fas fa-map"></i></button>
                                 </div>
                             </div>
 
-                            <select class="form-control" name="cs2_station" id="cs2_station">
+                            <select class="form-control hide" name="cs2_station" id="cs2_station">
                                 <option value="0"><?php __('Location') ?> &raquo;</option>
                             </select>
                         </div>
@@ -138,68 +138,49 @@ $all_country = werise_stations_country::getAll();
 
                     </div>
 
-                    <button id="show" class="btn" type="submit"><i class="fas fa-chart-area"></i> <?php __('Show Advisory') ?></button>
-                    <button id="showcustom" class="btn" type="button"><i class="fas fa-wrench"></i> <?php __('... More Options') ?></button>
+                    <button id="showcombi" class="btn btn-success mb-2 mr-2" type="button"><i class="fas fa-chart-area"></i> <?php __('Show Advisory') ?></button>
+                    <button id="showcustom" class="btn mb-2" type="button"><i class="fas fa-wrench"></i> <?php __('... More Options') ?></button>
 
                 </form>
 
             </div>
         </div>
 
-        <div class="alert alert-danger">
-            <span class="fa-stack">
-                <i class="fas fa-circle fa-stack-2x"></i>
-                <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
-            </span>
-            <span id="dss-error-box">error message here</span>
-        </div>
 
-        <div id="homeimages" class="card">
-            <div class="card-body text-center">
-                <img src="images/home02.jpg" />
-            </div>
-        </div>
+        <div id="advisory" class="hide">
 
-        <div id="advisory">
+            <h4>Dataset</h4>
 
-            <h2 class="title">Dataset</h2>
-
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-auto"><?php __('Location') ?></div>
-                        <div class="col"><span id="adv-location"></span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-auto"><?php __('Year') ?></div>
-                        <div class="col"><span id="adv-year"></span></div>
-                    </div>
+            <div class="row">
+                <div class="col">
+                    <strong><?php __('Location') ?>:</strong> <span id="adv-location"></span>, <?php echo $all_country[$country_choice]['country'] ?> <span class="flag-icon flag-icon-<?php echo strtolower($country_choice) ?>"></span>
                 </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col"><strong><?php __('Year') ?>:</strong> <span id="adv-year"></span></div>
             </div>
 
             <!-- START: two calendar -->
-            <div id="twocropcal">
+            <div id="twocropcal" class="mb-5">
 
-                <h2 class="title">Optimum sowing dates for two cropping seasons</h2>
+                <h4>Optimum sowing dates for two cropping seasons</h4>
 
                 <div class="table-responsive">
                     <table id="twocropcalbest" class="table table-bordered table-condensed">
                         <thead>
                             <tr>
-                                <th colspan="4"><span class="badge badge-info">First crop</span></th>
-                                <th colspan="4"><span class="badge badge-warning">Second crop</span></th>
-                                <th rowspan="2" style="width:80px">Total<br />Yield(t/ha)</th>
-                                <th rowspan="2" style="width:100px;text-align:center">Advisory</th>
-                            </tr>
-                            <tr>
-                                <th style="width:200px">Variety</th>
-                                <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
-                                <th style="width:150px">Sowing /<br />Harvest</th>
-                                <th style="width:100px">Yield<br />(t/ha)</th>
-                                <th style="width:200px">Variety</th>
-                                <th style="width:150px"><a style="color:#ffffff" href="javascript:launch_help('q1')">Rainfall <i class="icon-question-sign icon-white"> </i></a></th>
-                                <th style="width:150px">Sowing /<br />Harvest</th>
-                                <th style="width:100px">Yield<br />(t/ha)</th>
+                                <th>
+                                    <span class="badge badge-info">First crop</span><br />
+                                    Sowing /<br />Harvest
+                                </th>
+                                <th>
+                                    <span class="badge badge-warning">Second crop</span><br />
+                                    Sowing /<br />Harvest
+                                </th>
+                                <th>Variety</th>
+                                <th><a href="javascript:launch_help('q1')">Rainfall (mm) <i class="fas fa-question-circle"> </i></a></th>
+                                <th>Yield (t/ha)</th>
+                                <th>Total (t/ha)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -210,11 +191,11 @@ $all_country = werise_stations_country::getAll();
             </div>
             <!-- END: two calendar -->
 
-            <h2 id="advisory_anchor" class="title"><?php __('Advisory') ?></h2>
+            <h4><?php __('Advisory') ?></h4>
 
             <!-- START: calendar details -->
-            <h3><?php __('Calendar') ?></h3>
-            <div class="chartdiv table-responsive mb-3">
+            <h5><?php __('Calendar') ?></h5>
+            <div class="chartdiv table-responsive">
                 <table class="table table-sm">
                     <tr>
                         <td>
@@ -228,22 +209,20 @@ $all_country = werise_stations_country::getAll();
                 <table id="opt-planting2" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th rowspan="2" style="width:120px"><?php __('Crop') ?></th>
-                            <th rowspan="2" style="width:105px"><?php __('Sowing Date') ?></th>
-                            <th rowspan="2" class="alldates" style="width:90px"><?php __('Panicle Init.') ?></th>
-                            <th rowspan="2" class="alldates" style="width:90px"><?php __('Flowering') ?></th>
-                            <th rowspan="2" style="width:105px"><?php __('Harvest Date') ?></th>
-                            <th rowspan="2" style="width:50px;text-align:right"><?php __('Yield') ?><br />(t/ha)</th>
+                            <th rowspan="2"><?php __('Sowing Date') ?></th>
+                            <th rowspan="2" class="alldates"><?php __('Panicle Init.') ?></th>
+                            <th rowspan="2" class="alldates"><?php __('Flowering') ?></th>
+                            <th rowspan="2"><?php __('Harvest Date') ?></th>
                             <th colspan="3" style="text-align:center"><?php __('Fertilizer Schedule') ?></th>
-                            <th colspan="3" class="npkamt" style="width:250px;text-align:center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
+                            <th colspan="3" class="npkamt text-center"><?php __('Fertilizer recommendation') ?><br/>N-P-K (kg/ha)</th>
                         </tr>
                         <tr>
-                            <th style="width:145px"><?php __('Basal') ?></th>
-                            <th style="width:145px"><?php __('Top Dress 1') ?></th>
-                            <th style="width:145px"><?php __('Top Dress 2') ?></th>
-                            <th class="npkamt" style="width:80px"><?php __('Basal') ?></th>
-                            <th class="npkamt" style="width:80px"><?php __('Top Dress 1') ?></th>
-                            <th class="npkamt" style="width:80px"><?php __('Top Dress 2') ?></th>
+                            <th><?php __('Basal') ?></th>
+                            <th><?php __('Top Dress 1') ?></th>
+                            <th><?php __('Top Dress 2') ?></th>
+                            <th class="npkamt"><?php __('Basal') ?></th>
+                            <th class="npkamt"><?php __('Top Dress 1') ?></th>
+                            <th class="npkamt"><?php __('Top Dress 2') ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -253,34 +232,45 @@ $all_country = werise_stations_country::getAll();
             <!-- END: calendar details -->
 
             <!-- START: farmers details -->
-            <h3><?php __("Farmer's Information") ?></h3>
+            <h5><?php __("Farmer's Information") ?></h5>
 
             <div id="farm-info-table" class="card mb-3">
                 <div class="card-body">
 
                     <div class="form-group">
                         <label class="control-label" for="farm-size"><?php echo __('Farm size') ?></label>
-                        <div class="input-group">
-                            <input class="form-control" id="farm-size" type="text" value="1" />
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">ha.</div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input class="form-control" id="farm-size" type="text" size="3" value="1" />
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">ha.</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group m-0">
                         <label class="control-label" for="family-num-young""><?php echo __('Number of family members') ?></label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">0-14 yrs. old</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">0-14 yrs. old</div>
+                                </div>
+                                <input class="form-control" id="family-num-young" type="text" size="2" value="2" />
                             </div>
-                            <input class="form-control" id="family-num-young" type="text" value="2" />
                         </div>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">15+ yrs. old</div>
+                        <div class="col-auto">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">15+ yrs. old</div>
+                                </div>
+                                <input class="form-control" id="family-num-old" type="text" size="2" value="2" />
                             </div>
-                            <input class="form-control" id="family-num-old" type="text" value="2" />
                         </div>
                     </div>
 
@@ -289,7 +279,59 @@ $all_country = werise_stations_country::getAll();
             <!-- END: farmers details -->
 
             <!-- START: irrigation -->
-            <h3><?php __('Supplementary Irrigation') ?></h3>
+            <h5><?php __('Supplementary Irrigation') ?></h5>
+
+            <div class="card mb-2">
+                <div class="card-body">
+
+                    <h5 class="card-title"><?php __('Water pump info') ?></h5>
+
+
+                    <div class="form-group">
+                        <label class="control-label" for="pump-rate"><?php echo __('Pump discharge rate') ?></label>
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input class="form-control" id="pump-rate" type="text" size="3" value="20" />
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">liters / second</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="fuel-rate"><?php echo __('Fuel consumption rate') ?></label>
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input class="form-control" id="fuel-rate" type="text" size="2" value="1" />
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">liters / hour</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="fuel-price"><?php echo __('Fuel Price') ?></label>
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="input-group">
+                                    <input class="form-control" id="fuel-price" type="text" size="6" value="9300" />
+                                    <div class="input-group-prepend">
+                                        <div id="currency-name" class="input-group-text">rupiah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
 
             <div class="table-responsive">
                 <table id="water-reqt-table" class="table table-bordered">
@@ -301,7 +343,7 @@ $all_country = werise_stations_country::getAll();
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class="d-none">
                             <th scope="row"><?php __('Rice Variety') ?></th>
                             <td><span id="suppl-1-var"></span></td>
                             <td><span id="suppl-2-var"></span></td>
@@ -320,44 +362,6 @@ $all_country = werise_stations_country::getAll();
                             <th scope="row"><?php __('Water deficit') ?></th>
                             <td><span id="suppl-1-3">0</span> mm</td>
                             <td><span id="suppl-2-3">0</span> mm</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="3"><?php __('Water pump info') ?></th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-
-                                <div class="form-group">
-                                    <label class="control-label" for="pump-rate"><?php echo __('Pump discharge rate') ?></label>
-                                    <div class="input-group">
-                                        <input class="form-control" id="pump-rate" type="text" value="20" />
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">liters / second</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label" for="fuel-rate"><?php echo __('Fuel consumption rate') ?></label>
-                                    <div class="input-group">
-                                        <input class="form-control" id="fuel-rate" type="text" value="1" />
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">liters / hour</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label" for="fuel-price"><?php echo __('Fuel Price') ?></label>
-                                    <div class="input-group">
-                                        <input class="form-control" id="fuel-price" type="text" value="9300" />
-                                        <div class="input-group-prepend">
-                                            <div id="currency-name" class="input-group-text">rupiah</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </td>
                         </tr>
                         <tr>
                             <th scope="row" colspan="3"><?php __('Guidelines') ?></th>
@@ -384,90 +388,102 @@ $all_country = werise_stations_country::getAll();
                         </tr>
                     </tbody>
                 </table>
-                <!--END: irrigation -->
+            </div>
+            <!--END: irrigation -->
 
-                <!-- START: summary -->
-                <h3><?php __('Total Production') ?></h3>
+            <!-- START: summary -->
+            <h5><?php __('Total Production') ?></h5>
 
-                <div class="card mb-3">
-                    <div class="card-body">
+            <div class="table-responsive-sm mb-3">
+                <table id="total-production-table">
+                    <tr>
+                        <td class="border border-success p-2">
 
-                        <div class="table-responsive-sm">
-                            <table id="total-production-table">
-                                <tr>
-                                    <td>
-                                        <p>
-                                            Grain Yield for<br />
-                                            <span class="badge badge-info">first crop</span> is <span id="grain_yield1" style="font-weight: 700"></span> t/ha
-                                        </p>
-                                        <div id="rice-sack1" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-plus-circle"></i>
-                                    </td>
-                                    <td>
-                                        <p>
-                                            Grain Yield for<br />
-                                            <span class="badge badge-warning">second crop</span> is <span id="grain_yield2" style="font-weight: 700"></span> t/ha
-                                        </p>
-                                        <div id="rice-sack2" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-arrow-alt-circle-right"></i>
-                                    </td>
-                                    <td>
-                                        <p>TOTAL YIELD</p>
-                                        <p>
-                                            <span id="total_grain_yield"></span> t/ha
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                            <p class="text-center">
+                                Grain Yield for<br />
+                                <span class="badge badge-info">first crop</span> is <span id="grain_yield1" class="font-weight-bold"></span> t/ha
+                            </p>
+                            <div id="rice-sack1" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
 
-                <div class="table-responsive">
-                    <table id="farmer-advisory-table" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">&nbsp;</th>
-                                <th scope="col"><span class="badge badge-info">First crop</span> (t)</th>
-                                <th scope="col"><span class="badge badge-warning">Second crop</span> (t)</th>
-                                <th scope="col">TOTAL (t)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><?php __('Actual production') ?></th>
-                                <td><span id="actual-yield-1">0</span></td>
-                                <td><span id="actual-yield-2">0</span></td>
-                                <td><span id="actual-yield-3">0</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php __('Family consumption') ?></th>
-                                <td><span id="yield-consume-1">0</span></td>
-                                <td><span id="yield-consume-2">0</span></td>
-                                <td><span id="yield-consume-3">0</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><?php __('Surplus') ?></th>
-                                <td><span id="yield-surplus-1">0</span></td>
-                                <td><span id="yield-surplus-2">0</span></td>
-                                <td><span id="yield-surplus-3">0</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- END: summary -->
+                        </td>
+                        <td>
+                            <i class="fas fa-plus-circle yield-op"></i>
+                        </td>
+                        <td class="border border-success p-2">
 
+                            <p class="text-center">
+                                Grain Yield for<br />
+                                <span class="badge badge-warning">second crop</span> is <span id="grain_yield2" class="font-weight-bold"></span> t/ha
+                            </p>
+                            <div id="rice-sack2" style="background-image:url('images/rice-sack.jpg');background-repeat:repeat-x;width:1px;height:62px;margin:auto"></div>
+
+                        </td>
+                        <td>
+                            <i class="fas fa-arrow-alt-circle-right yield-op"></i>
+                        </td>
+                        <td class="border border-success p-2">
+
+                            <p class="text-center">
+                                TOTAL YIELD<br />
+                                <span id="total_grain_yield" class="font-weight-bold"></span> t/ha
+                            </p>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
-            <div id="width-ref">&nbsp;</div>
-
+            <div class="table-responsive">
+                <table id="farmer-advisory-table" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th><span class="badge badge-info">First crop</span> (t)</th>
+                            <th><span class="badge badge-warning">Second crop</span> (t)</th>
+                            <th>TOTAL (t)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><?php __('Actual production') ?></th>
+                            <td><span id="actual-yield-1">0</span></td>
+                            <td><span id="actual-yield-2">0</span></td>
+                            <td><span id="actual-yield-3">0</span></td>
+                        </tr>
+                        <tr>
+                            <th><?php __('Family consumption') ?></th>
+                            <td><span id="yield-consume-1">0</span></td>
+                            <td><span id="yield-consume-2">0</span></td>
+                            <td><span id="yield-consume-3">0</span></td>
+                        </tr>
+                        <tr>
+                            <th><?php __('Surplus') ?></th>
+                            <td><span id="yield-surplus-1">0</span></td>
+                            <td><span id="yield-surplus-2">0</span></td>
+                            <td><span id="yield-surplus-3">0</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- END: summary -->
 
         </div>
+
+    </div>
 </section>
+
+<!-- TEMPLATE: Variety Info -->
+<div id="variety-info-template" class="hide">
+    <div class="card mt-2">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-book"></i> Info on {{variety_name}}:</h5>
+            <ul>
+                <li>Maturity: {{maturity}} days ({{maturity_grp}})</li>
+                <li>Yield Average: {{yield_avg}} t.</li>
+                <li>Yield Potential: {{yield_potential}} t.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
 

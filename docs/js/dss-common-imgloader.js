@@ -60,22 +60,30 @@ var weriseApp = {
         var oktypes = ["string", "number"];
         if (oktypes.indexOf(typeof obj) !== -1)
         {
-            console.log(callerobj + '.' + weriseApp.dbg.caller.name + ' : ' + marker + ' => ' + obj);
+            var caller_name = weriseApp.dbg.caller.name;
+            var cn = '';
+            if (caller_name!='' && callerobj != caller_name) {
+                cn = '.'+caller_name; 
+            }
+            console.log(callerobj + cn + ' : ' + marker + ' => ' + obj);
         } else
         {
             console.log('dbg: ' + marker);
             console.log(typeof obj);
             console.log(obj);
         }
-    },
-    isJson: function (str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
+    },       
+    getChartDimensions: function () {    
+        var new_width = parseInt(jQuery("#width-ref").width());
+        if (new_width < 500) {
+            new_width = 800;
         }
-        return true;
-    }            
+        var new_height = parseInt(new_width / 3);
+        if (new_height < 300) {
+            new_height = 300;
+        }
+        return [new_width,new_height];
+    }    
 };
 
 /**
@@ -144,29 +152,6 @@ function hideLoader(item_id)
 {
     jQuery(item_id).css("background-image", "")
             .css("color", "#555555");
-}
-
-/**
- * display error in chart div
- */
-function showErrorChart(error_txt)
-{
-    var error_txt2 = 'There was a problem generating the data you requested. Please contact the website Administrator.';
-    if (error_txt == '')
-    {
-        jQuery('#dss-error-box').html(error_txt2).show();
-    } else
-    {
-        jQuery('#dss-error-box').html(error_txt).show();
-    }
-}
-
-/**
- * hide error in chart div
- */
-function hideErrorChart()
-{
-    jQuery('#dss-error-box').hide();
 }
 
 

@@ -5,11 +5,18 @@
             <div class="alert alert-error alert-fixed" style="display:block"><i class="icon-exclamation-sign" style="color:#ff0000"> </i> You are not allowed to view this content. Please <a href="#">contact us</a> if you need access to this website.</div>
         <?php endif; ?>                
 
-        <div id="home-heroimage" class="text-center">
-            <img class="img-fluid" src="images/banner-image3.jpg" />
+        <div id="home-heroimage" class="mt-2 mb-2 text-center">
+            <img class="img-fluid" src="images/banner-image4.jpg" />
+            <div id="hero-image-text" class="card">
+                <div class="card-body">
+                    <h1 class="mb-1">WeRise</h1>
+                    <p>Decision Support System for Rainfed Rice Production</p>
+                </div>
+            </div>                
         </div>
 
-        <h2 id="home-title" class="text-center">WeRise (<u>We</u>ather-<u>r</u>ice-nutrient <u>i</u>ntegrated decision <u>s</u>upport syst<u>e</u>m)</h2>
+
+        <h2 id="home-title">WeRise (<u>We</u>ather-<u>r</u>ice-nutrient <u>i</u>ntegrated decision <u>s</u>upport syst<u>e</u>m)</h2>
 
         <p>
             <?php echo _t('<langidx>index0001</langidx>
@@ -48,7 +55,7 @@
         <div id="homeimages" class="row">
             <div class="col text-right">
                 <div class="home-features-wrapper-left">
-                    <a href="index.php?pageaction=weather"><img src="images/home01-aug2015.gif" /></a>
+                    <a href="index.php?pageaction=weather"><img src="images/ssta.glob.MAM2018.1mar2018.gif" /></a>
                     <div class="home-features-overlay"><?php echo _t('Weather Advisory') ?></div>
                 </div>
             </div>    

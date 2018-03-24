@@ -50,7 +50,7 @@ above normal
 --lang--
 below normal
 --lang--
-real-time
+historical
 --lang--
 forecast
 --lang--

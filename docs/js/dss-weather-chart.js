@@ -10,9 +10,8 @@ function WeatherChart()
      */
     this.showChart = function () {
         var wvar = 0;
-        hideErrorChart();
-        jQuery('#homeimages').hide();
-        jQuery('.afterload').show();
+        jQuery('.jamstec').hide();
+        jQuery('.chartdiv').hide();
         for (i = 1; i <= 5; i++)
         {
             if (jQuery("#wvar" + i).is(':checked'))
@@ -46,7 +45,7 @@ function WeatherChart()
             if (data.chart == false)
             {
                 hideLoaderChart(item_chart);
-                showErrorChart(_t('No data available.'));
+                weriseApp.showError(_t('No data available.'));
                 return;
             }
             if (data.wvar !== false)
@@ -67,15 +66,8 @@ function WeatherChart()
      */
     function callHighCharts(item_chart, wvar, ajaxdata)
     {
-        var new_width = parseInt(jQuery("#width-ref").width());
-        if (new_width < 500) {
-            new_width = 500;
-        }
-        var new_height = parseInt(new_width / 3);
-        if (new_height < 300) {
-            new_height = 300;
-        }
-        jQuery(item_chart).width(new_width - 30).height(new_height);
+        var chartdim = weriseApp.getChartDimensions();
+        jQuery(item_chart).width(chartdim[0] - 30).height(chartdim[1]);
 
 
         var station_name = jQuery('#location_name').val();
