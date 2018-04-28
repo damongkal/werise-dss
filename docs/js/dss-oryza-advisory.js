@@ -212,16 +212,18 @@ var WaterRequirement = {
         var tmp_date = new Date(crop_data.sow_date);
         var tmp_month = tmp_date.getMonth();
         var reqt_method = 'direct dry seeding';
+        var reqt_method_month = '<br><small>sowing date is from July to February</small>';
         var reqt_depth = variety_info.tp_depth;
         if (tmp_month>=2 && tmp_month<=5) {
             reqt_method = 'transplanting';
+            reqt_method_month = '<br><small>sowing date is from March to June</small>';
             var reqt_depth = variety_info.dds_depth;
         }
         var currency_name = CombiListStorage.getCountryInfo('currency');
         jQuery('#suppl-'+cropidx+'-var').html(variety_info.variety_name);
         jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
         jQuery('#suppl-'+cropidx+'-2').html(reqt_depth);
-        jQuery('#suppl-'+cropidx+'-method').html(reqt_method);
+        jQuery('#suppl-'+cropidx+'-method').html(reqt_method+reqt_method_month);
         deficit = parseInt(crop_data.rain_amt - reqt_depth);
         if (deficit<0) {
             jQuery('#suppl-'+cropidx+'-3').html(Math.abs(deficit));

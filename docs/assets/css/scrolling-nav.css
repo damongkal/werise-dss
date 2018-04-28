@@ -138,12 +138,45 @@ footer a{
 }
 select[name="cs2_variety1"], select[name="cs2_variety2"], select[name="cs2_month1"], select[name="cs2_month2"] {
     width: 200px;
-} 
+}
 select[name="cs2_fertil0"] {
     width: 250px;
 }
 .chart {
-	margin-bottom: 150px;
+    margin-bottom: 15px;
+}
+h4 {
+    margin-top: 15px;
+}
+#advisory>h5 {
+    margin-top: 15px;
+}
+.tr-gray {
+    background-color: #ccc;
+}
+#sql-log
+{
+    border:1px solid #000000;
+    margin: 40px 5px 5px 5px;
+    padding: 5px;
+}
+#sql-log div
+{
+    border-bottom:1px dashed #000000;
+    padding: 3px;
+}
+#db-overview {
+    font-family: Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace;
+}
+#db-overview .region-td {
+    font-weight: 700;
+    background-color: #58d68d; 
+}
+.help-box {
+    padding: 0.75rem 0.75rem 0 0.75rem;
+}
+.help-box h5{
+    margin: 0 0 10px 0;
 }
 @media (min-width: 600px) {
     #mainNav {
@@ -201,6 +234,12 @@ select[name="cs2_fertil0"] {
     }
     #hero-image-text p {
         font-size: 1rem;
+    }
+    h4 {
+        margin-top: 30px;
+    }
+    #advisory>h5 {
+        margin-top: 30px;
     }
 }
 @media (min-width: 992px) {

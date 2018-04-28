@@ -25,10 +25,10 @@
         <link href="assets/css/scrolling-nav.css" rel="stylesheet">
 
         <!-- jQuery -->
-        <script src="assets/vendor/jquery/jquery.min.js"></script>        
+        <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script type="text/javascript">
             jQuery.noConflict();
-        </script>                        
+        </script>
 
         <script type="text/javascript" src="gzip.php?group=common"></script>
         <script type="text/javascript">
@@ -98,12 +98,35 @@
                                 </div>
                             </div>
                             <button class="btn btn-sm" onclick="javascript:window.print()"><i class="fas fa-print"></i> Print</button>
-                            <?php if (_ADM_ENV!=='PROD' || _opt(sysoptions::_ADM_SHOW_MENU) || (dss_auth::getUsername() === 'admin')) : ?>
-                                <button class="btn btn-sm" onclick="javascript:window.location.assign('admin.php')"><i class="fas fa-cog"></i> Admin</a></button>
-                            <?php endif; ?>    
+                            <?php if (_ADM_ENV !== 'PROD' || _opt(sysoptions::_ADM_SHOW_MENU) || (dss_auth::getUsername() === 'admin')) : ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="admin-menu-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-cog"></i> Admin</a>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="admin-menu-dropdown">
+                                        <h6 class="dropdown-header">References</h6>
+                                        <a class="dropdown-item" href="admin.php?pageaction=stations">Database overview</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=varieties">Rice Verieties</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=rcm">Fertilizer Application</a>
+                                        <div class="dropdown-divider"></div>
+                                        <?php if (_ADM_ENV!=='PROD') : ?>
+                                        <h6 class="dropdown-header">Data Processing</h6>
+                                        <a class="dropdown-item" href="admin.php?pageaction=cdfdm">Cumulative Distribution Function based Downscale Method (CDF-DM)</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=weatherfile">Weather Data (PRN format)</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=oryza">Oryza2000 Interface</a>
+                                        <div class="dropdown-divider"></div>
+                                        <?php endif; ?>       
+                                        <h6 class="dropdown-header">System</h6>
+                                        <a class="dropdown-item" href="admin.php?pageaction=config">Options</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=users">Users</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=webusage">Usage Log</a>
+                                        <a class="dropdown-item" href="admin.php?pageaction=phpinfo">PHP-Info</a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             <?php if (dss_auth::getUsername() !== '') : ?>
                                 <button class="btn btn-sm"><i class="fas fa-user-circle"></i> <?php echo dss_auth::getUsername() ?></button>
-                            <?php endif; ?>                                     
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -118,12 +141,14 @@
                         <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
                     </span>
                     <span id="werise-error-msg">error message here</span>
-                </div>     
+                </div>
             </div>
-        </section>        
+        </section>
 
         -content-
-
+        
+        <?php if ($_SERVER['SCRIPT_NAME']!=='/admin.php'): ?>
+        
         <section id="irri-japan" class="mt-4">
             <div class="container">
                 <div class="row">
@@ -273,9 +298,11 @@
             <!-- /.container -->
         </footer>
 
+        <?php endif; ?>
+        
         <section id="post-footer" style="background-color: #282828">
             <div class="container">
-                <div id="width-ref">&nbsp;</div>                
+                <div id="width-ref">&nbsp;</div>
                 <div class="row">
                     <div class="col-lg-12 py-2">
                         <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank"><img src="images/layout/creative_commons.png" class="cc" width="149" height="40" style="float: right;" /></a>
@@ -285,6 +312,7 @@
             <!-- /.container -->
         </section>
 
+
         <?php if (dss_auth::checkAccess2() === false) : ?>
             <!-- Login Modal -->
             <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" data-backdrop="static">
@@ -292,7 +320,7 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title">Login</h5>    
+                            <h5 class="modal-title">Login</h5>
                         </div>
 
                         <form id="login-form">
@@ -329,7 +357,7 @@
                     </div>
                 </div>
             </div>
-        <?php endif; ?>        
+        <?php endif; ?>
 
 
         <!-- Bootstrap core JavaScript -->

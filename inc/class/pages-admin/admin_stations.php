@@ -180,25 +180,25 @@ class admin_stations {
 
     public function fmtLatLon($station) {
         $map_ok = true;
-        $lat = '<span class="label">' . number_format($station->geo_lat, 3) . '</span>';
-        if ($station->geo_lat == '') {
-            $lat = '<span class="label label-important">???</span>';
-            $map_ok = false;
-        }
-        $lon = '<span class="label">' . number_format($station->geo_lon, 3) . '</span>';
-        if ($station->geo_lon == '') {
-            $lon = '<span class="label label-important">???</span>';
-            $map_ok = false;
-        }
-        $alt = '<span class="label">' . number_format($station->geo_alt, 1) . '</span>';
-        if ($station->geo_alt == '') {
-            $alt = '<span class="label label-important">?</span>';
-        }
         $gps_span = 'success';
         $gps_status = 'thumbs-up';
         if ($station->gps_confirmed == 0) {
-            $gps_span = 'important';
+            $gps_span = 'danger';
             $gps_status = 'thumbs-down';
+        }        
+        $lat = '<span class="badge badge-'.$gps_span.'">' . number_format($station->geo_lat, 3) . '</span>';
+        if ($station->geo_lat == '') {
+            $lat = '<span class="badge badge-danger">???</span>';
+            $map_ok = false;
+        }
+        $lon = '<span class="badge badge-'.$gps_span.'">' . number_format($station->geo_lon, 3) . '</span>';
+        if ($station->geo_lon == '') {
+            $lon = '<span class="badge badge-danger">???</span>';
+            $map_ok = false;
+        }
+        $alt = '<span class="badge badge-'.$gps_span.'">' . number_format($station->geo_alt, 1) . '</span>';
+        if ($station->geo_alt == '') {
+            $alt = '<span class="badge badge-danger">?</span>';
         }
         $map_btn = "";
         if ($map_ok) {
@@ -210,9 +210,9 @@ class admin_stations {
                 $loc[] = $station->topregion_name;
             }
             $location = implode(', ', $loc);
-            $map_btn = '<button class="btn btn-mini mapbtn" type="button" data="' . $station->geo_lat . ';' . $station->geo_lon . ';' . $location . '"><i class="icon-map-marker icon-fix"></i></button>';
+            $map_btn = '<button class="btn btn-sm mapbtn" type="button" data="' . $station->geo_lat . ';' . $station->geo_lon . ';' . $location . '"><i class="fas fa-map-marker"></i></button>';
         }
-        return "$lat $lon $alt &bull; <span class=\"label label-{$gps_span}\"><i class=\"icon-{$gps_status} icon-white\"></i></span> $map_btn";
+        return "{$lat} {$lon} {$alt} {$map_btn}";
     }
 
     public function fmtDataFiles($data,$data2 = false) {

@@ -67,8 +67,7 @@ function WeatherChart()
     function callHighCharts(item_chart, wvar, ajaxdata)
     {
         var chartdim = weriseApp.getChartDimensions();
-        jQuery(item_chart).width(chartdim[0] - 30).height(chartdim[1]);
-
+        jQuery(item_chart).width((chartdim[0] - 30)+'px').height(chartdim[1]+'px');
 
         var station_name = jQuery('#location_name').val();
         var wvar_props = getWeatherVarProps(wvar);

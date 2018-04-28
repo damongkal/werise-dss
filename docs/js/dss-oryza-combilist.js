@@ -101,7 +101,7 @@ var TwoCropCombination = {
         tmp = tmp + '<td>' + formatDate2(rec.sow_date,'','abbr') + '<br />' + formatDate2(rec.harvest_date,'','abbr') + '</td>';        
         tmp = tmp + '<td>&nbsp;</td>';
         tmp = tmp + '<td>' + WeriseTerms.getVarietyLabel(rec.variety) + '</td>';
-        tmp = tmp + '<td>' + rec.rain_amt.toFixed(1) + '<br />' + rec.rain_code + '</td>';
+        tmp = tmp + '<td>' + rec.rain_amt.toFixed(1) + '<br /><a href="#help-rainfall-category">' + rec.rain_code + '</a></td>';
         tmp = tmp + '<td class="text-right">' + rec.yield.toFixed(2) + '</td>';
         tmp = tmp + '<td>&nbsp;</td>';
         //tmp = tmp + '<td class="text-right"><strong>' + minyld +' to '+ maxyld + '</strong></td>';
@@ -115,7 +115,7 @@ var TwoCropCombination = {
         tmp = tmp + '<td>&nbsp;</td>';        
         tmp = tmp + '<td>' + formatDate2(rec2.sow_date,'','abbr') + '<br />' + formatDate2(rec2.harvest_date,'','abbr') + '</td>';        
         tmp = tmp + '<td>' + WeriseTerms.getVarietyLabel(rec2.variety) + '</td>';
-        tmp = tmp + '<td>' + rec2.rain_amt.toFixed(1) + '<br />' + rec2.rain_code + '</td>';
+        tmp = tmp + '<td>' + rec2.rain_amt.toFixed(1) + '<br /><a href="#help-rainfall-category">' + rec2.rain_code + '</a></td>';
         tmp = tmp + '<td class="text-right">' + rec2.yield.toFixed(2) + '</td>';
         tmp = tmp + '<td class="text-right">' + totalyld.toFixed(2) + '<br />';
         tmp = tmp + '<a role="button" class="twocropbtn btn btn-outline-success btn-sm" href="javascript:;"><i class="fas fa-star"></i> Choose</a>';
@@ -233,6 +233,7 @@ var CombiListForm = {
             {
                 jQuery('#crop-advisory-form').hide();                
                 CombiListForm.showCombinations();
+                document.getElementById('bread-crumbs').scrollIntoView();
             }
         });
         // change farm size
@@ -474,6 +475,20 @@ var CombiListForm = {
         // split type year
         var year = type_year.substr(1, 4);
         var wtype = type_year.substr(0, 1);
+        console.log(cstype);
+        if (cstype!=='recommend')
+        {
+            var sow1 = jQuery(this.c1date).val();
+            var tmp_date1 = new Date(sow1);
+            tmp_date1.setDate(tmp_date1.getDate() + 14);
+            jQuery("#adv-sowing1").html(formatDate2(sow1,'','abbr')+' to '+formatDate2(tmp_date1,'','abbr'));
+            
+            var sow2 = jQuery(this.c2date).val();
+            var tmp_date2 = new Date(sow2);
+            tmp_date2.setDate(tmp_date2.getDate() + 14);
+            jQuery("#adv-sowing2").html(formatDate2(sow2,'','abbr')+' to '+formatDate2(tmp_date2,'','abbr'));
+            jQuery("#target-sowdates").show();
+        }
         // build URL
         var url = new UrlBuilder('');
         url.addArg('pageaction','oryza2');
@@ -529,6 +544,9 @@ var CombiListForm = {
         // get data from previous stored ajax call
         var first_data = CombiListStorage.getRunData(first_idx);
         var second_data = CombiListStorage.getRunData(second_idx);
+        console.log(first_data);
+        jQuery('#adv-sowdate1').html(formatDate2(first_data.sow_date,'','abbr'));
+        jQuery('#adv-sowdate2').html(formatDate2(second_data.sow_date,'','abbr'));
         // highlight combination
         TwoCropCombination.showChoice(first_idx,second_idx);
         // weather advisory: rainfall category
@@ -543,7 +561,7 @@ var CombiListForm = {
         // total production advisory
         TotalProduction.showAdvisory();
         // focus on advisory
-        document.getElementById('bread-crumbs').scrollIntoView();        
+        document.getElementById('advisory-title').scrollIntoView();
     },
     /**
      * display highcharts

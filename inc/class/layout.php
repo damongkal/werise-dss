@@ -11,8 +11,13 @@ class layout
         $this->pageaction = $pageaction;
         
         // load layout
-        ob_start();        
-        if (in_array($pageaction,array('form_index','form_about','form_terms','form_weather','form_oryza'))) {
+        ob_start();
+        $layout2 = array(
+            'admin_index', 'admin_phpinfo', 'admin_config',
+            'admin_users', 'admin_webusage', 'admin_varieties',
+            'admin_rcm', 'admin_stations'
+            );
+        if (strpos($pageaction,'form_')===0 || in_array($pageaction,$layout2)) {
             $this->layout_dir = 'layout-v2';
         } else {
             $this->layout_dir = 'layout';

@@ -41,7 +41,7 @@ class debug
         $badge_tag = '';
         if ($badge!='')
         {
-            $badge_tag = '<span class="badge">'.$badge.' :</span> ';
+            $badge_tag = '<span class="badge badge-secondary">'.$badge.'</span> ';
         }
         if ($mixed)
         {
@@ -96,7 +96,7 @@ class debug
                     $sessval2 = $sessval;
                 }
                 
-                echo '<div '.$style3.'><span class="badge">'.$sesskey.':</span> '.$sessval2.'</div>';
+                echo '<div '.$style3.'><span class="badge badge-secondary">'.$sesskey.'</span> '.$sessval2.'</div>';
             }
         }
         

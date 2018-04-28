@@ -54,7 +54,7 @@ class admin_config
         {
             $val = $rec['db'];
         }
-        $txtitem = '<input id="%s" name="%s" type="text" style="width:300px" value="%s" />';
+        $txtitem = '<input id="%s" name="%s" type="text" class="form-control form-control-sm" value="%s" />';
         $item = sprintf($txtitem,$rec['key'],$rec['key'],$val);
         if ($rec['type']==='boolean')
         {
@@ -72,7 +72,7 @@ class admin_config
             $selected[0] = '';
             $selected[1] = 'selected="selected"';
         }
-        $tmp = '<select id="%s" name="%s" style="width:100px"><option value="0" %s >FALSE</option><option value="1" %s>TRUE</option></select>';
+        $tmp = '<select id="%s" name="%s" class="form-control form-control-sm" style="width:100px"><option value="0" %s >NO</option><option value="1" %s>YES</option></select>';
         return sprintf($tmp,$key,$key,$selected[0],$selected[1]);
     }
 }

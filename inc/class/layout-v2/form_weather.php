@@ -5,6 +5,10 @@ $all_country = werise_stations_country::getAll();
 <section id="main-content">
     <div class="container">
         <h2 id="page-title"><?php echo _CURRENT_OPT ?></h2>
+        
+        <p>
+            Thanks to our friends in JAMSTEC who provided the forecasted weather data displayed here. In the form below, choose the weather dataset you wish to see.
+        </p>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -81,7 +85,7 @@ $all_country = werise_stations_country::getAll();
         <div class="row">
             <div class="col text-center">
                 <figure class="figure jamstec">
-                    <img class="figure-img img-fluid rounded" src="images/ssta.glob.MAM2018.1mar2018.gif" alt="JAMSTEC" />
+                    <img class="figure-img img-fluid rounded" src="http://<?php echo (_opt(sysoptions::_JAMSTEC_IMG))  ?>" alt="JAMSTEC" />
                     <figcaption class="figure-caption"><strong>image source:</strong> http://www.jamstec.go.jp/frsgc/research/d1/iod/sintex_f1_forecast.html.en</figcaption>
                 </figure>
             </div>
@@ -90,6 +94,12 @@ $all_country = werise_stations_country::getAll();
         <div class="afterload hide">
             
             <h4><?php __('Advisory') ?></h4>
+            
+            <p>
+                Data is displayed in 10-day period values from <span id="data-date-from">July 2018</span> to <span id="data-date-to">June 2019</span>.
+                Statistical <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">mean</a> and <a href="https://en.wikipedia.org/wiki/Percentile">percentile</a> is computed using historical data from <span id="data-history-from">2000</span> to <span id="data-history-to">2018</span>.
+                We get the 20th percentile (P20) to determine periods with extremely low values and the 80th percentile (P80) to determine periods with extremely high values of the population.
+            </p>
 
             <?php foreach ($cls->getWvars() as $key_tmp => $wvar): ?>
                 <?php $key = $key_tmp + 1; ?>

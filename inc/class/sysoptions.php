@@ -30,6 +30,7 @@ class sysoptions
     const _OPT_GOOGLE_ANALYTICS = '_OPT_GOOGLE_ANALYTICS';
     const _SHOW_MAP = '_SHOW_MAP';
     const _SHOW_HISTORICAL = '_SHOW_HISTORICAL';
+    const _JAMSTEC_IMG = '_JAMSTEC_IMG';
 
     // oryza chart options
     const _ORYZACHART_SHOW_GENFERT = '_ORYZACHART_SHOW_GENFERT';
@@ -166,7 +167,10 @@ class sysoptions
             'desc' => 'Enable Google Analytics?');
         $this->default[self::_SHOW_HISTORICAL] =  array(
             'value' => false,
-            'desc' => 'Show Historical Data?');        
+            'desc' => 'Show Historical Data?');
+        $this->default[self::_JAMSTEC_IMG] =  array(
+            'value' => 'www.jamstec.go.jp/frcgc/research/d1/iod/2007/forecast/ssta.glob.JJA2018.1apr2018.gif',
+            'desc' => 'URL of JAMSTEC weather forecast image'); 
 
         // oryza chart options
         $this->default[] =  array('value' => 'category','desc' => 'Chart Options');

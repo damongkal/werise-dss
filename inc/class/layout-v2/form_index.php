@@ -46,8 +46,8 @@
             <?php echo _t('<langidx>index0003</langidx>
             Field tests on the WeRise prototype are going on in Indonesia and
             Lao PDR. The prototype for other countries may also be explored.
-            To run the prototype, please click on the weather advisory or grain
-            yield advisory image below or button above. Feedbacks to improve
+            To run the prototype, please click on the weather advisory or crop
+            advisory image below or button above. Feedbacks to improve
             the prototype and/or establish collaboration are welcome.
             ') ?>
         </p>
@@ -55,7 +55,7 @@
         <div id="homeimages" class="row">
             <div class="col text-right">
                 <div class="home-features-wrapper-left">
-                    <a href="index.php?pageaction=weather"><img src="images/ssta.glob.MAM2018.1mar2018.gif" /></a>
+                    <a href="index.php?pageaction=weather"><img src="http://<?php echo (_opt(sysoptions::_JAMSTEC_IMG))  ?>" /></a>
                     <div class="home-features-overlay"><?php echo _t('Weather Advisory') ?></div>
                 </div>
             </div>    

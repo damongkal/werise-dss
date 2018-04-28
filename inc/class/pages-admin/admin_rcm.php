@@ -32,6 +32,6 @@ class admin_rcm
             $k = intval($rec->k3);
             $dat = intval($rec->n3day);
         }        
-        return $n . '-' . $p . '-' . $k . ' on dat ' . $dat;
+        return $n . '-' . $p . '-' . $k;
     }
 }

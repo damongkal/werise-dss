@@ -167,7 +167,7 @@ class ajax_weather extends ajax_base
             // $this->debug->addLog($data,true);            
             // piggyback advisory for flood/drought
             $this->getAdvisoryThreshold($x_axis, $new_percentile);
-            $this->addPercentileChart($new_percentile, $x_axis, _t('Drought'), _t('Flood'));
+            $this->addPercentileChart($new_percentile, $x_axis, _t('P20'), _t('P80'));
         } else
         {
             $this->addPercentileChart($new_percentile, $x_axis);
@@ -270,7 +270,7 @@ class ajax_weather extends ajax_base
     private function addPercentileChart($percentile, $x_axis, $title1 = '', $title2 = '', $title3 = '') {
         if ($title1==='')
         {
-            $title1 = _t('Lower threshold'); // probability at 80%
+            $title1 = _t('P20'); // probability at 80%
         }
         $this->chart_data['series'][] = array(
             'data' => $this->addDates($percentile[0], $x_axis),
@@ -294,7 +294,7 @@ class ajax_weather extends ajax_base
 
         if ($title2==='')
         {
-            $title2 = _t('Upper threshold'); // probability at 20%
+            $title2 = _t('P80'); // probability at 20%
         }
         $this->chart_data['series'][] = array(
             'data' => $this->addDates($percentile[2], $x_axis),
