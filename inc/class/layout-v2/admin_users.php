@@ -11,23 +11,23 @@
                 <table class="table table-bordered table-condensed">
                     <tr class="tr-gray">
                         <th>Username</th>
-                        <th>Full Name</th>
-                        <th>Address</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th width="100">Is Enabled?</th>
+                        <th>Name</th>
+                        <th>Contact</th>
                         <th width="130">Date Created</th>
                     </tr>
 
                     <?php foreach (werise_users_model::getRecords() as $rec) : ?>
 
                         <tr>
-                            <td><a href="admin.php?pageaction=users&userid=<?php echo $rec->userid ?>"><?php echo $rec->username ?></a></td>
-                            <td><?php echo $rec->fullname ?></td>
-                            <td><?php echo $rec->address ?></td>
-                            <td><?php echo $rec->email ?></td>
-                            <td><?php echo $rec->phone ?></td>
-                            <td><?php echo ($rec->is_enabled == 1) ? "YES" : "NO" ?></td>
+                            <td><a href="admin.php?pageaction=users&userid=<?php echo $rec->userid ?>"><?php echo $cls->formatEnabled($rec) ?></a></td>
+                            <td>
+                                <?php echo $rec->fullname ?><br />
+                                <i class="fas fa-envelope"></i> <?php echo $rec->email ?>
+                            </td>
+                            <td>
+                                <i class="fas fa-address-card"></i> <?php echo $rec->address ?><br />
+                                <i class="fas fa-phone"></i> <?php echo $rec->phone ?>
+                            </td>
                             <td><?php echo $rec->date_created ?></td>
                         </tr>
 
@@ -65,7 +65,7 @@
                                 </tr>   
                                 <tr>
                                     <td class="tr-gray">Is Enabled?</td>
-                                    <td><?php echo $cls->formatEnabled($user->is_enabled) ?></td>
+                                    <td><?php echo $user->is_enabled ?></td>
                                 </tr>                   
                                 <tr>
                                     <td class="tr-gray">Date Registered</td>

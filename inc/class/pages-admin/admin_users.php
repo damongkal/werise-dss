@@ -25,14 +25,14 @@ class admin_users
         return false;    
     }
     
-    public function formatEnabled($is_enabled)
+    public function formatEnabled($rec)
     {
-        if ($is_enabled==1)
+        if ($rec->is_enabled==1)
         {
-            return '<span class="label label-success">YES</span>';
+            return '<span class="badge badge-success">'.$rec->username.'</span>';
         } else
         {
-            return '<span class="label label-important">NO</span>';
+            return '<span class="badge badge-danger">NO</span>';
         }
     }
     
