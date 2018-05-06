@@ -7,7 +7,7 @@ $all_country = werise_stations_country::getAll();
         <h2 id="page-title"><?php echo _CURRENT_OPT ?></h2>
         
         <p>
-            Thanks to our friends in JAMSTEC who provided the forecasted weather data displayed here. In the form below, choose the weather dataset you wish to see.
+            Thanks to our partners who provided the weather data displayed here. In the form below, choose the weather dataset you wish to see.
         </p>
 
         <div class="card mb-4">
@@ -103,7 +103,7 @@ $all_country = werise_stations_country::getAll();
 
             <?php foreach ($cls->getWvars() as $key_tmp => $wvar): ?>
                 <?php $key = $key_tmp + 1; ?>
-                <div id="wvar_chart<?php echo $key ?>" class="chartdiv mb-3 hide">
+                <div id="wvar_chart<?php echo $key ?>" class="chartdiv hide">
                     <h5><?php echo $wvar ?></h5>
                     <div class="table-responsive-sm">
                         <table class="table table-sm">
@@ -114,6 +114,12 @@ $all_country = werise_stations_country::getAll();
                             </tr>
                         </table>
                     </div> 
+                    <?php if ($key===1): ?>
+                    <p class="mb-5">
+                        The red circles are dates where expected rainfall is significantly less than what was observed in previous years. 
+                        The blue squares are dates dates where expected rainfall is significantly greater than what was observed in previous years.
+                    </p>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
 
@@ -168,21 +174,6 @@ $all_country = werise_stations_country::getAll();
                 <h2><?php __('Data Source') ?></h2>
                 <pre id="acknowledgement"></pre>
             </div>
-        </div>
-
-        <div class="afterload hide">
-            <?php if (_opt(sysoptions::_OPT_SHOW_DATAGRID)) : ?>
-                <div id="rawcomputation">
-                    <h2>Raw Data and Computations</h2>
-                    <div class="alert" style="display:block;font-weight:700;width:300px"><i class="icon-warning-sign"> </i>
-                        CONFIDENTIAL INFORMATION:<br />For Internal use only! Make sure this is not shown during demonstration.
-                    </div>
-                    <h3>Chart Data</h3>
-                    <div id="datagrid1" class="datagrid-dss"></div>
-                    <h3>Rainfall Analysis</h3>
-                    <div id="raw_rain"></div>
-                </div>
-            <?php endif; ?>
         </div>
 
     </div>

@@ -3,7 +3,7 @@ class advisory_rainfall
 {
     private $db;
     private $debug;
-    private $monthly;
+    //private $monthly;
 
     private $station;
     private $wtype;
@@ -19,8 +19,7 @@ class advisory_rainfall
         $this->debug = debug::getInstance();
         $this->station = $station;
         $this->wtype = $wtype;        
-        $this->monthly = $this->getAllMonthlyRainfall();
-        //$this->debug->addLog($this->monthly,true);
+        //$this->monthly = $this->getAllMonthlyRainfall();
     }
 
     /**
@@ -41,52 +40,43 @@ class advisory_rainfall
         return array($from,$to);
     }
 
+    /**
+     * get advisory for the specific period
+     * @param type $from
+     * @param type $to
+     * @return type
+     */
     public function getAdvisory($from, $to)
     {
         $year = date_format($from,'Y');
-
-        $ws = $this->getRainfall($from,$to);
-        if (!isset($ws[$year]))
-        {
-            return array(
-                'year' => $year,
-                'wsrain' => 0,
-                'p20' => null,
-                'p80' => null,
-                'advisory_code' => self::_RAIN_UNKNOWN,
-                'advisory_cat' => 'unknown',
-                'advisory_txt' => ''
-            );
-        }
-        $ws_year = $ws[$year];
-        $p20 = dss_utils::percentile($ws, 20);
-        $p80 = dss_utils::percentile($ws, 80);
+        $rain_totals = $this->getRainfall($from,$to);
+        $ws_year = $rain_totals[$year];
+        $p20 = dss_utils::percentile($rain_totals, 20);
+        $p80 = dss_utils::percentile($rain_totals, 80);
 
         $advisory_code = 1;
         $advisory_cat = _t('normal');
-        $advisory_txt = '';
+        
         if ($ws_year>$p80)
         {
             $advisory_code = 2;
             $advisory_cat = _t('above normal');
-            // $advisory_txt = _t('There is high risk of flooding.');
         }
         if ($ws_year<$p20)
         {
             $advisory_code = 3;
             $advisory_cat = _t('below normal');
-            // $advisory_txt = _t('There is high risk of drought.');
         }
 
-        return array(
-            'year' => $year,
-            'wsrain' => $ws_year,
+        $advisory = array(
+            'rainfall' => $ws_year,
             'p20' => $p20,
             'p80' => $p80,
             'advisory_code' => $advisory_code,
-            'advisory_cat' => $advisory_cat,
-            'advisory_txt' => $advisory_txt
+            'advisory_cat' => $advisory_cat
         );
+        $this->debug->addLog($advisory,true);
+        return $advisory;
     }
 
     private function getAllMonthlyRainfall()
@@ -100,15 +90,56 @@ class advisory_rainfall
             AND a.`wtype` = '{$this->wtype}'
             GROUP BY 1";
         return $this->db->getRowList($sql);
-    }
+    }        
 
     /**
-     * get the yearly rainfall of date period
+     * get the rainfall of date period
      */
     private function getRainfall($from,$to)
     {
-        $this->debug->addLog('from : ' . date_format($from,'Y-m'));
-        $this->debug->addLog('to : ' . date_format($to,'Y-m'));
+        $from_date = date_format($from,'Y-m-d');
+        $from_year = intval(date_format($from,'Y'));
+        $to_date = date_format($to,'Y-m-d');
+        $to_year = intval(date_format($to,'Y'));
+        $this->debug->addLog('TOTAL RAINFALL');
+        $this->debug->addLog("from : {$from_date}");
+        $this->debug->addLog("to : {$to_date}");
+        // get total rainfall
+        $sql = "
+            SELECT SUM( b.`rainfall` ) AS total_rain
+            FROM "._DB_DATA.".`weather_dataset` AS a
+            INNER JOIN "._DB_DATA.".`weather_data` AS b ON a.`id` = b.`dataset_id`
+            WHERE a.`country_code` = '{$this->station->country_code}'
+            AND a.`station_id` = {$this->station->station_id}
+            AND a.`wtype` = '{$this->wtype}'
+            AND b.observe_date >= '%s'    
+            AND b.observe_date <= '%s'";
+        $sql_rain = sprintf($sql,$from_date,$to_date);    
+        $row = $this->db->getRow($sql_rain);
+        $rain[$from_year] = $row->total_rain + 0;
+        // get min year
+        $sql_minyear = "
+            SELECT MIN(a.`year`) AS min_year
+            FROM "._DB_DATA.".`weather_dataset` AS a
+            WHERE a.`country_code` = '{$this->station->country_code}'
+            AND a.`station_id` = {$this->station->station_id}
+            AND a.`wtype` = 'r'";
+        $row2 = $this->db->getRow($sql_minyear);        
+        // get yearly rainfall
+        for($year_i = intval($row2->min_year); $year_i<$from_year; $year_i++) {
+            $end_year = $year_i;
+            if ($from_year!=$to_year) {
+                $end_year++;
+            }
+            $sql_rain3 = sprintf($sql,$year_i.date_format($from,'-m-d'),$end_year.date_format($to,'-m-d'));    
+            $row3 = $this->db->getRow($sql_rain3);
+            if (!is_null($row3->total_rain)) {
+                $rain[$year_i] = $row3->total_rain + 0;            
+            }
+        }
+        $this->debug->addLog($rain,true);
+        return $rain;
+        /*
         // compose the month array
         $months = array();
         $tmp_monthfrom = date_format($from,'n');
@@ -147,7 +178,6 @@ class advisory_rainfall
                 }
             }
         }
-        //$this->debug->addLog($ws_total,true);
 
         // remove null records
         $ws_total2 = array();
@@ -161,5 +191,7 @@ class advisory_rainfall
         $this->debug->addLog($ws_total2,true);
 
         return $ws_total2;
+         * 
+         */
     }
 }

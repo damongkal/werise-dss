@@ -316,9 +316,12 @@ class ajax_weather extends ajax_base
             $this->advisory['adv_rain'] = array('advisory_code'=>0);
             return;
         }
+        /*
         $adv = new advisory_rainfall($this->station, $this->wtype);
         $period = $adv->getWSPeriod($this->station,$this->year);
         $this->advisory['adv_rain'] = $adv->getAdvisory($period[0], $period[1]);
+         */
+        $this->advisory['adv_rain'] = false;
     }
 
     private function getAdvisoryThreshold($x_axis,$percentile)

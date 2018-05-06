@@ -123,7 +123,7 @@ class ajax_weather2 extends ajax_base
         {
             // piggyback advisory for flood/drought
             $this->getAdvisoryThreshold($x_axis, $new_percentile);
-            $this->addPercentileChart($new_percentile, $x_axis, _t('Drought'), _t('Flood'));
+            $this->addPercentileChart($new_percentile, $x_axis, _t('P20'), _t('P80'));
         } else
         {
             $this->addPercentileChart($new_percentile, $x_axis);

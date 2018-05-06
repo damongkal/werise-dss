@@ -209,9 +209,9 @@ $all_country = werise_stations_country::getAll();
                     <div class="card-body help-box">
                         <h5 id="help-rainfall-category" class="card-title"><i class="fas fa-book"></i> Rainfall Category:</h5>
                         <ul>
-                            <li><strong>normal:</strong> Rainfall amount is between 20th percentile (P20) and 80th percentile (P80)</li>
-                            <li><strong>above normal:</strong> Rainfall amount is greater than 80th percentile (P80) </li>
-                            <li><strong>below normal:</strong> Rainfall amount is less than 20th percentile (P20)</li>
+                            <li><strong>normal:</strong> Rainfall amount is similar to previous years</li>
+                            <li><strong>above normal:</strong> Rainfall amount is greater than previous years</li>
+                            <li><strong>below normal:</strong> Rainfall amount is less than previous years</li>
                         </ul>
                     </div>
                 </div>                
@@ -225,7 +225,7 @@ $all_country = werise_stations_country::getAll();
                 You have chosen <span id="adv-sowdate1"></span> as the sowing date for the first crop and <span id="adv-sowdate2"></span> for the second crop.
                 The following sections will guide you to maximize cropping inputs such as fertilizer application and irrigation requirements.
             </p>
-
+            
             <!-- START: calendar details -->
             <h5><?php __('Calendar') ?></h5>
             <p>
@@ -263,11 +263,15 @@ $all_country = werise_stations_country::getAll();
                 <table class="table table-sm">
                     <tr>
                         <td>
-                            <div id="chart2" class="chart mb-2"></div>
+                            <div id="chart2" class="chart"></div>
                         </td>
                     </tr>
                 </table>
             </div>
+            <p>
+                The red circle signifies dates where expected rainfall is less than what was observed in previous years. 
+                The blue square signifies dates where expected rainfall is greater than what was observed in previous years.
+            </p>
             <!-- END: calendar details -->
 
             <!-- START: farmers details -->
@@ -409,9 +413,15 @@ $all_country = werise_stations_country::getAll();
                             <td><span id="suppl-2-method"></span></td>
                         </tr>
                         <tr>
-                            <th scope="row"><?php __('Total Rainfall') ?></th>
-                            <td><span id="suppl-1-1">0</span> mm</td>
-                            <td><span id="suppl-2-1">0</span> mm</td>
+                            <th scope="row"><?php __('Rainfall') ?></th>
+                            <td>
+                                Expected rainfall is <span id="suppl-1-rain-amt"></span> mm. This is <span id="suppl-1-rain-code"></span> compared
+                                to previous years.
+                            </td>
+                            <td>
+                                Expected rainfall is <span id="suppl-2-rain-amt"></span> mm. This is <span id="suppl-2-rain-code"></span> compared
+                                to previous years.
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row"><?php __('Water requirement') ?></th>

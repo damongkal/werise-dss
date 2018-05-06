@@ -257,7 +257,7 @@ class werise_oryza_cropcalendar2
         $calendar['flower_date'] = $this->getDateFromOffset($rec->observe_date, $rec->flowering, $format);
         $calendar['harvest_date'] = $this->getDateFromOffset($rec->observe_date, $rec->harvest, $format);
         $calendar['fertsched'] = $fert_sched;                     
-        $calendar['rain_amt'] = $raindata['wsrain'];                     
+        $calendar['rain_amt'] = $raindata['rainfall'];                     
         $calendar['rain_code'] = $raindata['advisory_cat'];                       
         $this->runnums[$idx] = $calendar;
     }

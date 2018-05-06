@@ -81,7 +81,7 @@ OryzaWeatherChart.prototype = {
         var pct = 0;
         if (this.wvar === 0)
         {
-            pct = 0;
+            pct = 1;
         }
         // ajax progressbar
         showLoaderChart(this.item_chart);

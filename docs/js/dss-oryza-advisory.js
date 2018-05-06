@@ -221,7 +221,8 @@ var WaterRequirement = {
         }
         var currency_name = CombiListStorage.getCountryInfo('currency');
         jQuery('#suppl-'+cropidx+'-var').html(variety_info.variety_name);
-        jQuery('#suppl-'+cropidx+'-1').html(crop_data.rain_amt);
+        jQuery('#suppl-'+cropidx+'-rain-amt').html(crop_data.rain_amt);
+        jQuery('#suppl-'+cropidx+'-rain-code').html(crop_data.rain_code);
         jQuery('#suppl-'+cropidx+'-2').html(reqt_depth);
         jQuery('#suppl-'+cropidx+'-method').html(reqt_method+reqt_method_month);
         deficit = parseInt(crop_data.rain_amt - reqt_depth);
