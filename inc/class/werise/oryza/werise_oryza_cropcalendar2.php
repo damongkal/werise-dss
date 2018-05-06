@@ -10,6 +10,12 @@ class werise_oryza_cropcalendar2
     private $raindata;
     private $raindates;
     private $runnums = array();
+    private $debug;
+    
+    public function __construct()
+    {
+        $this->debug = debug::getInstance();
+    }    
     
     public function getRecommended(werise_core_dataset $dataset, $raindates, $season_start, $season_end, $crop1, $crop2 )
     {
@@ -65,6 +71,8 @@ class werise_oryza_cropcalendar2
             $cutoff1,
             $db->escape($crop1['variety']));
         $rs3 = $db->getRowList($sql6);
+        $this->debug->addLog("count: ".count($rs3));
+        $total_scount = 0;
         foreach($rs3 as $rec3) // 1st crop
         {
             // second crop
@@ -78,8 +86,10 @@ class werise_oryza_cropcalendar2
                 $cutoff2,
                 $db->escape($crop2['variety']));
             $rs4 = $db->getRowList($sql7);
+            $this->debug->addLog("count: ".count($rs4));
             $second = $this->getSecondCropList($rs4);
             $scount = count($second);
+            $total_scount += $scount;
             // make combination
             if($scount>0)
             {
@@ -92,8 +102,11 @@ class werise_oryza_cropcalendar2
                 $combikeys[] = array($first->yield + $second[0]->yield);            
             }
         }
-        array_multisort($combikeys, SORT_DESC, SORT_REGULAR, $combi  );
-        $final = array_slice($combi, 0, 2);
+        if ($total_scount===0){
+            throw new Exception('no combinations found!');
+        }
+        array_multisort($combikeys, SORT_DESC, SORT_REGULAR, $combi  );        
+        $final = array_slice($combi, 0, 2);        
         
         // breakdown
         $ref = array();
@@ -122,7 +135,7 @@ class werise_oryza_cropcalendar2
             {              
                 $this->buildCalendar($frec2);
             }
-        }        
+        }
         return array('runnums'=>$this->runnums,'toprecs'=>$ref);
     }
     
@@ -183,7 +196,6 @@ class werise_oryza_cropcalendar2
         }
         array_multisort($combikeys, SORT_DESC, SORT_REGULAR, $combi  );        
         $final = array_slice($combi, 0, 5);            
-        
         // breakdown
         $ref = array();
         foreach($final as $frec)

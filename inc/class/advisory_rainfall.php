@@ -18,7 +18,7 @@ class advisory_rainfall
         $this->db = Database_MySQL::getInstance();
         $this->debug = debug::getInstance();
         $this->station = $station;
-        $this->wtype = $wtype;        
+        $this->wtype = $wtype;     
         //$this->monthly = $this->getAllMonthlyRainfall();
     }
 
@@ -125,16 +125,19 @@ class advisory_rainfall
             AND a.`station_id` = {$this->station->station_id}
             AND a.`wtype` = 'r'";
         $row2 = $this->db->getRow($sql_minyear);        
-        // get yearly rainfall
-        for($year_i = intval($row2->min_year); $year_i<$from_year; $year_i++) {
-            $end_year = $year_i;
-            if ($from_year!=$to_year) {
-                $end_year++;
-            }
-            $sql_rain3 = sprintf($sql,$year_i.date_format($from,'-m-d'),$end_year.date_format($to,'-m-d'));    
-            $row3 = $this->db->getRow($sql_rain3);
-            if (!is_null($row3->total_rain)) {
-                $rain[$year_i] = $row3->total_rain + 0;            
+        $min_year = intval($row2->min_year);
+        if ($min_year>1970) {
+            // get yearly rainfall
+            for($year_i = $min_year; $year_i<$from_year; $year_i++) {
+                $end_year = $year_i;
+                if ($from_year!=$to_year) {
+                    $end_year++;
+                }
+                $sql_rain3 = sprintf($sql,$year_i.date_format($from,'-m-d'),$end_year.date_format($to,'-m-d'));    
+                $row3 = $this->db->getRow($sql_rain3);
+                if (!is_null($row3->total_rain)) {
+                    $rain[$year_i] = $row3->total_rain + 0;            
+                }
             }
         }
         $this->debug->addLog($rain,true);
